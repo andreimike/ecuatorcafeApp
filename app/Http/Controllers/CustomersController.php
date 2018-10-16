@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\CustomerFileUpload;
+use App\Imports\CustomersImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Concerns\WithMappedCells;
+use Illuminate\Http\File;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class CustomersController extends Controller
 {
@@ -129,4 +137,6 @@ class CustomersController extends Controller
 
         return redirect()->route('customer.view')->with('success', 'Clientul a fost sters!');
     }
+
 }
+

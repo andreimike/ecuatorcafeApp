@@ -22,10 +22,26 @@
     </div>
     <div class="container">
         <div class="row justify-content-center mt-3">
-            <div class="col-md-10">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body text-center">
-                        <button type="button" class="btn btn-success">Incarca fisier comenzi <i class="fas fa-plus"></i></button>
+                        <a href="{{route('order.create')}}" class="btn btn-success text-white">Adauga o comanda <i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="">
+                            Clienti:
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            @foreach($customers as $customer)
+                                <li class="list-group-item">{{$customer->nume}} <a href="{{route('customer.edit', [$customer->id])}}" title="Editeaza clientul - {{$customer->nume}}"><i class="far fa-edit"></i></a> </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>

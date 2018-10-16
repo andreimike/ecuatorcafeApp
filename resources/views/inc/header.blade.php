@@ -20,6 +20,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{route('customer.view')}}"><i class="fas fa-users"></i> Vizualizare Clienti</a>
                         <a class="dropdown-item" href="{{route('customer.create')}}"><i class="fas fa-user-plus"></i> Adaugare Clienti</a>
+                        <a class="dropdown-item" href="{{route('upload.customers')}}"><i class="fas fa-user-plus"></i> importare Clienti din Fisier</a>
                         {{--<a class="dropdown-item" href="#"><i class="fas fa-user-edit"></i> Editare Clienti</a>--}}
                     </div>
                 </li>

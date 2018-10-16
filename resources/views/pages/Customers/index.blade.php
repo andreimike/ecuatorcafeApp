@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-header">Listare Clineti</h5>
+                        <h5>Listare Clineti</h5>
                     </div>
                     <div class="card-body">
                         @if(count($customers) > 0)
@@ -21,7 +21,7 @@
                                         <th>ILN Companie</th>
                                         <th>CUI Companie</th>
                                         <th>Data adaugare companie</th>
-                                        <th>Actiuni</th>
+                                        <th class="text-center">Actiuni</th>
                                     </tr>
                                     </thead>
                                     <tbody>

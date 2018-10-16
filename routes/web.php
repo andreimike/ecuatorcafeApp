@@ -22,10 +22,18 @@ Route::get('/register', function () {
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 //Customers Routes
-
 Route::get('/clienti', 'CustomersController@index')->name('customer.view')->middleware('auth');
 Route::get('clienti/creeaza', 'CustomersController@create')->name('customer.create')->middleware('auth');
 Route::post('clienti/adauga', 'CustomersController@store')->name('customer.store')->middleware('auth');
 Route::get('clienti/editare/{id}', 'CustomersController@edit')->name('customer.edit')->middleware('auth');
 Route::post('clienti/{id}', 'CustomersController@update')->name('customer.update')->middleware('auth');
 Route::delete('clienti/eliminare/{id}', 'CustomersController@destroy')->name('customer.delete')->middleware('auth');
+Route::get('clienti/fisiere-incarcate', 'UploadCustomersFiles@index')->name('upload.viewfiles');
+Route::get('clienti/descarcare-fisier/{id}', 'UploadCustomersFiles@viewFile')->name('download.customerfile');
+Route::delete('clienti/sterge-fisier/{id}', 'UploadCustomersFiles@destroy')->name('delete.customerfile');
+Route::get('clienti/importa', 'UploadCustomersFiles@create')->name('upload.customers');
+Route::post('import/clienti', 'UploadCustomersFiles@store')->name('import.customers');
+
+
+//Order Routes
+Route::get('/comenzi/adaga', 'OrdersController@create')->name('order.create')->middleware('auth');
