@@ -21,7 +21,7 @@ class CustomersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function  __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -54,14 +54,16 @@ class CustomersController extends Controller
     {
         //Validate Inputs
         $this->validate($request, [
-            'nume' => 'required',
-            'adresa' => 'required',
-            'iln' => 'required',
-            'cui' => 'required'
+            'nume'              => 'required',
+            'contractor_ean'    => 'required',
+            'adresa'            => 'required',
+            'iln'               => 'required',
+            'cui'               => 'required'
         ]);
 
         //Create Customer
         $data = [
+            'contractor_ean' => $request->contractor_ean,
             'nume' => $request->nume,
             'adresa' => $request->adresa,
             'iln' => $request->iln,
@@ -81,7 +83,7 @@ class CustomersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($contractor_ean)
     {
         //
     }
@@ -92,9 +94,9 @@ class CustomersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($contractor_ean)
     {
-        $customer = Customer::find($id);
+        $customer = Customer::find($contractor_ean);
         return view('pages.customers.edit')->with('customer', $customer);
     }
 
@@ -105,17 +107,19 @@ class CustomersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $contractor_ean)
     {
         $this->validate($request, [
-            'nume' => 'required',
-            'adresa' => 'required',
-            'iln' => 'required',
-            'cui' => 'required'
+            'nume'              => 'required',
+            'contractor_ean'    => 'required',
+            'adresa'            => 'required',
+            'iln'               => 'required',
+            'cui'               => 'required'
         ]);
 
-        $customer = Customer::find($id);
+        $customer = Customer::find($contractor_ean);
         $customer->nume = $request->input('nume');
+        $customer->contractor_ean = $request->input('contractor_ean');
         $customer->adresa = $request->input('adresa');
         $customer->iln = $request->input('iln');
         $customer->cui = $request->input('cui');
@@ -130,9 +134,9 @@ class CustomersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($contractor_ean)
     {
-        $customer =  Customer::find($id);
+        $customer = Customer::find($contractor_ean);
         $customer->delete();
 
         return redirect()->route('customer.view')->with('success', 'Clientul a fost sters!');

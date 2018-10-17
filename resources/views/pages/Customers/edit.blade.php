@@ -21,12 +21,18 @@
                         Editare Client
                     </div>
                     <div class="card-body">
-                        <form action="{{route('customer.update', ['id'=>$customer->id])}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('customer.update', ['id'=>$customer->contractor_ean])}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
-                            <div class="form-group">
-                                <label for="nume">Nume Companie</label>
-                                <input type="text" class="form-control" name="nume" id="nume"
-                                       placeholder="Nume Companie" value="{{$customer->nume}}">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nume">Nume Companie</label>
+                                    <input type="text" class="form-control" name="nume" id="nume"
+                                           placeholder="Nume Companie" value="{{$customer->nume}}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="contractor_ean">EAN Companie</label>
+                                    <input type="text" class="form-control" name="contractor_ean" id="contractor_ean" placeholder="EAN Companie" value="{{$customer->contractor_ean}}">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="adresa">Adresa Companie</label>

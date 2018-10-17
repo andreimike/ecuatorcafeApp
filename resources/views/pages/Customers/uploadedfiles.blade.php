@@ -20,6 +20,7 @@
                         Fisiere Importate
                     </div>
                     <div class="card-body">
+                        @if(count($files) > 0)
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class="bg-light text-dark">
@@ -56,6 +57,11 @@
                                 </tbody>
                             </table>
                         </div>
+                        @else
+                            <div class="alert alert-warning" role="alert">
+                                <p class="text-center p-2 mt-3"><i class="fas fa-exclamation-triangle"></i> <span class="text-dark">Nu exista fisiere incarcate pe server</span></p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

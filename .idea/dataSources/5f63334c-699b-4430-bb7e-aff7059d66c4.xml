@@ -927,11 +927,10 @@
     <table id="233" parent="2" name="users">
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <column id="234" parent="229" name="id">
+    <column id="234" parent="229" name="contractor_ean">
       <Position>1</Position>
-      <DataType>int(10) unsigned|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="235" parent="229" name="nume">
@@ -970,7 +969,7 @@
     </column>
     <key id="241" parent="229" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
+      <ColNames>contractor_ean</ColNames>
       <Primary>1</Primary>
     </key>
     <column id="242" parent="230" name="id">

@@ -23,10 +23,16 @@
                     <div class="card-body">
                         <form action="{{route('customer.store')}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
-                            <div class="form-group">
-                                <label for="nume">Nume Companie</label>
-                                <input type="text" class="form-control" name="nume" id="nume"
-                                       placeholder="Nume Companie">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nume">Nume Companie</label>
+                                    <input type="text" class="form-control" name="nume" id="nume"
+                                           placeholder="Nume Companie">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="contractor_ean">Ean Companie</label>
+                                    <input type="text" class="form-control" name="contractor_ean" id="contractor_ean" placeholder="Contractor EAN">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="adresa">Adresa Companie</label>
@@ -46,6 +52,9 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Adauga Client</button>
                         </form>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{route('upload.customers')}}"><i class="fas fa-cloud-upload-alt"></i> Importa Clineti din Fisier XLXS</a>
                     </div>
                 </div>
             </div>

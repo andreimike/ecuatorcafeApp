@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Customer;
 use App\Models\CustomerFileUpload;
 use App\Imports\CustomersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Concerns\WithMappedCells;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
+use Maatwebsite\Excel\HeadingRowImport;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -60,7 +61,6 @@ class UploadCustomersFiles extends Controller
         $this->validate($request, [
             'fisierclienti' => 'required|max:100000'
         ]);
-
         $file = $request->file('fisierclienti');
         $time = time();
         $formatedTime = date('Y-m-d', $time);
@@ -71,8 +71,29 @@ class UploadCustomersFiles extends Controller
             'cale_fisier' => $path,
             'id_utilizator' => Auth::user()->id
         ];
-        $collection = (new CustomersImport)->toArray($file);
+
+        $customersArray = Excel::toArray(new CustomersImport, $file);
+
+        foreach ($customersArray as $stageOneKey => $stageOneVal) {
+            foreach ($stageOneVal as $k => $v) {
+                if ($v[0] != null) {
+                    $data1 = [
+                        'nume' => $v[0],
+                        'contractor_ean' => $v[1],
+                        'adresa' => $v[2],
+                        'iln' => $v[3],
+                        'cui' => $v[4]
+                    ];
+                    Customer::create($data1);
+                } else {
+                    echo "Null";
+                }
+            }
+        }
+        // Excel::import(new CustomersImport(), $file);
+
         CustomerFileUpload::create($data);
+        //Excel::import(new CustomersImport(), $file);
 
         return redirect()->route('customer.view')->with('success', 'Clientul a fost adaugat cu succes!');
     }
@@ -120,7 +141,7 @@ class UploadCustomersFiles extends Controller
     public function destroy($id)
     {
         $file = CustomerFileUpload::find($id);
-        if($file){
+        if ($file) {
             $filePath = $file->cale_fisier;
             $file->delete();
             Storage::delete($filePath);
