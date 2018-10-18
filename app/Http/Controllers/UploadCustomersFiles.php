@@ -71,9 +71,8 @@ class UploadCustomersFiles extends Controller
             'cale_fisier' => $path,
             'id_utilizator' => Auth::user()->id
         ];
-
+        CustomerFileUpload::create($data);
         $customersArray = Excel::toArray(new CustomersImport, $file);
-
         foreach ($customersArray as $stageOneKey => $stageOneVal) {
             foreach ($stageOneVal as $k => $v) {
                 if ($v[0] != null) {
@@ -90,11 +89,6 @@ class UploadCustomersFiles extends Controller
                 }
             }
         }
-        // Excel::import(new CustomersImport(), $file);
-
-        CustomerFileUpload::create($data);
-        //Excel::import(new CustomersImport(), $file);
-
         return redirect()->route('customer.view')->with('success', 'Clientul a fost adaugat cu succes!');
     }
 

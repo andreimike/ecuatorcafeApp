@@ -15,13 +15,22 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Clienti
+                        <i class="fas fa-users"></i> Clienti
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{route('customer.view')}}"><i class="fas fa-users"></i> Vizualizare Clienti</a>
                         <a class="dropdown-item" href="{{route('customer.create')}}"><i class="fas fa-user-plus"></i> Adaugare Clienti</a>
-                        <a class="dropdown-item" href="{{route('upload.customers')}}"><i class="fas fa-user-plus"></i> importare Clienti din Fisier</a>
+                        <a class="dropdown-item" href="{{route('upload.customers')}}"><i class="fas fa-file-upload"></i> Importare Clienti din Fisier</a>
                         {{--<a class="dropdown-item" href="#"><i class="fas fa-user-edit"></i> Editare Clienti</a>--}}
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-folder-open"></i> Comenzi
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{route('order.view')}}"><i class="fas fa-list-ol"></i> Vizualizare Comenzi</a>
+                        <a class="dropdown-item" href="{{route('order.create')}}"><i class="fas fa-file-upload"></i> Adauga Comenzi</a>
                     </div>
                 </li>
             </ul>

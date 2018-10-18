@@ -36,4 +36,6 @@ Route::post('import/clienti', 'UploadCustomersFiles@store')->name('import.custom
 
 
 //Order Routes
+Route::get('comenzi', 'OrdersController@index')->name('order.view')->middleware('auth');
 Route::get('/comenzi/adaga', 'OrdersController@create')->name('order.create')->middleware('auth');
+Route::post('comenzi/import', 'OrdersController@store')->name('order.store')->middleware('auth');
