@@ -17,4 +17,9 @@ class Customer extends Model
 
     protected $fillable = array('contractor_ean', 'nume', 'adresa', 'iln', 'cui');
 
+    public  function order(){
+
+        return $this->hasOne('App\Models\Order', 'contractor_ean_id', 'contractor_ean');
+    }
+
 }

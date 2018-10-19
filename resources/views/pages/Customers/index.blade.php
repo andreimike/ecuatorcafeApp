@@ -31,7 +31,7 @@
                                                    title="Editare Client -  {{$customer->nume}}">{{$customer->nume}}</a>
                                             </td>
                                             <td>{{$customer->adresa}}</td>
-                                            <td>>{{$customer->contractor_ean}}</td>
+                                            <td>{{$customer->contractor_ean}}</td>
                                             <td>{{$customer->iln}}</td>
                                             <td>{{$customer->cui}}</td>
                                             <td>{{$customer->created_at}}</td>

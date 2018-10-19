@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Order;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $customers = Customer::all();
-        return view('pages.home', compact('customers'));
+        $orders = Order::with('customer')->get();
+
+        return view('pages.home', compact('customers', 'orders'));
     }
 }

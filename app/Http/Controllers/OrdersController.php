@@ -32,25 +32,9 @@ class OrdersController extends Controller
 
     public function index()
     {
-        $orders = Order::all();
-        $raws = DB::table('orders')->select('product')->get()->toArray();
-        $productsAsocArray = $raws;
-       // $asoc = json_decode($productsAsocArray['product'], true);
-//        dd($productsAsocArray);
-//        foreach ($raws as $raw){
-//            $decodeProductString = $raw->product;
-//            $d = json_encode($decodeProductString);
-//
-//            var_dump($productsAsocArray);
-//        }
-//        dd($raws);
-//        foreach ($raws as $k => $v) {
-//            $decodeProductString = json_decode($raws->product);
-//            $productsAsocArray = json_decode(json_encode($decodeProductString), true);
-//        }
+        $orders = Order::with('customer')->get();
 
-
-        return view('pages.order.index', compact('orders', 'productsAsocArray'));
+        return view('pages.order.index', compact('orders', 'customers'));
     }
 
     /**
@@ -100,8 +84,8 @@ class OrdersController extends Controller
                 $product = (object)[];
                 $product->product_ean = $orderArray[$i + 12][1];
                 $product->product_name = $orderArray[$i + 12][2];
-                $product->product_qty = $orderArray[$i + 12][5];
-                $product->product_price = $orderArray[$i + 12][7];
+                $product->product_qty = (int)$orderArray[$i + 12][5];
+                $product->product_price = (int)$orderArray[$i + 12][7];
                 $prod1 = (array)$product;
                 $orderProducts[$j] = $prod1;
                 $j++;
@@ -111,8 +95,8 @@ class OrdersController extends Controller
                     $product = (object)[];
                     $product->product_ean = $orderArray[$i + 13][1];
                     $product->product_name = $orderArray[$i + 13][2];
-                    $product->product_qty = $orderArray[$i + 13][5];
-                    $product->product_price = $orderArray[$i + 13][7];
+                    $product->product_qty = (int)$orderArray[$i + 13][5];
+                    $product->product_price = (int)$orderArray[$i + 13][7];
                     $prod2 = (array)$product;
                     $orderProducts[$j] = $prod2;
                     $j++;
@@ -120,16 +104,17 @@ class OrdersController extends Controller
                         $i += 15;
                     } else {
                         $product = (object)[];
-                        $product->product_ean = $orderArray[$i + 13][1];
-                        $product->product_name = $orderArray[$i + 13][2];
-                        $product->product_qty = $orderArray[$i + 13][5];
-                        $product->product_price = $orderArray[$i + 13][7];
+                        $product->product_ean = $orderArray[$i + 14][1];
+                        $product->product_name = $orderArray[$i + 14][2];
+                        $product->product_qty = (int)$orderArray[$i + 14][5];
+                        $product->product_price = (int)$orderArray[$i + 14][7];
                         $prod3 = (array)$product;
                         $orderProducts[$j] = $prod3;
                         $j++;
                         $i += 16;
                     }
                 }
+
 
                 $orderProductsToString = json_encode($orderProducts);
                 $clearProductString = str_replace('.00 ', '', $orderProductsToString);

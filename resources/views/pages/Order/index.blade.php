@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -17,32 +16,21 @@
                                 <tr>
                                     <th>#Id</th>
                                     <th>Ordin Comanda</th>
+                                    <th>Client</th>
                                     <th>Produs</th>
                                     <th>Ean Produs</th>
                                     <th>Cantitate Produs</th>
                                     <th>Pret Produs</th>
-                                    <th>Total Cantitate</th>
-                                    <th>Total Pret</th>
                                     <th>Numar Aviz</th>
-                                    <th class="text-center">Generare Aviz</th>
-                                    <th class="text-center">Generare Declaratie de conformitate</th>
+                                    <th class="text-center">Aviz</th>
+                                    <th class="text-center">Declaratie</th>
                                     <th class="text-center">DPD</th>
-                                    <th class="text-center">Emite in SmartBill</th>
+                                    <th class="text-center">SmartBill</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($orders as $order)
-
-                                    <?php
-                                    foreach($productsAsocArray as $productAsocArray){
-                                       dd($productAsocArray);
-                                    };
-
-
-                                        ?>
-
-                                        
-
+                                    <?php $productInfosArray = json_decode($order['product'], true);?>
                                     <tr>
                                         <th scope="row">
                                             {{$order->id}}
@@ -51,29 +39,32 @@
                                             {{$order->order_number}}
                                         </td>
                                         <td>
+                                            <p>{{$order->customer->nume}}</p>
+                                        </td>
+                                        <td>
                                             <ul class="text-left list-group list-group-flush">
-                                                @foreach($productsAsocArray as $productAsocArray)
+                                                @foreach($productInfosArray as $k => $productInfo)
+
                                                     <li class="text-left list-group-item">
-                                                        {{$productAsocArray['product_name']}}
+                                                        {{$productInfo['product_name']}}
                                                     </li>
                                                 @endforeach
                                             </ul>
                                         </td>
                                         <td>
                                             <ul class="text-left list-group list-group-flush">
-                                                @foreach($productsAsocArray as $productAsocArray)
+                                                @foreach($productInfosArray as $k => $productInfo)
                                                     <li class="text-left list-group-item">
-                                                        {{$productAsocArray['product_ean']}}
+                                                        {{$productInfo['product_ean']}}
                                                     </li>
                                                 @endforeach
                                             </ul>
                                         </td>
                                         <td>
                                             <ul class="text-left list-group list-group-flush">
-                                                @foreach($productsAsocArray as $productAsocArray)
+                                                @foreach($productInfosArray as $k => $productInfo)
                                                     <li class="text-left list-group-item">
-
-
+                                                        {{$productInfo['product_qty']}}
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -81,29 +72,12 @@
                                         </td>
                                         <td>
                                             <ul class="text-left list-group list-group-flush">
-                                                @foreach($productsAsocArray as $productAsocArray)
+                                                @foreach($productInfosArray as $k => $productInfo)
                                                     <li class="text-left list-group-item">
-                                                        {{--{{$productAsocArray['product_price']}}--}}
-                                                        {{$price =$productAsocArray['product_price']}}
+                                                        {{$productInfo['product_price']}}
                                                     </li>
                                                 @endforeach
                                             </ul>
-                                        </td>
-                                        <td>
-
-
-                                            <?php
-                                            foreach ($productsAsocArray as $productAsocArray) {
-                                                $qty = $productAsocArray['product_qty'];
-                                                $int = (int)$qty;
-                                                $sum = $int + $int + $int;
-                                            }
-                                            ?>
-                                            <p><b>{{$sum}}</b></p>
-
-                                        </td>
-                                        <td>
-
                                         </td>
                                         <td>
                                             @if($order->notice_number != null)
@@ -114,19 +88,45 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td>
-                                            <a href="" class="btn btn-secondary btn-sm"><i class="fas fa-file-alt"></i></a>
+                                        <td class="text-center">
+                                            @if($order->notice == null)
+                                                <a href="" class="btn btn-success text-center"><i
+                                                            class="fas fa-file-alt"></i></a>
+                                            @else
+                                                <button type="button" class="btn btn-secondary"
+                                                        style="cursor:not-allowed;" disabled><i
+                                                            class="fas fa-file-alt"></i></button>
+                                            @endif
                                         </td>
-                                        <td>
-                                            <a href="" class="btn btn-dark btn-sm"><i class="far fa-file-alt"></i></a>
+                                        <td class="text-center">
+                                            @if($order->conformity_declaration == null)
+                                                <a href="" class="btn btn-info text-center"><i
+                                                            class="far fa-file-alt"></i></a>
+                                            @else
+                                                <button type="button" class="btn btn-secondary"
+                                                        style="cursor:not-allowed;" disabled><i
+                                                            class="far fa-file-alt"></i></button>
+                                            @endif
                                         </td>
-                                        <td>
-                                            <a href="" class="btn btn-danger btn-sm"><i
-                                                        class="fas fa-shipping-fast"></i></a>
+                                        <td class="text-center">
+                                            @if($order->dpd_shipping == null)
+                                                <a href="" class="btn btn-danger text-center"><i
+                                                            class="fas fa-shipping-fast"></i></a>
+                                            @else
+                                                <button type="button" class="btn btn-secondary"
+                                                        style="cursor:not-allowed;" disabled><i
+                                                            class="fas fa-shipping-fast"></i></button>
+                                            @endif
                                         </td>
-                                        <td>
-                                            <a href="" class="btn btn-primary btn-sm"><i
-                                                        class="fas fa-file-invoice-dollar"></i></a>
+                                        <td class="text-center">
+                                            @if($order->smart_bill_invoice == null)
+                                                <a href="" class="btn btn-primary text-center"><i
+                                                            class="fas fa-file-invoice-dollar"></i></a>
+                                            @else
+                                                <button type="button" class="btn btn-secondary"
+                                                        style="cursor:not-allowed;" disabled><i
+                                                            class="fas fa-file-invoice-dollar"></i></button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
