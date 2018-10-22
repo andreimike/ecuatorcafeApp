@@ -1008,7 +1008,7 @@
     </column>
     <column id="248" parent="231" name="order_number">
       <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>

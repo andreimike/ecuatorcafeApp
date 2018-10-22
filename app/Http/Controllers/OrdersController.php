@@ -16,6 +16,8 @@ use Illuminate\Http\UploadedFile;
 use Maatwebsite\Excel\HeadingRowImport;
 use Auth;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade as PDF;
+use App;
 
 class OrdersController extends Controller
 {
@@ -66,6 +68,7 @@ class OrdersController extends Controller
         $path = Storage::putFileAs('orders', $file, $fileName);
         $data = [
             'cale_fisier' => $path,
+            'cale_fisier' => $path,
             'id_utilizator' => Auth::user()->id
         ];
         CustomerFileUpload::create($data);
@@ -74,6 +77,9 @@ class OrdersController extends Controller
         $j = 0;
         $arraySize = count($ordersArray[0]);
         $orderProducts = array();
+        $fryingDateBraz = $request->get('date1');
+        $fryingDateCol = $request->get('date2');
+        $fryingDateEti = $request->get('date3');
         //Delete all the row and entry of the Orders Table
         DB::table('orders')->truncate();
         while ($i <= $arraySize) {
@@ -86,6 +92,14 @@ class OrdersController extends Controller
                 $product->product_name = $orderArray[$i + 12][2];
                 $product->product_qty = (int)$orderArray[$i + 12][5];
                 $product->product_price = (int)$orderArray[$i + 12][7];
+                if ($orderArray[$i + 12][1] == 2000005405518) {
+                    $product->frying_date = date($fryingDateBraz);
+
+                } elseif ($orderArray[$i + 12][1] == 2000005405525) {
+                    $product->frying_date = date($fryingDateCol);
+                } else {
+                    $product->frying_date = date($fryingDateEti);
+                }
                 $prod1 = (array)$product;
                 $orderProducts[$j] = $prod1;
                 $j++;
@@ -97,6 +111,14 @@ class OrdersController extends Controller
                     $product->product_name = $orderArray[$i + 13][2];
                     $product->product_qty = (int)$orderArray[$i + 13][5];
                     $product->product_price = (int)$orderArray[$i + 13][7];
+                    if ($orderArray[$i + 13][1] == 2000005405518) {
+                        $product->frying_date = date($fryingDateBraz);
+
+                    } elseif ($orderArray[$i + 13][1] == 2000005405525) {
+                        $product->frying_date = date($fryingDateCol);
+                    } else {
+                        $product->frying_date = date($fryingDateEti);
+                    }
                     $prod2 = (array)$product;
                     $orderProducts[$j] = $prod2;
                     $j++;
@@ -108,14 +130,20 @@ class OrdersController extends Controller
                         $product->product_name = $orderArray[$i + 14][2];
                         $product->product_qty = (int)$orderArray[$i + 14][5];
                         $product->product_price = (int)$orderArray[$i + 14][7];
+                        if ($orderArray[$i + 14][1] == 2000005405518) {
+                            $product->frying_date = date($fryingDateBraz);
+
+                        } elseif ($orderArray[$i + 14][1] == 2000005405525) {
+                            $product->frying_date = date($fryingDateCol);
+                        } else {
+                            $product->frying_date = date($fryingDateEti);
+                        }
                         $prod3 = (array)$product;
                         $orderProducts[$j] = $prod3;
                         $j++;
                         $i += 16;
                     }
                 }
-
-
                 $orderProductsToString = json_encode($orderProducts);
                 $clearProductString = str_replace('.00 ', '', $orderProductsToString);
                 $data = [
@@ -126,7 +154,7 @@ class OrdersController extends Controller
                 Order::create($data);
             }
         }
-        return redirect()->route('customer.view')->with('success', 'Comenzile au fost importate cu succes!');
+        return redirect()->route('order.view')->with('success', 'Comenzile au fost importate cu succes!');
     }
 
     /**
@@ -137,7 +165,7 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -148,7 +176,8 @@ class OrdersController extends Controller
      */
     public function edit($id)
     {
-        //
+//        $order = Order::find($id);
+//        return view('pages.order.edit')->with('order', $order);
     }
 
     /**
@@ -160,7 +189,12 @@ class OrdersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+//        $order = Order::find($id);
+//        $productFryingDate = json_decode($order['product'], true);
+//        $orderProductsToString = json_encode($productFryingDate[0]['frying_date']);
+//        $order->$orderProductsToString[0]['frying_date'] = $request->input('date');
+//        dd($order);
+
     }
 
     /**
@@ -172,5 +206,32 @@ class OrdersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function conformity($id)
+    {
+
+        $order = Order::find($id);
+        $productInfosArray = json_decode($order['product'], true);
+        $pdf = App::make('dompdf.wrapper');
+        $pdf = PDF::loadView('pages.order.conformity', compact('order'))->setPaper('a4', 'portrait');
+        $pdfFileName = $order->order_number;
+        $order->conformity_declaration = 1;
+        $order->save();
+        return $pdf->download('Declaratie-de-Conformititate-' . $pdfFileName . '.pdf');
+
+    }
+
+    public function declarations()
+    {
+        $orders = Order::all();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf = PDF::loadView('pages.order.declarations', compact('orders'))->setPaper('a4', 'portrait');
+        $totalOrders = DB::table('orders')->count();
+        DB::table('orders')
+            ->having('id', '>=', $totalOrders)
+            ->update(['conformity_declaration' => 1]);
+        return $pdf->download('Declaratii-de-Conformititate' . '.pdf');
+
     }
 }

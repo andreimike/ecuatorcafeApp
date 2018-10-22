@@ -10,6 +10,18 @@
                         <h5 class="text-center">Comenzi</h5>
                     </div>
                     <div class="card-body pr-0 pl-0">
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-md-3">
+                                <a href="{{route('order.declarations')}}" class="btn btn-info btn-block"
+                                   title="Generaza Declaratie de Conformitate pentru toate comenzile" target="_blank">Genereaza
+                                    declaratii de confomitate</a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="btn btn-success btn-block"
+                                   title="Generaza Avize de Insotire">Genereaza
+                                    declaratii de confomitate</a>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class="bg-light text-dark">
@@ -21,7 +33,8 @@
                                     <th>Ean Produs</th>
                                     <th>Cantitate Produs</th>
                                     <th>Pret Produs</th>
-                                    <th>Numar Aviz</th>
+                                    <th>Data Prajire</th>
+                                    <th>Nr Aviz</th>
                                     <th class="text-center">Aviz</th>
                                     <th class="text-center">Declaratie</th>
                                     <th class="text-center">DPD</th>
@@ -80,17 +93,26 @@
                                             </ul>
                                         </td>
                                         <td>
+                                            <ul class="text-left list-group list-group-flush">
+                                                @foreach($productInfosArray as $k => $productInfo)
+                                                    <li class="text-left list-group-item">
+                                                        {{$productInfo['frying_date']}}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </td>
+                                        <td>
                                             @if($order->notice_number != null)
                                                 {{$order->notice_number}}
                                             @else
                                                 <div class="aler alert-warning">
-                                                    Inca nu exista un numar de aviz!
+                                                    Inca nu exista!
                                                 </div>
                                             @endif
                                         </td>
                                         <td class="text-center">
                                             @if($order->notice == null)
-                                                <a href="" class="btn btn-success text-center"><i
+                                                <a href="" class="btn btn-success text-center" target="_blank"><i
                                                             class="fas fa-file-alt"></i></a>
                                             @else
                                                 <button type="button" class="btn btn-secondary"
@@ -100,7 +122,8 @@
                                         </td>
                                         <td class="text-center">
                                             @if($order->conformity_declaration == null)
-                                                <a href="" class="btn btn-info text-center"><i
+                                                <a href="{{route('order.conformity', [$order->id])}}"
+                                                   class="btn btn-info text-center" target="_blank"><i
                                                             class="far fa-file-alt"></i></a>
                                             @else
                                                 <button type="button" class="btn btn-secondary"
@@ -110,7 +133,7 @@
                                         </td>
                                         <td class="text-center">
                                             @if($order->dpd_shipping == null)
-                                                <a href="" class="btn btn-danger text-center"><i
+                                                <a href="" class="btn btn-danger text-center" target="_blank"><i
                                                             class="fas fa-shipping-fast"></i></a>
                                             @else
                                                 <button type="button" class="btn btn-secondary"
@@ -120,7 +143,7 @@
                                         </td>
                                         <td class="text-center">
                                             @if($order->smart_bill_invoice == null)
-                                                <a href="" class="btn btn-primary text-center"><i
+                                                <a href="" class="btn btn-primary text-center" target="_blank"><i
                                                             class="fas fa-file-invoice-dollar"></i></a>
                                             @else
                                                 <button type="button" class="btn btn-secondary"
