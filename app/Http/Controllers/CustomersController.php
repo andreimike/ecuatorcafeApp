@@ -70,8 +70,6 @@ class CustomersController extends Controller
             'cui' => $request->cui
         ];
 
-        //dd($data);
-
         Customer::create($data);
 
         return redirect()->route('customer.create')->with('success', 'Clientul a fost adaugat cu succes!');

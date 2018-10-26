@@ -5,6 +5,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                @include('inc.messages')
                 <div class="card mt-1">
                     <div class="card-header">
                         <h5 class="text-center">Comenzi</h5>
@@ -37,7 +38,7 @@
                                     <th>Nr Aviz</th>
                                     <th class="text-center">Aviz</th>
                                     <th class="text-center">Declaratie</th>
-                                    <th class="text-center">DPD</th>
+                                    <th class="text-center">Curier</th>
                                     <th class="text-center">SmartBill</th>
                                 </tr>
                                 </thead>
@@ -112,7 +113,7 @@
                                         </td>
                                         <td class="text-center">
                                             @if($order->notice == null)
-                                                <a href="" class="btn btn-success text-center" target="_blank"><i
+                                                <a href="{{route('order.single.notice', [$order->id])}}" class="btn btn-success text-center" target="_blank"><i
                                                             class="fas fa-file-alt"></i></a>
                                             @else
                                                 <button type="button" class="btn btn-secondary"
@@ -123,12 +124,12 @@
                                         <td class="text-center">
                                             @if($order->conformity_declaration == null)
                                                 <a href="{{route('order.conformity', [$order->id])}}"
-                                                   class="btn btn-info text-center" target="_blank"><i
+                                                   class="btn btn-info text-center"><i
                                                             class="far fa-file-alt"></i></a>
                                             @else
-                                                <button type="button" class="btn btn-secondary"
-                                                        style="cursor:not-allowed;" disabled><i
-                                                            class="far fa-file-alt"></i></button>
+                                                <form action="{{route('order.conformity', ['id' => $order->id])}}" method="get">
+                                                <i class="fas fa-check text-success"></i> &nbsp; <button title="Regenereaza Declaratie de Conformitate" type="submit" onclick="return confirm('Acesata Declaratie de conformitate a fost deja generata. Doresti sa o generezi din nou?')" class="btn btn-info text-center"><i class="far fa-file-alt"></i></button>
+                                                </form>
                                             @endif
                                         </td>
                                         <td class="text-center">

@@ -41,6 +41,4 @@ Route::get('comenzi/adaga', 'OrdersController@create')->name('order.create')->mi
 Route::post('comenzi/import', 'OrdersController@store')->name('order.store')->middleware('auth');
 Route::get('comenzi/declaratie-conformitate/{id}', 'OrdersController@conformity')->name('order.conformity')->middleware('auth');
 Route::get('comenzi/generare-declaratii-bulk/', 'OrdersController@declarations')->name('order.declarations')->middleware('auth');
-//Route::get('comenzi/editare/{id}', 'OrdersController@edit')->name('order.edit')->middleware('auth');
-//Route::post('comenzi/{id}', 'OrdersController@update')->name('order.update')->middleware('auth');
-s
+Route::get('comenzi/generare-aviz/{id}', 'OrdersController@notice')->name('order.single.notice')->middleware('auth');

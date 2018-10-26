@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Option;
+use Illuminate\Http\Request;
 use App\Models\CustomerFileUpload;
 use App\Imports\CustomersImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -211,14 +212,15 @@ class OrdersController extends Controller
     public function conformity($id)
     {
 
+
         $order = Order::find($id);
-        $productInfosArray = json_decode($order['product'], true);
-        $pdf = App::make('dompdf.wrapper');
-        $pdf = PDF::loadView('pages.order.conformity', compact('order'))->setPaper('a4', 'portrait');
-        $pdfFileName = $order->order_number;
-        $order->conformity_declaration = 1;
-        $order->save();
-        return $pdf->download('Declaratie-de-Conformititate-' . $pdfFileName . '.pdf');
+            $productInfosArray = json_decode($order['product'], true);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf = PDF::loadView('pages.order.conformity', compact('order'))->setPaper('a4', 'portrait');
+            $pdfFileName = $order->order_number;
+            $order->conformity_declaration = 1;
+            $order->save();
+            return $pdf->download('Declaratie-de-Conformititate-' . $pdfFileName . '.pdf');
 
     }
 
@@ -227,11 +229,36 @@ class OrdersController extends Controller
         $orders = Order::all();
         $pdf = App::make('dompdf.wrapper');
         $pdf = PDF::loadView('pages.order.declarations', compact('orders'))->setPaper('a4', 'portrait');
+        //Count total number of orders
         $totalOrders = DB::table('orders')->count();
+        //Set for all conformity_declaration column from 0 to 1 after the PDF
         DB::table('orders')
             ->having('id', '>=', $totalOrders)
             ->update(['conformity_declaration' => 1]);
         return $pdf->download('Declaratii-de-Conformititate' . '.pdf');
+
+    }
+
+    public function notice($id)
+    {
+        $order = Order::find($id);
+        $productInfosArray = json_decode($order['product'], true);
+        $orderId = $order->id;
+        $option = Option::all();
+        $data = [
+            'order_id' => $orderId
+        ];
+        Option::create($data);
+        $increment = DB::table('options')->increment('serial_number', 1);
+        $data1 = [
+
+            'serial_number' => $increment,
+        ];
+        Option::create($data1);
+        // $serialNumber = $option->serial_number;
+//        $orderSerialNumber = new Option;
+//        $orderSerialNumber->order_id = $order->id;
+
 
     }
 }

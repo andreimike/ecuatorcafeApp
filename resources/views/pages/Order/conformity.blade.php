@@ -81,8 +81,8 @@
                         style="border: none; padding-top: 10px; padding-bottom: 10px; padding-right: 50px; width: 200px; height: 200px; vertical-align: top;">
                         <p style="text-align: left;">Administrator, <br>
                             Mitran Alexandru</p>
-                        <img src="http://www.octaser.ro/produse/301/1/30%20CABINET%20MEDICAL.jpg" align="Semnatura"
-                             style="width: 80px; height: auto; display: block;"/>
+                        <img src="https://ecuatorcafe.ro/wp-content/uploads/2018/10/PastedGraphic-2.jpg" align="Stampila si Semnatura"
+                             style="width: 100px; height: auto; display: block;"/>
                     </td>
                 </tr>
                 </tbody>
