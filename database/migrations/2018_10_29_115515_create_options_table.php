@@ -14,7 +14,6 @@ class CreateOptionsTable extends Migration
     public function up()
     {
         Schema::create('options', function (Blueprint $table) {
-            $table->engine = "InnoDB";
             $table->increments('id', true);
             $table->integer('serial_number')->default(0)->nullable();
             $table->timestamps();

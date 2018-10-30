@@ -214,13 +214,13 @@ class OrdersController extends Controller
 
 
         $order = Order::find($id);
-            $productInfosArray = json_decode($order['product'], true);
-            $pdf = App::make('dompdf.wrapper');
-            $pdf = PDF::loadView('pages.order.conformity', compact('order'))->setPaper('a4', 'portrait');
-            $pdfFileName = $order->order_number;
-            $order->conformity_declaration = 1;
-            $order->save();
-            return $pdf->download('Declaratie-de-Conformititate-' . $pdfFileName . '.pdf');
+        $productInfosArray = json_decode($order['product'], true);
+        $pdf = App::make('dompdf.wrapper');
+        $pdf = PDF::loadView('pages.order.conformity', compact('order'))->setPaper('a4', 'portrait');
+        $pdfFileName = $order->order_number;
+        $order->conformity_declaration = 1;
+        $order->save();
+        return $pdf->download('Declaratie-de-Conformititate-' . $pdfFileName . '.pdf');
 
     }
 
@@ -244,21 +244,25 @@ class OrdersController extends Controller
         $order = Order::find($id);
         $productInfosArray = json_decode($order['product'], true);
         $orderId = $order->id;
-        $option = Option::all();
-        $data = [
-            'order_id' => $orderId
-        ];
-        Option::create($data);
+        $orderNumber = $order->order_number;
+        $totalOrders = DB::table('orders')->count();
+        $orderCustomer = Order::with('customer')->where('order_number', '=', $orderNumber)->get();
+        $options = Option::all();
+        foreach ($options as $option){
+            $lastSerialNumber = $option->serial_number;
+        }
+
+        $incrementSerialNumber = $lastSerialNumber + 1;
+        $order->serial_number = $incrementSerialNumber;
+        $order->notice = 1;
+        $order->save();
         $increment = DB::table('options')->increment('serial_number', 1);
-        $data1 = [
+        $pdf = App::make('dompdf.wrapper');
+        $pdf = PDF::loadView('pages.order.notice', compact('order', 'orderCustomer', 'totalOrders'))->setPaper('a4', 'portrait');
+        $pdfFileName = $order->order_number;
 
-            'serial_number' => $increment,
-        ];
-        Option::create($data1);
-        // $serialNumber = $option->serial_number;
-//        $orderSerialNumber = new Option;
-//        $orderSerialNumber->order_id = $order->id;
-
+        $order->save();
+        return $pdf->download('Aviz-' . $pdfFileName . '.pdf');
 
     }
 }

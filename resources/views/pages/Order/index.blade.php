@@ -112,9 +112,14 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
+
                                             @if($order->notice == null)
-                                                <a href="{{route('order.single.notice', [$order->id])}}" class="btn btn-success text-center" target="_blank"><i
-                                                            class="fas fa-file-alt"></i></a>
+                                                <form action="{{route('order.single.notice', ['id' => $order->id])}}"
+                                                      method="GET">
+                                                    {{csrf_field()}}
+                                                    <button type="submit" class="btn btn-success text-center"><i
+                                                                class="fas fa-file-alt"></i></button>
+                                                </form>
                                             @else
                                                 <button type="button" class="btn btn-secondary"
                                                         style="cursor:not-allowed;" disabled><i
@@ -153,6 +158,26 @@
                                             @endif
                                         </td>
                                     </tr>
+                                    <script>
+                                        $(function () {
+
+                                            $('form').on('submit', function (e) {
+
+                                                e.preventDefault();
+
+                                                $.ajax({
+                                                    type: 'get',
+                                                    url: '{{route('order.single.notice', [$order->id])}}',
+                                                    data: $('form'),
+                                                    success: function () {
+                                                        location.reload();
+                                                    }
+                                                });
+
+                                            });
+
+                                        });
+                                    </script>
                                 @endforeach
                                 </tbody>
                             </table>
@@ -164,3 +189,4 @@
     </div>
 
 @endsection
+

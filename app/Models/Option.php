@@ -8,14 +8,14 @@ class Option extends Model
 {
     //table name
     protected $table = 'options';
-    //Set PK to not auto incrementing
+
     //primary key
     public $primaryKey = 'id';
     //Timestamps
 
     public $timestamps = true;
 
-    protected $fillable = array('order_id', 'serial_number', 'order_serial_number');
+    protected $fillable = array('serial_number');
 
 //    public function order()
 //    {

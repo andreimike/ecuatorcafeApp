@@ -19,7 +19,6 @@ class CreateOrdersTable extends Migration
             $table->string('contractor_ean_id');
             $table->foreign('contractor_ean_id')->references('contractor_ean')->on('customers')->onDelete('cascade');
             $table->text('product');
-            $table->integer('notice_number')->nullable();
             $table->boolean('notice')->default(false);
             $table->boolean('conformity_declaration')->default(false);
             $table->boolean('dpd_shipping')->default(false);

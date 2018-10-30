@@ -42,3 +42,7 @@ Route::post('comenzi/import', 'OrdersController@store')->name('order.store')->mi
 Route::get('comenzi/declaratie-conformitate/{id}', 'OrdersController@conformity')->name('order.conformity')->middleware('auth');
 Route::get('comenzi/generare-declaratii-bulk/', 'OrdersController@declarations')->name('order.declarations')->middleware('auth');
 Route::get('comenzi/generare-aviz/{id}', 'OrdersController@notice')->name('order.single.notice')->middleware('auth');
+
+Route::get('notice-test', function (){
+    return view('pages.order.notice');
+});

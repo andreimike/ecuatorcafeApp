@@ -12,7 +12,7 @@ class Order extends Model
 
     public $timestamps = true;
 
-    protected $fillable = array('order_number', 'contractor_ean_id', 'product', 'notice_number', 'notice', 'conformity_declaration', 'dpd_shipping', 'smart_bill_invoice');
+    protected $fillable = array('order_number', 'contractor_ean_id', 'product', 'notice_number', 'notice', 'conformity_declaration', 'dpd_shipping', 'smart_bill_invoice', 'serial_number');
 
     public function customer()
     {
