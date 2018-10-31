@@ -13,13 +13,7 @@ class Option extends Model
     public $primaryKey = 'id';
     //Timestamps
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = array('serial_number');
-
-//    public function order()
-//    {
-//
-//        return $this->hasOne('App\Models\Order', 'contractor_ean_id', 'contractor_ean');
-//    }
 }

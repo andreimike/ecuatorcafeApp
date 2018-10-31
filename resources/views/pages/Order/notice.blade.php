@@ -14,11 +14,11 @@
                         <h3 style="text-align: right;">AVIZ DE INSOTIRE A MARFII</h3>
                         <hr style="border: 1px solid #000;"/>
                         <p style="text-align: right; padding: 0px !important; margin: 0px !important;">Seria
-                            ATSNP nr.
-                            0533</p>
+                            ATSNP nr. {{$order->serial_number}}
+                        </p>
                         <p style="text-align: right; padding: 0px !important; margin: 0px !important;">Data
                             (zi/luna/an):
-                            01/07/2018</p>
+                            {{date('d/m/Y')}}</p>
                         <p style="text-align: right; padding: 0px !important; margin: 0px !important;">Cota
                             TVA: 9%</p>
                     </td>
@@ -87,32 +87,39 @@
                             <tr>
                                 <th scope="row" style="text-align: center;">0</th>
                                 <td>
-                                    <p style="text-align: center;">1</p>
+                                    <p style="text-align: center; margin: 0px; padding: 0px;">1</p>
                                 </td>
                                 <td>
-                                    <p style="text-align: center;">2</p>
+                                    <p style="text-align: center; margin: 0px; padding: 0px;">2</p>
                                 </td>
                                 <td>
-                                    <p style="text-align: center;">3</p>
+                                    <p style="text-align: center; margin: 0px; padding: 0px;">3</p>
                                 </td>
                                 <td>
-                                    <p style="text-align: center;">4</p>
+                                    <p style="text-align: center; margin: 0px; padding: 0px;">4</p>
                                 </td>
                                 <td>
-                                    <p style="text-align: center;">5(3x4)</p>
+                                    <p style="text-align: center; margin: 0px; padding: 0px;">5(3x4)</p>
                                 </td>
                                 <td>
-                                    <p style="text-align: center;">6</p>
+                                    <p style="text-align: center; margin: 0px; padding: 0px;">6</p>
                                 </td>
                             </tr>
 
                             <?php $productInfosArray = json_decode($order['product'], true); ?>
+                            <!-- Order Index Deckaration -->
+                            <?php $index = (int)0; ?>
+                            <!-- Price Sum Declaration -->
                             <?php $s = (float)0; ?>
+                            <!-- Vat Total Sum Declartion -->
                             <?php $sVat = (float)0; ?>
                             @foreach($productInfosArray as $orderInfos)
                                 <tr style="border-top: none; border-bottom: none; padding-top: 2px !important; padding-bottom: 2px !important;">
                                     <th scope="row" style="border-top: none; border-bottom: none; text-align: center;">
-                                        1
+                                        <?php
+                                        $index = $index + 1;
+                                        ?>
+                                        <p style="text-align: center;">{{$index}}</p>
                                     </th>
                                     <td style="border-top: none; border-bottom: none;">
 
@@ -202,7 +209,7 @@
                                 <td align="left" style="border-top: none; vertical-align: top;">
                                     <img src="https://ecuatorcafe.ro/wp-content/uploads/2018/10/PastedGraphic-2.jpg"
                                          align="Stampila si Semnatura"
-                                         style="width: 79px; height: auto;"/>
+                                         style="width: 79px; height: auto; margin-top: 3px;"/>
                                     <small>Semnatura<br>si stampila<br>furnizorului</small>
                                 </td>
                                 <td align="center" style="border-top: none;">

@@ -8,7 +8,7 @@
 
 @if(session('success'))
     <div class="aler alert-success alert-dismissible fade show p-2 mb-2" role="alert">
-        <h5 class="alert-heading">{{session('success')}}</h5>
+        <h4 class="alert-heading text-center">{{session('success')}}</h4>
         <button type="button" class="close" data-dismis="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -17,10 +17,9 @@
 
 @if(session('error'))
     <div class="aler alert-danger alert-dismissible fade show p-2 mb-2" role="alert">
-        <h4 class="alert-heading">{{session('error')}}</h4>
+        <h4 class="alert-heading text-center">{{session('error')}}</h4>
         <button type="button" class="close" data-dismis="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
 @endif
-

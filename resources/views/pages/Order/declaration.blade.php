@@ -62,9 +62,9 @@
                 <tbody>
                 <tr style="border: none" border="0">
                     <td align="center" border="0" style="border: none; padding-top: 30px; padding-bottom: 30px;">
-                        <p style="text-align: center;">Referitor la Avizul cu nr.__533__ Seria ATSNP.</p>
+                        <p style="text-align: center;">Referitor la Avizul cu nr.__{{$order->serial_number}}__ Seria ATSNP.</p>
                     </td>
-                </tr>
+                </tr>s
                 </tbody>
             </table>
             <table border="0" cellpadding="0" cellspacing="0" align="left"

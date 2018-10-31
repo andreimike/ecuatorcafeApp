@@ -11,12 +11,11 @@ use App\Imports\CustomersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\UploadedFile;
-use Maatwebsite\Excel\HeadingRowImport;
 use Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 use Barryvdh\DomPDF\Facade as PDF;
 use App;
 
@@ -216,7 +215,7 @@ class OrdersController extends Controller
         $order = Order::find($id);
         $productInfosArray = json_decode($order['product'], true);
         $pdf = App::make('dompdf.wrapper');
-        $pdf = PDF::loadView('pages.order.conformity', compact('order'))->setPaper('a4', 'portrait');
+        $pdf = PDF::loadView('pages.order.declaration', compact('order'))->setPaper('a4', 'portrait');
         $pdfFileName = $order->order_number;
         $order->conformity_declaration = 1;
         $order->save();
@@ -241,28 +240,68 @@ class OrdersController extends Controller
 
     public function notice($id)
     {
+        //Get Order infos
         $order = Order::find($id);
         $productInfosArray = json_decode($order['product'], true);
+        // Get Order Id
         $orderId = $order->id;
+        // Get Order Number
         $orderNumber = $order->order_number;
+        // Get Current time
+        $time = time();
+        // Formatting the current Time
+        $formattedTime = date('Y-m-d', $time);
+        //Count all Orders from DB
         $totalOrders = DB::table('orders')->count();
+        // Get Customer For Each Order by Order Number
         $orderCustomer = Order::with('customer')->where('order_number', '=', $orderNumber)->get();
-        $options = Option::all();
-        foreach ($options as $option){
-            $lastSerialNumber = $option->serial_number;
+        // Generate a Name for each Notice Pdf by Order Number And Current Time
+        $pdfFileName = 'AvizNr-' . $order->order_number . '-' . $formattedTime . '.pdf';
+        // New Directory for Storage Notice Pdf - OneTimeUsed
+        $savePath = '/avize/';
+        // Check if Directory exist in Storage Path/App
+        if (!File::exists(storage_path($savePath))) {
+            // If Directory doesn't exist Create A New One - OneTimeUse
+            Storage::makeDirectory($savePath);
         }
-
-        $incrementSerialNumber = $lastSerialNumber + 1;
-        $order->serial_number = $incrementSerialNumber;
-        $order->notice = 1;
-        $order->save();
-        $increment = DB::table('options')->increment('serial_number', 1);
+        // Pdf Make Functions
         $pdf = App::make('dompdf.wrapper');
-        $pdf = PDF::loadView('pages.order.notice', compact('order', 'orderCustomer', 'totalOrders'))->setPaper('a4', 'portrait');
-        $pdfFileName = $order->order_number;
-
+        // 1. Get Pdf Content from a View, 2. Send variable to the View, Set paper Format, 3.Save The Notice Pdf to specific Path using Laravel Storage Path, New Folder("avize") and a unique name
+        $pdf = PDF::loadView('pages.order.notice', compact('order', 'orderCustomer', 'totalOrders'))->setPaper('a4', 'portrait')->setWarnings(false)->save(storage_path() . '/app' . $savePath . $pdfFileName);
+        // Set in DB Col Notice From Null to 1 - after it was created
+        $order->notice = 1;
+        // Storage in DB Col notice_pdf_path The filename for Notice Pdf
+        $order->notice_pdf_path = $pdfFileName;
+        // Save in DB
         $order->save();
-        return $pdf->download('Aviz-' . $pdfFileName . '.pdf');
+        return redirect()->route('order.view')->with('success', 'Avizul de insotire a fost generat cu succes! Puteti sa il descarcati');
+    }
 
+    public function noticeDownload($id)
+    {
+        //PDF file is stored under project/public/download/info.pdf
+        $file = Order::find($id);
+        $fileName = $file->notice_pdf_path;
+        $filePath = '/app/avize/' . $fileName;
+        return response()->download(storage_path() . $filePath);
+    }
+
+    public function serialNumber()
+    {
+        $orders = Order::all();
+        $serialNumber = Option::find(1);
+        $initialSerialNumber = $serialNumber->serial_number;
+        $i = 1;
+        foreach ($orders as $order) {
+            $incrementSerialNumber = $initialSerialNumber + $i;
+            $i++;
+            $order->serial_number = $incrementSerialNumber;
+            $order->save();
+        }
+        $finalSerialNumber = $incrementSerialNumber;
+        $serialNumber->serial_number = $finalSerialNumber;
+        $serialNumber->save();
+
+        return redirect()->route('order.view')->with('Success', 'Au fost generate cu succes numere de serii pentru toate comenziile');
     }
 }
