@@ -70,8 +70,10 @@
                             </div>
                         @else
                             <div class="alert alert-warning" role="alert">
-                                <p class="text-center p-2 mt-3"><i class="fas fa-exclamation-triangle"></i> <span class="text-dark">Momentan nu exista clineti in baza de date!</span> <a
-                                            href="{{route('customer.create')}}">Va rugam sa adaugati clienti.</a> <i class="fas fa-exclamation-triangle"></i></p>
+                                <p class="text-center p-2 mt-3"><i class="fas fa-exclamation-triangle"></i> <span
+                                            class="text-dark">Momentan nu exista clineti in baza de date!</span> <a
+                                            href="{{route('customer.create')}}">Va rugam sa adaugati clienti.</a> <i
+                                            class="fas fa-exclamation-triangle"></i></p>
                             </div>
                         @endif
                     </div>

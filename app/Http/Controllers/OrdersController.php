@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-
 use Barryvdh\DomPDF\Facade as PDF;
 use App;
 
@@ -208,7 +207,33 @@ class OrdersController extends Controller
         //
     }
 
-    public function conformity($id)
+    public function serialNumber()
+    {
+        $orders = Order::all();
+        // Get Initial Serial Number From DB by ID(1)
+        $serialNumber = Option::find(1);
+        // Get Serial Number From Option Table
+        $initialSerialNumber = $serialNumber->serial_number;
+        $i = 1;
+        foreach ($orders as $order) {
+            //For each Order increment serial number by 1($i)
+            $incrementSerialNumber = $initialSerialNumber + $i;
+            // Increment serial number by 1
+            $i++;
+            // Save for each order serial number
+            $order->serial_number = $incrementSerialNumber;
+            $order->save();
+        }
+        // Store final serial number
+        $finalSerialNumber = $incrementSerialNumber;
+        // Save final serial number in Option Table
+        $serialNumber->serial_number = $finalSerialNumber;
+        $serialNumber->save();
+
+        return redirect()->route('order.view')->with('Success', 'Au fost generate cu succes numere de serii pentru toate comenziile');
+    }
+
+    public function generateDeclaration($id)
     {
 
 
@@ -223,7 +248,7 @@ class OrdersController extends Controller
 
     }
 
-    public function declarations()
+    public function generateDeclarations()
     {
         $orders = Order::all();
         $pdf = App::make('dompdf.wrapper');
@@ -235,10 +260,9 @@ class OrdersController extends Controller
             ->having('id', '>=', $totalOrders)
             ->update(['conformity_declaration' => 1]);
         return $pdf->download('Declaratii-de-Conformititate' . '.pdf');
-
     }
 
-    public function notice($id)
+    public function generateNotice($id)
     {
         //Get Order infos
         $order = Order::find($id);
@@ -251,8 +275,6 @@ class OrdersController extends Controller
         $time = time();
         // Formatting the current Time
         $formattedTime = date('Y-m-d', $time);
-        //Count all Orders from DB
-        $totalOrders = DB::table('orders')->count();
         // Get Customer For Each Order by Order Number
         $orderCustomer = Order::with('customer')->where('order_number', '=', $orderNumber)->get();
         // Generate a Name for each Notice Pdf by Order Number And Current Time
@@ -277,6 +299,23 @@ class OrdersController extends Controller
         return redirect()->route('order.view')->with('success', 'Avizul de insotire a fost generat cu succes! Puteti sa il descarcati');
     }
 
+    public function generateNotices()
+    {
+        $orders = Order::with('customer')->get();
+        // Get Current time
+        $time = time();
+        // Formatting the current Time
+        $formattedTime = date('Y-m-d', $time);
+        $pdf = App::make('dompdf.wrapper');
+        $pdf = PDF::loadView('pages.order.notices', compact('orders'))->setPaper('a4', 'portrait');
+        $totalOrders = DB::table('orders')->count();
+        //Set for all conformity_declaration column from 0 to 1 after the PDF
+        DB::table('orders')
+            ->having('id', '>=', $totalOrders)
+            ->update(['notice' => 1]);
+        return $pdf->download('Avize-de-insotire-' . $formattedTime . '.pdf');
+    }
+
     public function noticeDownload($id)
     {
         //PDF file is stored under project/public/download/info.pdf
@@ -286,22 +325,4 @@ class OrdersController extends Controller
         return response()->download(storage_path() . $filePath);
     }
 
-    public function serialNumber()
-    {
-        $orders = Order::all();
-        $serialNumber = Option::find(1);
-        $initialSerialNumber = $serialNumber->serial_number;
-        $i = 1;
-        foreach ($orders as $order) {
-            $incrementSerialNumber = $initialSerialNumber + $i;
-            $i++;
-            $order->serial_number = $incrementSerialNumber;
-            $order->save();
-        }
-        $finalSerialNumber = $incrementSerialNumber;
-        $serialNumber->serial_number = $finalSerialNumber;
-        $serialNumber->save();
-
-        return redirect()->route('order.view')->with('Success', 'Au fost generate cu succes numere de serii pentru toate comenziile');
-    }
 }

@@ -39,12 +39,15 @@ Route::post('import/clienti', 'UploadCustomersFiles@store')->name('import.custom
 Route::get('/comenzi', 'OrdersController@index')->name('order.view')->middleware('auth');
 Route::get('comenzi/adaga', 'OrdersController@create')->name('order.create')->middleware('auth');
 Route::post('comenzi/import', 'OrdersController@store')->name('order.store')->middleware('auth');
-Route::get('comenzi/declaratie-conformitate/{id}', 'OrdersController@conformity')->name('order.conformity')->middleware('auth');
-Route::get('comenzi/generare-declaratii-bulk/', 'OrdersController@declarations')->name('order.declarations')->middleware('auth');
-Route::get('comenzi/generare-aviz/{id}', 'OrdersController@notice')->name('order.single.notice')->middleware('auth');
+Route::get('comenzi/declaratie-conformitate/{id}', 'OrdersController@generateDeclaration')->name('order.conformity')->middleware('auth');
+Route::get('comenzi/generare-declaratii-bulk/', 'OrdersController@generateDeclarations')->name('order.declarations')->middleware('auth');
+Route::get('comenzi/generare-aviz/{id}', 'OrdersController@generateNotice')->name('order.single.notice')->middleware('auth');
+Route::get('comenzi/generare-avize-bulk/', 'OrdersController@generateNotices')->name('order.all.notices')->middleware('auth');
 Route::get('comenzi/descarca-aviz/{id}', 'OrdersController@noticeDownload')->name('order.single.notice.download')->middleware('auth');
 Route::get('comenzi/generare-numar-serie', 'OrdersController@serialNumber')->name('order.serial.numbers')->middleware('auth');
+Route::get('optiuni/editare-numar-de-serie/', 'OptionsController@editSerialNumber')->name('serial.number.edit')->middleware('auth');
+Route::post('optiuni/{id}', 'OptionsController@updateSerialNumber')->name('serial.number.update')->middleware('auth');
 
-Route::get('notice-test', function (){
+Route::get('notice-test', function () {
     return view('pages.order.notice');
 });

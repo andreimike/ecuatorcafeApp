@@ -13,19 +13,44 @@
                     <div class="card-body pr-0 pl-0">
                         <div class="row justify-content-center mb-3">
                             <div class="col-md-3">
-                                <a href="{{route('order.serial.numbers')}}" class="btn btn-primary btn-block"
-                                   title="Generaza Declaratie de Conformitate pentru toate comenzile">Genereaza
+                                @if($orders[0]->serial_number != null && $orders[1]->serial_number != null)
+                                    <button type="button" class="btn btn-outline-success" disabled><i
+                                                class="fas fa-check text-success"></i>&nbsp; Numerele de Serie au fost
+                                        Generate
+                                    </button>
+                                @else<a href="{{route('order.serial.numbers')}}" class="btn btn-primary btn-block"
+                                        title="Generaza Declaratie de Conformitate pentru toate comenzile">Genereaza
                                     Nr. de Serie Pentru Comenzi</a>
+                                @endif
                             </div>
                             <div class="col-md-3">
-                                <a href="{{route('order.declarations')}}" class="btn btn-info btn-block"
-                                   title="Generaza Declaratie de Conformitate pentru toate comenzile" target="_blank">Genereaza
-                                    declaratii de confomitate</a>
+                                @if($orders[0]->serial_number == null && $orders[1]->serial_number == null)
+                                    <button type="button" class="btn btn-outline-secondary btn-block"
+                                            onclick="noticeGeneratorAlert()"><i
+                                                class="fas fa-ban text-danger"></i>
+                                        Genereaza
+                                        Avize De Insotire
+                                    </button>
+                                @else
+                                    <a href="{{route('order.all.notices')}}" class="btn btn-success btn-block"
+                                       title="Generaza Avize de Insotire"
+                                       target="_blank">Genereaza
+                                        Avize De Insotire</a>
+                                @endif
                             </div>
                             <div class="col-md-3">
-                                <a href="" class="btn btn-success btn-block"
-                                   title="Generaza Avize de Insotire">Genereaza
-                                    declaratii de confomitate</a>
+                                @if($orders[0]->notice == null && $orders[1]->notice == null)
+                                    <button type="button" class="btn btn-outline-secondary"
+                                            onclick="conformityGeneratorAlert()">
+                                        <i class="fas fa-ban text-danger"></i>
+                                        Genereaza
+                                        declaratii de confomitate
+                                    </button>
+                                @else
+                                    <a href="{{route('order.declarations')}}" class="btn btn-info btn-block"
+                                       title="Generaza Declaratie de Conformitate pentru toate comenzile">Genereaza
+                                        declaratii de confomitate</a>
+                                @endif
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -124,6 +149,10 @@
                                                 <button type="button" class="btn btn-outline-secondary btn-lg"
                                                         onclick="noticeAlertMessage()"><i
                                                             class="fas fa-file-alt"></i></button>
+                                            @elseif($order->notice == 1 && $order->serial_number != 0 && $order->notice_pdf_path == null)
+                                                <a href="{{route('order.single.notice', [$order->id])}}"
+                                                   class="btn btn-success btn-lg text-center"><i
+                                                            class="fas fa-folder-plus"></i></a>
                                             @elseif($order->notice == null && $order->serial_number != 0 && $order->notice_pdf_path == null)
                                                 <a href="{{route('order.single.notice', [$order->id])}}"
                                                    class="btn btn-success btn-lg text-center"><i
@@ -205,6 +234,14 @@
     </div>
 
     <script>
+        function noticeGeneratorAlert() {
+            alert("Generati mai intai Un Numar de Serie pentru toate comenzile");
+        }
+
+        function conformityGeneratorAlert() {
+            alert("Trebuie sa generati mai intai Avizele de Insotire");
+        }
+
         function noticeAlertMessage() {
             alert("Generare Aviz de Insotire a Marfii.  Inca nu a fost generat un Numar de Serie pentru aceasta Conmanda. Va rugam sa generati un numar de serie mai intai!");
         }

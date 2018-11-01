@@ -71,6 +71,11 @@ class UploadCustomersFiles extends Controller
             'cale_fisier' => $path,
             'id_utilizator' => Auth::user()->id
         ];
+        $this->validate($request, [
+            'nume' => 'required|max:255',
+            'contractor_ean' => 'required|unique|max:255',
+        ]);
+
         CustomerFileUpload::create($data);
         $customersArray = Excel::toArray(new CustomersImport, $file);
         foreach ($customersArray as $stageOneKey => $stageOneVal) {
