@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37f4dfae-1d0f-4301-bb9e-746e5fba3f18" name="Default" comment="Adaugare setare data prajire cafea pentru fiecare tip de cafea in parte&#10;Adaugare un nou index in array-ul cu infos pentru produse - frying_date&#10;Setare preluare data prajire cafea corect dupa data setata in formular&#10;Generare Declaratie de conf pentru fiecare comanda in parte dupa id +  setare in db in col conformity_declaration =&gt; 1&#10;Generare Declaratii de conf Bluk +  setare in db in col conformity_declaration =&gt; 1 pentru toate comenzile inregistrare&#10;Instalare pachet generare PDF pentru dec de conf  via - https://github.com/barryvdh/laravel-dompdf&#10;Adaugare btns in view-comenzi pentru generare bulk dec. de conf. si avize.&#10;Creare rute&#10;Creare views pentru declaratii(bulk si single)&#10;Creare Metode pentru Generare pdf(bulk si single)">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/OptionsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/options/serial-number-edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/options/serial-number-view.blade.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/composer.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/config/dompdf.php" afterDir="false" />
@@ -326,13 +322,18 @@
       <change afterPath="$PROJECT_DIR$/vendor/sabberworm/php-css-parser/tests/files/whitespace.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendor/sabberworm/php-css-parser/tests/phpunit.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendor/sabberworm/php-css-parser/tests/quickdump.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OptionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OptionsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UploadCustomersFiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UploadCustomersFiles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/inc/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inc/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/Customers/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/Customers/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/Order/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/Order/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
@@ -363,109 +364,21 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="ecuator_app: schema" type="c314c289:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="ecuator_app: schema" type="c314c289:MysqlImplModel$Schema" />
-        <item name="customers: table" type="98d5ac3d:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="ecuator_app: schema" type="c314c289:MysqlImplModel$Schema" />
-        <item name="options: table" type="98d5ac3d:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="ecuator_app: schema" type="c314c289:MysqlImplModel$Schema" />
-        <item name="orders: table" type="98d5ac3d:MysqlImplModel$Table" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OrdersController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="OrdersController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrdersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="320" column="67" selection-start-line="320" selection-start-column="67" selection-end-line="320" selection-end-column="67" />
+            <state relative-caret-position="645">
+              <caret line="362" column="32" lean-forward="true" selection-start-line="362" selection-start-column="32" selection-end-line="362" selection-end-column="32" />
               <folding>
                 <element signature="e#40#61#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="notices.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="52" column="99" selection-start-line="52" selection-start-column="99" selection-end-line="52" selection-end-column="99" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/web.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="734">
-              <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
-              <folding>
-                <element signature="e#7#389#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="orders" pinned="false" current-in-tab="false">
-        <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/orders">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="44" column="78" selection-start-line="44" selection-start-column="78" selection-end-line="44" selection-end-column="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UploadCustomersFiles.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UploadCustomersFiles.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="71" column="47" lean-forward="true" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
-              <folding>
-                <element signature="e#40#68#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Customer.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/Customer.php">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -494,24 +407,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_17_071608_drop_customers_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_12_111106_create_customers_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_17_071813_create_customers_table.php" />
-        <option value="$PROJECT_DIR$/resources/views/auth/register.blade.php" />
-        <option value="$PROJECT_DIR$/app/Imports/CustomersImport.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/Customers/uploadedfiles.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/Customers/create.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_18_063726_create_products_table.php" />
-        <option value="$PROJECT_DIR$/app/Models/Product.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_18_070159_create_orders_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_18_130137_change_product_length_to_orders.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_18_131647_change_orders_table_with_ondelete_to_orders.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_18_125626_create_orders_table.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/Customers/view.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/app/Models/Customer.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/home.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/Order/edit.blade.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/Order/create.blade.php" />
@@ -536,15 +433,31 @@
         <option value="$PROJECT_DIR$/resources/views/inc/messages.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/Order/notice.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/options/serial-number-view.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/inc/header.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/options/serial-number-edit.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/OptionsController.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/Customers/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php" />
+        <option value="$USER_HOME$/ecuator_app.sql" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/index.php" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/app.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/resources/views/pages/home.blade.php" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/home.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/app.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/Order/index.blade.php" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/inc/header.blade.php" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/header.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UploadCustomersFiles.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/OptionsController.php" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/OptionsController.php" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/UploadCustomersFiles.php" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/web.php" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/.htaccess" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/.env" />
+        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/OrdersController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" />
       </list>
     </option>
   </component>
@@ -662,7 +575,6 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1920" />
     <option name="y" value="23" />
     <option name="width" value="1920" />
     <option name="height" value="968" />
@@ -701,14 +613,7 @@
             <path>
               <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Imports" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Models" type="462c0819:PsiDirectoryNode" />
+              <item name="docker" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
@@ -727,6 +632,13 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="inc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
@@ -764,6 +676,21 @@
               <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
               <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
+              <item name="storage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -774,6 +701,11 @@
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/alexandru/ecuator-app/resources/views/inc/header.blade.php" />
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -828,6 +760,12 @@
       <workItem from="1540904782093" duration="12437000" />
       <workItem from="1540971729812" duration="15284000" />
       <workItem from="1541056921496" duration="8113000" />
+      <workItem from="1541068287456" duration="61000" />
+      <workItem from="1541075620816" duration="9058000" />
+      <workItem from="1541140928903" duration="733000" />
+      <workItem from="1541166519338" duration="10757000" />
+      <workItem from="1541187767138" duration="674000" />
+      <workItem from="1541232626072" duration="1536000" />
     </task>
     <task id="LOCAL-00001" summary="Major Work. Made Import Customers from XLSX without package. &#10;Some fix at customer.&#10;Delete Customer ID and replace with contractor_ean">
       <created>1539791174430</created>
@@ -878,15 +816,21 @@
       <option name="project" value="LOCAL" />
       <updated>1541002015679</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Creare metoda geneezre avize bulk&#10;Creare Rute&#10;Creare Metoda Editare Numar de Serie&#10;Creare views">
+      <created>1541068334741</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1541068334741</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215826000" />
+    <option name="totallyTimeSpent" value="238645000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="23" width="1920" height="968" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1920" height="968" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50159746" side_tool="true" weight="0.40183696" />
@@ -895,11 +839,10 @@
       <window_info anchor="bottom" id="Version Control" order="13" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49840257" weight="0.40183696" />
-      <window_info anchor="right" id="Remote Host" order="3" />
-      <window_info anchor="bottom" id="Database Console" order="0" weight="0.32914287" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16400427" />
+      <window_info anchor="right" id="Remote Host" order="3" weight="0.32960597" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17358893" />
       <window_info anchor="bottom" id="Docker" order="8" />
-      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.12193823" />
+      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.17412141" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -910,6 +853,7 @@
       <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.49946752" visible="true" weight="0.32916668" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Database Console" order="0" weight="0.32914287" />
       <window_info anchor="bottom" id="Find" order="2" />
     </layout>
   </component>
@@ -927,180 +871,10 @@
     <MESSAGE value="Adaugare setare data prajire cafea pentru fiecare tip de cafea in parte&#10;Adaugare un nou index in array-ul cu infos pentru produse - frying_date&#10;Setare preluare data prajire cafea corect dupa data setata in formular&#10;Generare Declaratie de conf pentru fiecare comanda in parte dupa id +  setare in db in col conformity_declaration =&gt; 1&#10;Generare Declaratii de conf Bluk +  setare in db in col conformity_declaration =&gt; 1 pentru toate comenzile inregistrare&#10;Instalare pachet generare PDF pentru dec de conf  via - https://github.com/barryvdh/laravel-dompdf&#10;Adaugare btns in view-comenzi pentru generare bulk dec. de conf. si avize.&#10;Creare rute&#10;Creare views pentru declaratii(bulk si single)&#10;Creare Metode pentru Generare pdf(bulk si single)" />
     <MESSAGE value="Notice 80% done:&#10;Make Pdf&#10;Send Order Data tot View for Pdf&#10;calculate sum for product price&#10;Create Option table&#10;Careate Col in Order for serial Number&#10;create Serial Number &amp; autoincrement after click the create notice button&#10;save the last serial number in option table" />
     <MESSAGE value="Create Numar de Aviz Bulk Pentru toate comenzile&#10;Buton Creare Nr de Aviz Bulk&#10;Salvare Nr de Aviz individual pentru fiecare Comanda in Tabela de Comenzi&#10;Salvare Ultimul nr de Aviz Generat in Tabela De optiuni&#10;Creare Aviz Corect&#10;Parsare in Aviz Data curenta si Nr de Aviz&#10;Parsare in View-urile pentru declaratie Nr de Aviz&#10;Afisare Nr de Aviz In pagina de Comenzi&#10;Restrictii la crearea Declaratiilor si A Avizelor&#10;Nu se Poate Creea declaratie daca nu a fost generat Aviz&#10;Nu se poate Genera Aviz daca nu a fost Generat Nr de serie pentru toate comenzile&#10;Salvare Pdf Pentru Aviz intr-un fisier doar pentru avize&#10;Buton Descarcare Avize&#10;Migratie Adaugare Coloana de Salvare Nume Aviz in Tabela de Optiuni" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Numar de Aviz Bulk Pentru toate comenzile&#10;Buton Creare Nr de Aviz Bulk&#10;Salvare Nr de Aviz individual pentru fiecare Comanda in Tabela de Comenzi&#10;Salvare Ultimul nr de Aviz Generat in Tabela De optiuni&#10;Creare Aviz Corect&#10;Parsare in Aviz Data curenta si Nr de Aviz&#10;Parsare in View-urile pentru declaratie Nr de Aviz&#10;Afisare Nr de Aviz In pagina de Comenzi&#10;Restrictii la crearea Declaratiilor si A Avizelor&#10;Nu se Poate Creea declaratie daca nu a fost generat Aviz&#10;Nu se poate Genera Aviz daca nu a fost Generat Nr de serie pentru toate comenzile&#10;Salvare Pdf Pentru Aviz intr-un fisier doar pentru avize&#10;Buton Descarcare Avize&#10;Migratie Adaugare Coloana de Salvare Nume Aviz in Tabela de Optiuni" />
+    <MESSAGE value="Creare metoda geneezre avize bulk&#10;Creare Rute&#10;Creare Metoda Editare Numar de Serie&#10;Creare views" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creare metoda geneezre avize bulk&#10;Creare Rute&#10;Creare Metoda Editare Numar de Serie&#10;Creare views" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/FirstSerialNumberIndex.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/options">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Imports/OrdersImport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-          <folding>
-            <element signature="e#31#52#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/dompdf.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1561">
@@ -1126,9 +900,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-          <folding>
-            <element signature="e#7#45#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1174,13 +945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/inc/header.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="82" selection-start-line="40" selection-start-column="82" selection-end-line="40" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/options/serial-number-edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -1202,26 +966,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CustomersController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="144" selection-start-line="144" selection-end-line="144" />
-          <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OptionsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="91" column="40" lean-forward="true" selection-start-line="91" selection-start-column="40" selection-end-line="91" selection-end-column="40" />
-          <folding>
-            <element signature="e#40#61#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/declaration.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1140">
@@ -1236,41 +980,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
-          <folding>
-            <element signature="e#7#389#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/notice.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="44" selection-end-line="276" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/orders">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="44" column="78" selection-start-line="44" selection-start-column="78" selection-end-line="44" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/CustomerFileUpload.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Customer.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php">
@@ -1280,22 +990,139 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrdersController.php">
+    <entry file="file://$PROJECT_DIR$/bootstrap/app.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/logging.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/filesystems.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="320" column="67" selection-start-line="320" selection-start-column="67" selection-end-line="320" selection-end-column="67" />
+        <state relative-caret-position="-272" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/ecuator_app.sql" />
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/index.php" />
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/app.php" />
+    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/orders">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/notice.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="110" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/home.blade.php" />
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" column="102" selection-start-line="16" selection-start-column="102" selection-end-line="16" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="15" lean-forward="true" selection-start-column="15" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/app.blade.php" />
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="57" column="30" lean-forward="true" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/index.blade.php" />
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/header.blade.php" />
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UploadCustomersFiles.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="40" lean-forward="true" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
+          <folding>
+            <element signature="e#40#68#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Customer.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OptionsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding>
             <element signature="e#40#61#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UploadCustomersFiles.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CustomersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="71" column="47" lean-forward="true" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
+        <state relative-caret-position="2025">
+          <caret line="144" selection-start-line="144" selection-end-line="144" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/OptionsController.php" />
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/UploadCustomersFiles.php" />
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/web.php" />
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/.htaccess" />
+    <entry file="file://$PROJECT_DIR$/docker/app.dockerfile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/server.php" />
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="16" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/inc/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/.env" />
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/Order.php" />
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/OrdersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="353" column="23" lean-forward="true" selection-start-line="353" selection-start-column="23" selection-end-line="353" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrdersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="362" column="32" lean-forward="true" selection-start-line="362" selection-start-column="32" selection-end-line="362" selection-end-column="32" />
           <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
+            <element signature="e#40#61#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -21,6 +21,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- FavIcon -->
+    <link rel="icon" sizes="192x192" href="https://ecuatorcafe.ro/wp-content/uploads/2018/10/Logo-EcuatorCafeEdited.jpg">
+    <!-- Meta Tag Manager -->
+    <meta name="theme-color" content="#C7A17A" />
+    <!-- / Meta Tag Manager -->
+
 </head>
 <body>
 <div id="app">

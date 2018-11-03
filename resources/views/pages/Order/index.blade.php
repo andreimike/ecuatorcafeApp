@@ -6,53 +6,63 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 @include('inc.messages')
-                <div class="card mt-1">
+                <div class="card mt-1 mb-3">
                     <div class="card-header">
-                        <h5 class="text-center">Comenzi</h5>
+                        <h4 class="text-center"><i class="fas fa-list-ol"></i> &nbsp; Actiuni pentru toate comenzile:
+                        </h4>
                     </div>
-                    <div class="card-body pr-0 pl-0">
-                        <div class="row justify-content-center mb-3">
-                            <div class="col-md-3">
-                                @if($orders[0]->serial_number != null && $orders[1]->serial_number != null)
-                                    <button type="button" class="btn btn-outline-success" disabled><i
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-3 mt-2 mb-2 text-center">
+                                @if($orders[1]->serial_number != 0 && $orders[2]->serial_number != 0)
+                                    <button type="button" class="btn btn-outline-success text-center" disabled><i
                                                 class="fas fa-check text-success"></i>&nbsp; Numerele de Serie au fost
                                         Generate
                                     </button>
-                                @else<a href="{{route('order.serial.numbers')}}" class="btn btn-primary btn-block"
+                                @else<a href="{{route('order.serial.numbers')}}"
+                                        class="btn btn-primary btn-block text-center"
                                         title="Generaza Declaratie de Conformitate pentru toate comenzile">Genereaza
                                     Nr. de Serie Pentru Comenzi</a>
                                 @endif
                             </div>
-                            <div class="col-md-3">
-                                @if($orders[0]->serial_number == null && $orders[1]->serial_number == null)
-                                    <button type="button" class="btn btn-outline-secondary btn-block"
+                            <div class="col-md-3 mt-2 mb-2 text-center">
+                                @if($orders[1]->serial_number == 0 && $orders[2]->serial_number == 0)
+                                    <button type="button" class="btn btn-outline-secondary btn-block text-center"
                                             onclick="noticeGeneratorAlert()"><i
                                                 class="fas fa-ban text-danger"></i>
                                         Genereaza
                                         Avize De Insotire
                                     </button>
                                 @else
-                                    <a href="{{route('order.all.notices')}}" class="btn btn-success btn-block"
+                                    <a href="{{route('order.all.notices')}}"
+                                       class="btn btn-success btn-block text-center"
                                        title="Generaza Avize de Insotire"
                                        target="_blank">Genereaza
                                         Avize De Insotire</a>
                                 @endif
                             </div>
-                            <div class="col-md-3">
-                                @if($orders[0]->notice == null && $orders[1]->notice == null)
-                                    <button type="button" class="btn btn-outline-secondary"
+                            <div class="col-md-3 mt-2 mb-2 text-center">
+                                @if($orders[1]->notice == 0 && $orders[2]->notice == 0)
+                                    <button type="button" class="btn btn-outline-secondary text-center"
                                             onclick="conformityGeneratorAlert()">
                                         <i class="fas fa-ban text-danger"></i>
                                         Genereaza
                                         declaratii de confomitate
                                     </button>
                                 @else
-                                    <a href="{{route('order.declarations')}}" class="btn btn-info btn-block"
+                                    <a href="{{route('order.declarations')}}" class="btn btn-info btn-block text-center"
                                        title="Generaza Declaratie de Conformitate pentru toate comenzile">Genereaza
                                         declaratii de confomitate</a>
                                 @endif
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h4 class="text-center">Comenzi</h4>
+                    </div>
+                    <div class="card-body pr-0 pl-0">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class="bg-light text-dark">
@@ -133,7 +143,7 @@
                                             </ul>
                                         </td>
                                         <td>
-                                            @if($order->serial_number == null)
+                                            @if($order->serial_number == 0)
                                                 <div class="aler alert-warning">
                                                     Negenerat
                                                 </div>
@@ -142,9 +152,7 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-
-
-                                            @if($order->notice == null && $order->serial_number == 0)
+                                            @if($order->notice == 0 && $order->serial_number == 0)
                                                 <i class="fas fa-ban text-danger"></i>
                                                 <button type="button" class="btn btn-outline-secondary btn-lg"
                                                         onclick="noticeAlertMessage()"><i
@@ -153,7 +161,7 @@
                                                 <a href="{{route('order.single.notice', [$order->id])}}"
                                                    class="btn btn-success btn-lg text-center"><i
                                                             class="fas fa-folder-plus"></i></a>
-                                            @elseif($order->notice == null && $order->serial_number != 0 && $order->notice_pdf_path == null)
+                                            @elseif($order->notice == 0 && $order->serial_number != 0 && $order->notice_pdf_path == null)
                                                 <a href="{{route('order.single.notice', [$order->id])}}"
                                                    class="btn btn-success btn-lg text-center"><i
                                                             class="fas fa-folder-plus"></i></a>
@@ -162,15 +170,6 @@
                                                         href="{{route('order.single.notice.download', [$order->id])}}"
                                                         class="btn btn-success btn-lg text-center"><i
                                                             class="fas fa-file-download"></i></a>
-                                                {{--@elseif($order->notice == 1 && $order->serial_number != 0)--}}
-                                                {{--<form action="{{route('order.single.notice.download', ['id' => $order->id])}}"--}}
-                                                {{--method="get">--}}
-                                                {{--<i class="fas fa-check text-success"></i>&nbsp;--}}
-                                                {{--<button title="Regenereaza Avizul De Insotire" type="submit"--}}
-                                                {{--onclick="return confirm('Acest Aviz de insotire fost deja generat. Doresti sa il generezi din nou?')"--}}
-                                                {{--class="btn btn-success btn-lg"><i--}}
-                                                {{--class="fas fa-file-alt"></i></button>--}}
-                                                {{--</form>--}}
                                             @else
                                                 <div class="aler alert-warning text-center">
                                                     <i class="fas fa-robot"></i> A aparut o eroare!
@@ -178,12 +177,17 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            @if($order->notice == null && $order->serial_number != 0)
+                                            @if($order->notice == 0 && $order->serial_number == 0)
                                                 <i class="fas fa-ban text-danger"></i>
                                                 <button type="button" class="btn btn-outline-dark btn-lg"
                                                         onclick="conformityAlertMessage()"><i
                                                             class="far fa-file-alt"></i></button>
-                                            @elseif($order->notice == 1 && $order->conformity_declaration == null && $order->serial_number != 0)
+                                            @elseif($order->notice == 0 && $order->conformity_declaration == 0 && $order->serial_number != 0)
+                                                <i class="fas fa-ban text-danger"></i>
+                                                <button type="button" class="btn btn-outline-dark btn-lg"
+                                                        onclick="conformityAlertMessage()"><i
+                                                            class="far fa-file-alt"></i></button>
+                                            @elseif($order->notice == 1 && $order->conformity_declaration == 0 && $order->serial_number != 0)
                                                 <a href="{{route('order.conformity', [$order->id])}}"
                                                    class="btn btn-info btn-lg"><i
                                                             class="far fa-file-alt"></i></a>
@@ -203,7 +207,7 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            @if($order->dpd_shipping == null)
+                                            @if($order->dpd_shipping == 0)
                                                 <a href="" class="btn btn-danger btn-lg" target="_blank"><i
                                                             class="fas fa-shipping-fast"></i></a>
                                             @else
@@ -213,7 +217,7 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            @if($order->smart_bill_invoice == null)
+                                            @if($order->smart_bill_invoice == 0)
                                                 <a href="" class="btn btn-primary btn-lg" target="_blank"><i
                                                             class="fas fa-file-invoice-dollar"></i></a>
                                             @else

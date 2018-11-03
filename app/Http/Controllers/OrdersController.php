@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Barryvdh\DomPDF\Facade as PDF;
 use App;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
+
 
 class OrdersController extends Controller
 {
@@ -26,10 +29,12 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
     public function __construct()
     {
         $this->middleware('auth');
     }
+
 
     public function index()
     {
@@ -323,6 +328,40 @@ class OrdersController extends Controller
         $fileName = $file->notice_pdf_path;
         $filePath = '/app/avize/' . $fileName;
         return response()->download(storage_path() . $filePath);
+    }
+
+    public function smartBillApi()
+    {
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => 'https://ws.smartbill.ro:8183',
+            // You can set any number of default request options.
+            'timeout' => 2.0,
+            'headers' =>
+                [
+                    'Accept' => 'application/json',
+//                    'Accept' => 'application/octet-stream',
+                    'Content-Type' => 'application/json'
+                ],
+            'auth' =>
+                [
+                    'office@ecuatorcafe.ro',
+                    '6ecf8b23f08a05eb91bcf5f69d248d2c'
+                ]
+        ]);
+
+        $response = $client->get('/SBORO/api/invoice/paymentstatus',
+            ['query' =>
+                [
+                    'cif' => 'RO31883947',
+                    'seriesname' => 'TSNP',
+                    'number' => '2858'
+                ]]
+        );
+        $data = (string) $response->getBody();
+        $data = json_decode($data);
+        dd($data->unpaidAmount);
+
     }
 
 }

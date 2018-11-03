@@ -13,8 +13,8 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        <h6 class="text-center">Bine ai revenit <b>{{Auth::user()->name}}</b></h6>
+                        <h6 class="text-center">Bine ai revenit <b
+                                    style="text-transform: uppercase;">{{Auth::user()->name}}</b></h6>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,10 @@
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
                             @foreach($customers as $customer)
-                                <li class="list-group-item">{{$customer->nume}} <a href="{{route('customer.edit', [$customer->id])}}" title="Editeaza clientul - {{$customer->nume}}"><i class="far fa-edit"></i></a> </li>
+                                <li class="list-group-item">{{$customer->nume}} <a
+                                            href="{{route('customer.edit', [$customer->contractor_ean])}}"
+                                            title="Editeaza clientul - {{$customer->nume}}"><i class="far fa-edit"></i></a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -81,7 +84,8 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body text-center">
-                        <a href="{{route('order.create')}}" class="btn btn-success text-white">Adauga o comanda <i class="fas fa-plus"></i></a>
+                        <a href="{{route('order.create')}}" class="btn btn-success text-white">Adauga o comanda <i
+                                    class="fas fa-plus"></i></a>
                     </div>
                 </div>
             </div>

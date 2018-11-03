@@ -28,9 +28,9 @@ Route::post('clienti/adauga', 'CustomersController@store')->name('customer.store
 Route::get('clienti/editare/{contractor_ean}', 'CustomersController@edit')->name('customer.edit')->middleware('auth');
 Route::post('clienti/{contractor_ean}', 'CustomersController@update')->name('customer.update')->middleware('auth');
 Route::delete('clienti/eliminare/{contractor_ean}', 'CustomersController@destroy')->name('customer.delete')->middleware('auth');
-Route::get('clienti/fisiere-incarcate', 'UploadCustomersFiles@index')->name('upload.viewfiles');
-Route::get('clienti/descarcare-fisier/{id}', 'UploadCustomersFiles@viewFile')->name('download.customerfile');
-Route::delete('clienti/sterge-fisier/{id}', 'UploadCustomersFiles@destroy')->name('delete.customerfile');
+Route::get('clienti/fisiere-incarcate', 'UploadCustomersFiles@index')->name('upload.viewfiles')->middleware('auth');
+Route::get('clienti/descarcare-fisier/{id}', 'UploadCustomersFiles@viewFile')->name('download.customerfile')->middleware('auth');
+Route::delete('clienti/sterge-fisier/{id}', 'UploadCustomersFiles@destroy')->name('delete.customerfile')->middleware('auth');
 Route::get('clienti/importa', 'UploadCustomersFiles@create')->name('upload.customers')->middleware('auth');
 Route::post('import/clienti', 'UploadCustomersFiles@store')->name('import.customers')->middleware('auth');
 
@@ -48,6 +48,6 @@ Route::get('comenzi/generare-numar-serie', 'OrdersController@serialNumber')->nam
 Route::get('optiuni/editare-numar-de-serie/', 'OptionsController@editSerialNumber')->name('serial.number.edit')->middleware('auth');
 Route::post('optiuni/{id}', 'OptionsController@updateSerialNumber')->name('serial.number.update')->middleware('auth');
 
-Route::get('notice-test', function () {
-    return view('pages.order.notice');
-});
+//API Routes
+
+Route::get('smart-bill-api', 'OrdersController@smartBillApi');
