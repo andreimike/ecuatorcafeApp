@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
-use App\Models\CustomerFileUpload;
+use App\Models\CustomerUploadFile;
 use App\Imports\CustomersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -54,11 +54,12 @@ class CustomersController extends Controller
     {
         //Validate Inputs
         $this->validate($request, [
-            'nume'              => 'required',
-            'contractor_ean'    => 'required',
-            'adresa'            => 'required',
-            'iln'               => 'required',
-            'cui'               => 'required'
+            'nume' => 'required',
+            'contractor_ean' => 'required',
+            'adresa' => 'required',
+            'localitate' => 'required',
+            'judet' => 'required',
+            'cui' => 'required'
         ]);
 
         //Create Customer
@@ -66,8 +67,17 @@ class CustomersController extends Controller
             'contractor_ean' => $request->contractor_ean,
             'nume' => $request->nume,
             'adresa' => $request->adresa,
+            'localitate' => $request->localitate,
+            'judet' => $request->judet,
+            'tara' => $request->tara,
             'iln' => $request->iln,
-            'cui' => $request->cui
+            'cui' => $request->cui,
+            'reg_com' => $request->reg_com,
+            'banca' => $request->banca,
+            'iban' => $request->iban,
+            'pers_contact' => $request->pers_contact,
+            'telefon' => $request->telefon,
+            'email' => $request->email
         ];
 
         Customer::create($data);
@@ -108,19 +118,29 @@ class CustomersController extends Controller
     public function update(Request $request, $contractor_ean)
     {
         $this->validate($request, [
-            'nume'              => 'required',
-            'contractor_ean'    => 'required',
-            'adresa'            => 'required',
-            'iln'               => 'required',
-            'cui'               => 'required'
+            'nume' => 'required',
+            'contractor_ean' => 'required',
+            'adresa' => 'required',
+            'localitate' => 'required',
+            'judet' => 'required',
+            'cui' => 'required'
         ]);
 
         $customer = Customer::find($contractor_ean);
         $customer->nume = $request->input('nume');
         $customer->contractor_ean = $request->input('contractor_ean');
         $customer->adresa = $request->input('adresa');
+        $customer->localitate = $request->input('localitate');
+        $customer->judet = $request->input('judet');
+        $customer->tara = $request->input('tara');
         $customer->iln = $request->input('iln');
         $customer->cui = $request->input('cui');
+        $customer->reg_com = $request->input('reg_com');
+        $customer->banca = $request->input('banca');
+        $customer->iban = $request->input('iban');
+        $customer->email = $request->input('email');
+        $customer->pers_contact = $request->input('pers_contact');
+        $customer->telefon = $request->input('telefon');
         $customer->save();
 
         return redirect()->route('customer.view')->with('success', 'Clientul a fost actualizat!');

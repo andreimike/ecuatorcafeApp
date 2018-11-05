@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
-use App\Models\CustomerFileUpload;
+use App\Models\CustomerUploadFile;
 use App\Imports\CustomersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -17,7 +17,7 @@ use Auth;
 use Illuminate\Support\Facades\Storage;
 
 
-class UploadCustomersFiles extends Controller
+class CustomersUploadsFiles extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,7 +32,7 @@ class UploadCustomersFiles extends Controller
 
     public function index()
     {
-        $files = CustomerFileUpload::orderBy('created_at', 'desc')->get();
+        $files = CustomerUploadFile::orderBy('created_at', 'desc')->get();
 
         Return view('pages.customers.uploadedfiles', compact('files'));
     }
@@ -40,14 +40,14 @@ class UploadCustomersFiles extends Controller
     public function viewFile($id)
     {
         //PDF file is stored under project/public/download/info.pdf
-        $files = CustomerFileUpload::find($id);
-        $filePath = $files->cale_fisier;
+        $files = CustomerUploadFile::find($id);
+        $filePath = $files->customers_uploads_path;
         return response()->download(storage_path('app/') . $filePath);
     }
 
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.s
      *
      * @return \Illuminate\Http\Response
      */
@@ -74,15 +74,11 @@ class UploadCustomersFiles extends Controller
         $fileName = $fileHash . '.' . $request->file('fisierclienti')->getClientOriginalExtension();
         $path = Storage::putFileAs('files', $file, $fileName);
         $data = [
-            'cale_fisier' => $path,
+            'customers_uploads_path' => $path,
             'id_utilizator' => Auth::user()->id
         ];
-        $this->validate($request, [
-            'nume' => 'required|max:255',
-            'contractor_ean' => 'required|unique|max:255',
-        ]);
 
-        CustomerFileUpload::create($data);
+        CustomerUploadFile::create($data);
         $customersArray = Excel::toArray(new CustomersImport, $file);
         foreach ($customersArray as $stageOneKey => $stageOneVal) {
             foreach ($stageOneVal as $k => $v) {
@@ -91,12 +87,16 @@ class UploadCustomersFiles extends Controller
                         'nume' => $v[0],
                         'contractor_ean' => $v[1],
                         'adresa' => $v[2],
-                        'iln' => $v[3],
-                        'cui' => $v[4]
+                        'localitate' => $v[3],
+                        'judet' => $v[4],
+                        'tara' => $v[5],
+                        'iln' => $v[6],
+                        'cui' => $v[7],
+                        'reg_com' => $v[8]
                     ];
                     Customer::create($data1);
                 } else {
-                    echo "Null";
+                    echo "Succes! Clientii au fost importati, dar exista campuri necompletate care se pot actualiza ulterior.";
                 }
             }
         }
@@ -145,12 +145,12 @@ class UploadCustomersFiles extends Controller
      */
     public function destroy($id)
     {
-        $file = CustomerFileUpload::find($id);
+        $file = CustomerUploadFile::find($id);
         if ($file) {
-            $filePath = $file->cale_fisier;
+            $filePath = $file->customers_uploads_path;
             $file->delete();
             Storage::delete($filePath);
         }
-        Return redirect()->route('upload.viewfiles')->with('success', 'Fisierul a fost sters!');
+        Return redirect()->route('view.stored.files')->with('success', 'Fisierul a fost sters!');
     }
 }

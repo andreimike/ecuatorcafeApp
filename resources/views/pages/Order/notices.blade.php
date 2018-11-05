@@ -52,7 +52,19 @@
                             <p style="text-align: left; padding: 0; margin: 0;">Reg. com.: J40/2731/2005</p>
                             <p style="text-align: left; padding: 0; margin: 0;">CIF: RO17233051</p>
                             <p style="text-align: left; padding: 0; margin: 0;">
-                                Adresa: {{$order->customer->nume}}
+                                @foreach($orderCustomer as $customerInfo)
+                                    CUI: {{$customerInfo->customer->cui}}
+                                @endforeach
+                            </p>
+                            <p style="text-align: left; padding: 0; margin: 0;">
+                                @foreach($orderCustomer as $customerInfo)
+                                    Adresa: {{$customerInfo->customer->adresa}}
+                                @endforeach
+                            </p>
+                            <p style="text-align: left; padding: 0; margin: 0;">
+                                @foreach($orderCustomer as $customerInfo)
+                                    Judet: {{$customerInfo->customer->judet}}
+                                @endforeach
                             </p>
                             <p style="text-align: left; padding: 0; margin: 0;">Judet: Bucuresti</p>
                         </td>

@@ -15,9 +15,10 @@ class Customer extends Model
     //Timestamps
     public $timestamps = true;
 
-    protected $fillable = array('contractor_ean', 'nume', 'adresa', 'iln', 'cui');
+    protected $fillable = array('contractor_ean', 'nume', 'adresa', 'localitate', 'judet', 'tara', 'iln', 'cui', 'reg_com', 'banca', 'iban', 'pers_contact', 'email', 'telefon');
 
-    public  function order(){
+    public function order()
+    {
 
         return $this->hasOne('App\Models\Order', 'contractor_ean_id', 'contractor_ean');
     }

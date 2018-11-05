@@ -6,7 +6,8 @@ use App\Models\Order;
 use App\Models\Customer;
 use App\Models\Option;
 use Illuminate\Http\Request;
-use App\Models\CustomerFileUpload;
+use App\Models\CustomerUploadFile;
+use App\Models\OrderUploadFile;
 use App\Imports\CustomersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -19,6 +20,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use GuzzleHttp\Middleware;
 
 
 class OrdersController extends Controller
@@ -71,11 +73,10 @@ class OrdersController extends Controller
         $fileName = $fileHash . '.' . $request->file('file')->getClientOriginalExtension();
         $path = Storage::putFileAs('orders', $file, $fileName);
         $data = [
-            'cale_fisier' => $path,
-            'cale_fisier' => $path,
+            'orders_uploads_path' => $path,
             'id_utilizator' => Auth::user()->id
         ];
-        CustomerFileUpload::create($data);
+        OrderUploadFile::create($data);
         $ordersArray = Excel::toArray(new CustomersImport, $file);
         $i = 0;
         $j = 0;
@@ -330,7 +331,94 @@ class OrdersController extends Controller
         return response()->download(storage_path() . $filePath);
     }
 
-    public function smartBillApi()
+    public function createInvoice($id)
+    {
+        $order = Order::find($id);
+        $productInfosArray = json_decode($order['product'], true);
+        $ecuatorCui = "RO31883947";
+        $orderId = $order->id;
+        // Get Order Number
+        $orderNumber = $order->order_number;
+        // Get Customer For Each Order by Order Number
+        $orderCustomer = Order::with('customer')->where('order_number', '=', $orderNumber)->get();
+
+        foreach ($productInfosArray as $orderInfo) {
+            $req =  $reqData = [
+                'companyVatCode' => $ecuatorCui,
+                'client' => [
+                    'name' => $orderCustomer[0]->customer->nume,
+                    'vatCode' => $orderCustomer[0]->customer->cui,
+                    'address' => $orderCustomer[0]->customer->adresa,
+                    'isTaxPayer' => false,
+                    'city' => $orderCustomer[0]->customer->localitate,
+                    'county' => $orderCustomer[0]->customer->judet,
+                    'country' => $orderCustomer[0]->customer->tara,
+                    'saveToDb' => false,
+                ],
+                'isDraft' => true,
+                'issueDate' => date('Y-m-d'),
+                'seriesName' => 'TSNP',
+                'currency' => 'RON',
+                'language' => 'RO',
+                'dueDate' => date('Y-m-d', time() + 14 * 3600),
+                'useStock' => false,
+                'useEstimateDetails' => false,
+                'usePaymentTax' => false,
+                'products' => [
+                    [
+                        'name' => $orderInfo['product_name'],
+                        'isDiscount' => false,
+                        'measuringUnitName' => 'buc',
+                        'currency' => 'RON',
+                        'quantity' => $orderInfo['product_qty'],
+                        'price' => $orderInfo['product_price'],
+                        'isTaxIncluded' => true,
+                        'taxName' => 'Redusa',
+                        'taxPercentage' => 9,
+                        'saveToDb' => false,
+                        'isService' => false,
+                    ]
+                ]
+            ];
+        }
+        echo '<pre>';
+        print_r($req);
+        echo '</pre>';
+        die();
+        $client = new \GuzzleHttp\Client([
+            'timeout' => 2.0,
+            'headers' =>
+                [
+                    'Accept' => 'application/json',
+//                    'Accept' => 'application/octet-stream',
+                    'Content-Type' => 'application/json'
+                ],
+            'auth' =>
+                [
+                    'office@ecuatorcafe.ro',
+                    '6ecf8b23f08a05eb91bcf5f69d248d2c'
+                ]
+        ]);
+
+
+        try {
+            $response = $client->POST('https://ws.smartbill.ro:8183/SBORO/api/invoice', [
+                \GuzzleHttp\RequestOptions::JSON => $reqData
+
+            ]);
+        } catch (\Exception $ex) {
+
+            dd($ex);
+            \Log::error($ex);
+        }
+
+        $data = (string)$response->getBody();
+        $data = json_decode($data);
+        dd($data);
+
+    }
+
+    public function getInvoicePaidStatus($id)
     {
         $client = new Client([
             // Base URI is used with relative requests
@@ -358,10 +446,11 @@ class OrdersController extends Controller
                     'number' => '2858'
                 ]]
         );
-        $data = (string) $response->getBody();
+        $data = (string)$response->getBody();
         $data = json_decode($data);
         dd($data->unpaidAmount);
 
     }
+
 
 }

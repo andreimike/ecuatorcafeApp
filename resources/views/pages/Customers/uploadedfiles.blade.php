@@ -36,10 +36,10 @@
                                     <tr>
                                         <th scope="row">{{$file->id}}</th>
                                         <td>
-                                            <a href="{{route('download.customerfile', ['id' => $file->id])}}">{{$file->cale_fisier}}</a>
+                                            <a href="{{route('download.customerfile', ['id' => $file->id])}}">{{$file->customers_uploads_path}}</a>
                                         </td>
                                         <td>{{$file->created_at}}</td>
-                                        <td>
+                                        <td>s
                                             <!--Delete-->
                                             <form class="form-delete"
                                                   action="{{route('delete.customerfile', ['id' => $file->id])}}"
@@ -47,8 +47,8 @@
                                                 {{csrf_field()}}
                                                 {{method_field('DELETE')}}
                                                 <button type="submit" class="btn btn-danger btn-sm mt-1"
-                                                        onclick="return confirm('Fisierul {{$file->cale_fisier}} va fi sters. Esti sigur?')"
-                                                        title="Stergere Fisier - {{$file->cale_fisier}}"><i
+                                                        onclick="return confirm('Fisierul {{$file->customers_uploads_path}} va fi sters. Esti sigur?')"
+                                                        title="Stergere Fisier - {{$file->customers_uploads_path}}"><i
                                                             class="far fa-trash-alt"></i></button>
                                             </form>
                                         </td>

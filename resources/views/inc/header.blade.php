@@ -39,6 +39,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{route('serial.number.edit')}}"><i class="fas fa-pen"></i> Editeaza Numarul de Serie</a>
+                        <a class="dropdown-item" href="{{route('view.stored.files')}}"><i class="far fa-hdd"></i> Fisiere Incarcate pe Server</a>
                     </div>
                 </li>
             </ul>

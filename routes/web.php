@@ -28,11 +28,11 @@ Route::post('clienti/adauga', 'CustomersController@store')->name('customer.store
 Route::get('clienti/editare/{contractor_ean}', 'CustomersController@edit')->name('customer.edit')->middleware('auth');
 Route::post('clienti/{contractor_ean}', 'CustomersController@update')->name('customer.update')->middleware('auth');
 Route::delete('clienti/eliminare/{contractor_ean}', 'CustomersController@destroy')->name('customer.delete')->middleware('auth');
-Route::get('clienti/fisiere-incarcate', 'UploadCustomersFiles@index')->name('upload.viewfiles')->middleware('auth');
-Route::get('clienti/descarcare-fisier/{id}', 'UploadCustomersFiles@viewFile')->name('download.customerfile')->middleware('auth');
-Route::delete('clienti/sterge-fisier/{id}', 'UploadCustomersFiles@destroy')->name('delete.customerfile')->middleware('auth');
-Route::get('clienti/importa', 'UploadCustomersFiles@create')->name('upload.customers')->middleware('auth');
-Route::post('import/clienti', 'UploadCustomersFiles@store')->name('import.customers')->middleware('auth');
+Route::get('clienti/fisiere-incarcate', 'CustomersUploadsFiles@index')->name('upload.viewfiles')->middleware('auth');
+Route::get('clienti/descarcare-fisier/{id}', 'CustomersUploadsFiles@viewFile')->name('download.customerfile')->middleware('auth');
+Route::delete('clienti/sterge-fisier/{id}', 'CustomersUploadsFiles@destroy')->name('delete.customerfile')->middleware('auth');
+Route::get('clienti/importa', 'CustomersUploadsFiles@create')->name('upload.customers')->middleware('auth');
+Route::post('import/clienti', 'CustomersUploadsFiles@store')->name('import.customers')->middleware('auth');
 
 
 //Order Routes
@@ -48,6 +48,10 @@ Route::get('comenzi/generare-numar-serie', 'OrdersController@serialNumber')->nam
 Route::get('optiuni/editare-numar-de-serie/', 'OptionsController@editSerialNumber')->name('serial.number.edit')->middleware('auth');
 Route::post('optiuni/{id}', 'OptionsController@updateSerialNumber')->name('serial.number.update')->middleware('auth');
 
+//Options Routes
+Route::get('optiuni/fisiere-incarcate', 'OptionsController@getStoredFiles')->name('view.stored.files')->middleware('auth');
+Route::get('optiuni/descarcare-fisier-comanda/{id}', 'OptionsController@downloadOrderFile')->name('download.order.file')->middleware('auth');
+Route::delete('optiuni/sterge-fisier-comanda/{id}', 'OptionsController@destroyOrderFile')->name('delete.order.file')->middleware('auth');
 //API Routes
 
-Route::get('smart-bill-api', 'OrdersController@smartBillApi');
+Route::get('comenzi/generare-factura/{id}', 'OrdersController@createInvoice')->name('generate.invoice');

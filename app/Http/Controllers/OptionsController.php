@@ -6,7 +6,8 @@ use App\Models\Order;
 use App\Models\Customer;
 use App\Models\Option;
 use Illuminate\Http\Request;
-use App\Models\CustomerFileUpload;
+use App\Models\CustomerUploadFile;
+use App\Models\OrderUploadFile;
 use App\Imports\CustomersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -121,5 +122,32 @@ class OptionsController extends Controller
         $customer->save();
 
         return redirect()->route('serial.number.edit')->with('success', 'Numarul de Serie a fost salvat cu succes!');
+    }
+
+    public function getStoredFiles()
+    {
+        $customersFiles = CustomerUploadFile::orderBy('created_at', 'desc')->get();
+        $ordersFiles = OrderUploadFile::orderBy('created_at', 'desc')->get();
+        Return view('pages.options.uploads', compact('customersFiles', 'ordersFiles'));
+
+    }
+
+    public function downloadOrderFile($id)
+    {
+        //PDF file is stored under project/public/download/info.pdf
+        $files = OrderUploadFile::find($id);
+        $filePath = $files->orders_uploads_path;
+        return response()->download(storage_path('app/') . $filePath);
+    }
+
+    public function destroyOrderFile($id)
+    {
+        $file = OrderUploadFile::find($id);
+        if ($file) {
+            $filePath = $file->orders_uploads_path;
+            $file->delete();
+            Storage::delete($filePath);
+        }
+        Return redirect()->route('view.stored.files')->with('success', 'Fisierul a fost sters!');
     }
 }
