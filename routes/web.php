@@ -52,6 +52,8 @@ Route::post('optiuni/{id}', 'OptionsController@updateSerialNumber')->name('seria
 Route::get('optiuni/fisiere-incarcate', 'OptionsController@getStoredFiles')->name('view.stored.files')->middleware('auth');
 Route::get('optiuni/descarcare-fisier-comanda/{id}', 'OptionsController@downloadOrderFile')->name('download.order.file')->middleware('auth');
 Route::delete('optiuni/sterge-fisier-comanda/{id}', 'OptionsController@destroyOrderFile')->name('delete.order.file')->middleware('auth');
-//API Routes
 
-Route::get('comenzi/generare-factura/{id}', 'OrdersController@createInvoice')->name('generate.invoice');
+
+//API Routes
+Route::get('comenzi/generare-factura/{id}', 'OrdersController@createInvoice')->name('generate.smart.bill.invoice');
+Route::get('/optiuni/api-token', 'OrdersController@getToken');

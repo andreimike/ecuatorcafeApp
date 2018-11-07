@@ -39,7 +39,7 @@
                                         </thead>
                                         <tbody>
                                         @foreach($customers as $customer)
-                                            <tr>
+                                            <tr class="addHover">
                                                 <th scope="row">{{$customer->contractor_ean}}</th>
                                                 <td><a href="{{route('customer.edit', [$customer->contractor_ean])}}"
                                                        title="Editare Client -  {{$customer->nume}}">{{$customer->nume}}</a>
@@ -149,7 +149,7 @@
                                         </thead>
                                         <tbody>
                                         @foreach($customers as $customer)
-                                            <tr>
+                                            <tr class="addHover">
                                                 <th scope="row">{{$customer->contractor_ean}}</th>
                                                 <td><a href="{{route('customer.edit', [$customer->contractor_ean])}}"
                                                        title="Editare Client -  {{$customer->nume}}">{{$customer->nume}}</a>

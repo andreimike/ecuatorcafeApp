@@ -118,9 +118,9 @@
                             <!-- Order Index Deckaration -->
                             <?php $index = (int)0; ?>
                             <!-- Price Sum Declaration -->
-                            <?php $s = (float)0; ?>
+                            <?php $sum = (float)0.10; ?>
                             <!-- Vat Total Sum Declartion -->
-                            <?php $sVat = (float)0; ?>
+                            <?php $sVat = (float)0.01; ?>
                             @foreach($productInfosArray as $orderInfos)
                                 <tr style="border-top: none; border-bottom: none; padding-top: 2px !important; padding-bottom: 2px !important;">
                                     <th scope="row" style="border-top: none; border-bottom: none; text-align: center;">
@@ -145,26 +145,28 @@
                                     </td>
                                     <td style="border-top: none; border-bottom: none;">
                                         <p style="text-align: right; text-transform: uppercase;">
-                                            <?php $productPrice = (float)$orderInfos['product_price']; ?>
-                                            <?php $prodPriceWithoutVat = $productPrice / 1.09; ?>
+                                            <?php $productPrice = (float)round($orderInfos['product_price'], 2); ?>
+                                            <?php $prodPriceWithoutVat = (float)round($productPrice / 1.09, 2); ?>
                                             <?php $truncateProdPriceWithoutVat = round($prodPriceWithoutVat, 2); ?>
                                             {{$truncateProdPriceWithoutVat}}
                                         </p>
                                     </td>
                                     <td style="border-top: none; border-bottom: none;">
                                         <p style="text-align: right; text-transform: uppercase;">
-                                            <?php $productQty = (float)$orderInfos['product_qty']; ?>
-                                            <?php $productTotalPrice = $productQty * $truncateProdPriceWithoutVat; ?>
+                                            <?php $productQty = (float)round($orderInfos['product_qty'], 2); ?>
+                                            <?php $productTotalPrice = (float)round($productQty * $truncateProdPriceWithoutVat, 2); ?>
                                             <?php $orderArraySize = count($productInfosArray); ?>
                                             <?php $productEan = $orderInfos['product_ean']; ?>
-                                            <?php $s = $s + $productTotalPrice; ?>
+                                            <?php $sum = (float)round($sum + $productTotalPrice, 2); ?>
+                                            <?php $s = round($sum, 2); ?>
                                             {{$productTotalPrice}}
                                         </p>
                                     </td>
                                     <td style="border-top: none; border-bottom: none;">
                                         <p style="text-align: right; text-transform: uppercase;">
-                                            <?php $vatTotal = $productTotalPrice * 0.09; ?>
-                                            <?php $sVat = $sVat + $vatTotal; ?>
+                                            <?php $vatTotal = (float)$productTotalPrice * 0.09; ?>
+                                            <?php $vatTotal = (float)round($vatTotal, 2); ?>
+                                            <?php $sVat = (float)round($sVat + $vatTotal, 2); ?>
                                             {{$vatTotal}}
                                         </p>
                                     </td>
@@ -214,7 +216,7 @@
                         <table border="1" cellspacing="0" cellpadding="0"
                                style="vertical-align: top; width: 100%;">
                             <tr>
-                                <td align="left" style="border-top: none; vertical-align: top;">
+                                <td align="left" style="border-top: none; vertical-align: top; text-align: center;">
                                     <img src="https://ecuatorcafe.ro/wp-content/uploads/2018/10/PastedGraphic-2.jpg"
                                          align="Stampila si Semnatura"
                                          style="width: 79px; height: auto; margin-top: 3px;"/>
@@ -254,7 +256,7 @@
                                                 Total plata
                                             </td>
                                             <td align="center" style="text-align: right; width: 50%;">
-                                                <?php $orderTotalSum = $s + $sVat ?>
+                                                <?php $orderTotalSum = round($s + $sVat, 2); ?>
                                                 {{$orderTotalSum}}
                                             </td>
                                         </tr>

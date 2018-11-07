@@ -63,22 +63,31 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate the file from upload
         $this->validate($request, [
             'file' => 'required|max:100000'
         ]);
+        // Get the file
         $file = $request->file('file');
         $time = time();
         $formatedTime = date('Y-m-d', $time);
+        // Hash for uploaded file
         $fileHash = $file->getClientOriginalName() . "-" . $formatedTime;
+        // Set name for order file
         $fileName = $fileHash . '.' . $request->file('file')->getClientOriginalExtension();
+        // Save order file on server
         $path = Storage::putFileAs('orders', $file, $fileName);
+        // Save in DB path and user for order file
         $data = [
             'orders_uploads_path' => $path,
             'id_utilizator' => Auth::user()->id
         ];
         OrderUploadFile::create($data);
+
         $ordersArray = Excel::toArray(new CustomersImport, $file);
+        // Order Array Index
         $i = 0;
+        // Product Array index
         $j = 0;
         $arraySize = count($ordersArray[0]);
         $orderProducts = array();
@@ -88,15 +97,22 @@ class OrdersController extends Controller
         //Delete all the row and entry of the Orders Table
         DB::table('orders')->truncate();
         while ($i <= $arraySize) {
+            // Clear Product Object
             unset($orderProducts);
+            // Foreach index of order array
             foreach ($ordersArray as $orderArray) {
+                // Get order ID
                 $currentOrderId = $orderArray[$i][2];
+                // Get Contractor EAN
                 $currentContractorEan = $orderArray[$i + 10][2];
+                // Initializes Product Object
                 $product = (object)[];
+                //First Product - get infos
                 $product->product_ean = $orderArray[$i + 12][1];
                 $product->product_name = $orderArray[$i + 12][2];
                 $product->product_qty = (int)$orderArray[$i + 12][5];
                 $product->product_price = (int)$orderArray[$i + 12][7];
+                // Set frying date for product
                 if ($orderArray[$i + 12][1] == 2000005405518) {
                     $product->frying_date = date($fryingDateBraz);
 
@@ -105,10 +121,25 @@ class OrdersController extends Controller
                 } else {
                     $product->frying_date = date($fryingDateEti);
                 }
+                // End Set frying date
+                // Get product in array
                 $prod1 = (array)$product;
+                // Get product in array by index - $j
                 $orderProducts[$j] = $prod1;
+                // Incrementing Product Array Index
                 $j++;
                 if ($orderArray[$i + 13][0] == null) {
+                    // Convert Order Array in string
+                    $orderProductsToString = json_encode($orderProducts);
+                    // Escape some character
+                    $clearProductString = str_replace('.00 ', '', $orderProductsToString);
+                    // Insert order in DB
+                    $data = [
+                        'order_number' => $currentOrderId,
+                        'contractor_ean_id' => $currentContractorEan,
+                        'product' => $clearProductString,
+                    ];
+                    Order::create($data);
                     $i += 14;
                 } else {
                     $product = (object)[];
@@ -127,7 +158,33 @@ class OrdersController extends Controller
                     $prod2 = (array)$product;
                     $orderProducts[$j] = $prod2;
                     $j++;
-                    if ($orderArray[+14][0] == null) {
+                    if (!isset($orderArray[$i + 14][0])) {
+                        // Convert Order Array in string
+                        $orderProductsToString = json_encode($orderProducts);
+                        // Escape some character
+                        $clearProductString = str_replace('.00 ', '', $orderProductsToString);
+                        // Insert order in DB
+                        $data = [
+                            'order_number' => $currentOrderId,
+                            'contractor_ean_id' => $currentContractorEan,
+                            'product' => $clearProductString,
+                        ];
+                        Order::create($data);
+                        // End insert Order in DB
+                        $i += 15;
+                    } elseif ($orderArray[$i + 14][0] == null) {
+                        // Convert Order Array in string
+                        $orderProductsToString = json_encode($orderProducts);
+                        // Escape some character
+                        $clearProductString = str_replace('.00 ', '', $orderProductsToString);
+                        // Insert order in DB
+                        $data = [
+                            'order_number' => $currentOrderId,
+                            'contractor_ean_id' => $currentContractorEan,
+                            'product' => $clearProductString,
+                        ];
+                        Order::create($data);
+                        // End insert Order in DB
                         $i += 15;
                     } else {
                         $product = (object)[];
@@ -146,17 +203,21 @@ class OrdersController extends Controller
                         $prod3 = (array)$product;
                         $orderProducts[$j] = $prod3;
                         $j++;
+                        // Convert Order Array in string
+                        $orderProductsToString = json_encode($orderProducts);
+                        // Escape some character
+                        $clearProductString = str_replace('.00 ', '', $orderProductsToString);
+                        // Insert order in DB
+                        $data = [
+                            'order_number' => $currentOrderId,
+                            'contractor_ean_id' => $currentContractorEan,
+                            'product' => $clearProductString,
+                        ];
+                        Order::create($data);
+                        // End insert Order in DB
                         $i += 16;
                     }
                 }
-                $orderProductsToString = json_encode($orderProducts);
-                $clearProductString = str_replace('.00 ', '', $orderProductsToString);
-                $data = [
-                    'order_number' => $currentOrderId,
-                    'contractor_ean_id' => $currentContractorEan,
-                    'product' => $clearProductString,
-                ];
-                Order::create($data);
             }
         }
         return redirect()->route('order.view')->with('success', 'Comenzile au fost importate cu succes!');
@@ -168,7 +229,8 @@ class OrdersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
 
     }
@@ -179,7 +241,8 @@ class OrdersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
 //        $order = Order::find($id);
 //        return view('pages.order.edit')->with('order', $order);
@@ -192,7 +255,8 @@ class OrdersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
 //        $order = Order::find($id);
 //        $productFryingDate = json_decode($order['product'], true);
@@ -208,12 +272,14 @@ class OrdersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         //
     }
 
-    public function serialNumber()
+    public
+    function serialNumber()
     {
         $orders = Order::all();
         // Get Initial Serial Number From DB by ID(1)
@@ -239,7 +305,8 @@ class OrdersController extends Controller
         return redirect()->route('order.view')->with('Success', 'Au fost generate cu succes numere de serii pentru toate comenziile');
     }
 
-    public function generateDeclaration($id)
+    public
+    function generateDeclaration($id)
     {
 
 
@@ -254,7 +321,8 @@ class OrdersController extends Controller
 
     }
 
-    public function generateDeclarations()
+    public
+    function generateDeclarations()
     {
         $orders = Order::all();
         $pdf = App::make('dompdf.wrapper');
@@ -268,7 +336,8 @@ class OrdersController extends Controller
         return $pdf->download('Declaratii-de-Conformititate' . '.pdf');
     }
 
-    public function generateNotice($id)
+    public
+    function generateNotice($id)
     {
         //Get Order infos
         $order = Order::find($id);
@@ -305,7 +374,8 @@ class OrdersController extends Controller
         return redirect()->route('order.view')->with('success', 'Avizul de insotire a fost generat cu succes! Puteti sa il descarcati');
     }
 
-    public function generateNotices()
+    public
+    function generateNotices()
     {
         $orders = Order::with('customer')->get();
         // Get Current time
@@ -313,7 +383,7 @@ class OrdersController extends Controller
         // Formatting the current Time
         $formattedTime = date('Y-m-d', $time);
         $pdf = App::make('dompdf.wrapper');
-        $pdf = PDF::loadView('pages.order.notices', compact('orders'))->setPaper('a4', 'portrait');
+        $pdf = PDF::loadView('pages.order.notices', compact('orders', 'orderCustomer'))->setPaper('a4', 'portrait');
         $totalOrders = DB::table('orders')->count();
         //Set for all conformity_declaration column from 0 to 1 after the PDF
         DB::table('orders')
@@ -322,7 +392,8 @@ class OrdersController extends Controller
         return $pdf->download('Avize-de-insotire-' . $formattedTime . '.pdf');
     }
 
-    public function noticeDownload($id)
+    public
+    function noticeDownload($id)
     {
         //PDF file is stored under project/public/download/info.pdf
         $file = Order::find($id);
@@ -331,7 +402,8 @@ class OrdersController extends Controller
         return response()->download(storage_path() . $filePath);
     }
 
-    public function createInvoice($id)
+    public
+    function createInvoice($id)
     {
         $order = Order::find($id);
         $productInfosArray = json_decode($order['product'], true);
@@ -341,56 +413,57 @@ class OrdersController extends Controller
         $orderNumber = $order->order_number;
         // Get Customer For Each Order by Order Number
         $orderCustomer = Order::with('customer')->where('order_number', '=', $orderNumber)->get();
+        $smartBillInvoiceMentions = 'Numar comanda ' . $order->order_number;
+        $reqData = [
+            'companyVatCode' => $ecuatorCui,
+            'client' => [
+                'name' => $orderCustomer[0]->customer->nume,
+                'vatCode' => $orderCustomer[0]->customer->cui,
+                'address' => $orderCustomer[0]->customer->adresa,
+                'isTaxPayer' => false,
+                'city' => $orderCustomer[0]->customer->localitate,
+                'county' => $orderCustomer[0]->customer->judet,
+                'country' => 'Romania',
+                'saveToDb' => false,
+            ],
+            'isDraft' => true,
+            'issueDate' => date('Y-m-d'),
+            'seriesName' => 'TSNP',
+            'currency' => 'RON',
+            'language' => 'RO',
+            'precision' => 1,
+            'dueDate' => date('Y-m-d', time() + 14 * 3600),
+            'useStock' => false,
+            'usePaymentTax' => false,
+            'useEstimateDetails' => false,
+            'observations' => $smartBillInvoiceMentions,
+            'mentions' => $smartBillInvoiceMentions,
+            'products' => []
+        ];
 
+        $i = 0;
         foreach ($productInfosArray as $orderInfo) {
-            $req =  $reqData = [
-                'companyVatCode' => $ecuatorCui,
-                'client' => [
-                    'name' => $orderCustomer[0]->customer->nume,
-                    'vatCode' => $orderCustomer[0]->customer->cui,
-                    'address' => $orderCustomer[0]->customer->adresa,
-                    'isTaxPayer' => false,
-                    'city' => $orderCustomer[0]->customer->localitate,
-                    'county' => $orderCustomer[0]->customer->judet,
-                    'country' => $orderCustomer[0]->customer->tara,
+
+            $reqData['products'][$i] =
+                ['name' => $orderInfo['product_name'],
+                    'isDiscount' => false,
+                    'measuringUnitName' => 'buc',
+                    'currency' => 'RON',
+                    'quantity' => $orderInfo['product_qty'],
+                    'price' => $orderInfo['product_price'],
+                    'isTaxIncluded' => true,
+                    'taxName' => 'Redusa',
+                    'taxPercentage' => 9,
                     'saveToDb' => false,
-                ],
-                'isDraft' => true,
-                'issueDate' => date('Y-m-d'),
-                'seriesName' => 'TSNP',
-                'currency' => 'RON',
-                'language' => 'RO',
-                'dueDate' => date('Y-m-d', time() + 14 * 3600),
-                'useStock' => false,
-                'useEstimateDetails' => false,
-                'usePaymentTax' => false,
-                'products' => [
-                    [
-                        'name' => $orderInfo['product_name'],
-                        'isDiscount' => false,
-                        'measuringUnitName' => 'buc',
-                        'currency' => 'RON',
-                        'quantity' => $orderInfo['product_qty'],
-                        'price' => $orderInfo['product_price'],
-                        'isTaxIncluded' => true,
-                        'taxName' => 'Redusa',
-                        'taxPercentage' => 9,
-                        'saveToDb' => false,
-                        'isService' => false,
-                    ]
-                ]
-            ];
+                    'isService' => false,
+                ];
+            $i++;
         }
-        echo '<pre>';
-        print_r($req);
-        echo '</pre>';
-        die();
         $client = new \GuzzleHttp\Client([
             'timeout' => 2.0,
             'headers' =>
                 [
                     'Accept' => 'application/json',
-//                    'Accept' => 'application/octet-stream',
                     'Content-Type' => 'application/json'
                 ],
             'auth' =>
@@ -399,58 +472,60 @@ class OrdersController extends Controller
                     '6ecf8b23f08a05eb91bcf5f69d248d2c'
                 ]
         ]);
-
-
         try {
             $response = $client->POST('https://ws.smartbill.ro:8183/SBORO/api/invoice', [
                 \GuzzleHttp\RequestOptions::JSON => $reqData
-
             ]);
         } catch (\Exception $ex) {
-
-            dd($ex);
             \Log::error($ex);
         }
+        //Get Request Response Code -> 200 Succes
+        $statusCode = $response->getStatusCode();
+        if ($statusCode == 200) {
+            // Set in DB Col SmartBill_Invoice From Null to 1 - after it was created
+            $order->smart_bill_invoice = 1;
+            // Save in DB
+            $order->save();
+            return redirect()->route('order.view')->with('success', 'Factura a fost generata cu succes in SmartBill');
+        } else {
+            return redirect()->route('order.view')->with('error', 'Factura NU a fost generata!');
+        }
 
-        $data = (string)$response->getBody();
-        $data = json_decode($data);
-        dd($data);
+//        $data = (string)$response->getBody();
+//        $data = json_decode($data);
+////        dd($data);
 
     }
 
-    public function getInvoicePaidStatus($id)
+    public function getToken()
     {
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'https://ws.smartbill.ro:8183',
-            // You can set any number of default request options.
+        $client = new \GuzzleHttp\Client([
             'timeout' => 2.0,
             'headers' =>
                 [
                     'Accept' => 'application/json',
-//                    'Accept' => 'application/octet-stream',
-                    'Content-Type' => 'application/json'
+                    'Content-Type' => 'application/json',
+                    'X-Auth-Username' => 'topstarAPI',
+                    'X-Auth-Password' => 'l4djE/Ev9g=='
                 ],
             'auth' =>
                 [
-                    'office@ecuatorcafe.ro',
-                    '6ecf8b23f08a05eb91bcf5f69d248d2c'
+                    'topstarAPI',
+                    'l4djE/Ev9g=='
                 ]
         ]);
-
-        $response = $client->get('/SBORO/api/invoice/paymentstatus',
-            ['query' =>
-                [
-                    'cif' => 'RO31883947',
-                    'seriesname' => 'TSNP',
-                    'number' => '2858'
-                ]]
-        );
+        try {
+            $response = $client->POST('https://sameday-api.demo.zitec.com/api/authenticate', [
+                'query' => ['remember_me' => 'true']
+            ]);
+        } catch (\Exception $ex) {
+            \Log::error($ex);
+        }
+        //Get Request Response Code -> 200 Succes
+        $statusCode = $response->getStatusCode();
         $data = (string)$response->getBody();
         $data = json_decode($data);
-        dd($data->unpaidAmount);
-
+        dd($data);
+        dd($data);
     }
-
-
 }

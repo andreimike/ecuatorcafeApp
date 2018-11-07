@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37f4dfae-1d0f-4301-bb9e-746e5fba3f18" name="Default" comment="Adaugare setare data prajire cafea pentru fiecare tip de cafea in parte&#10;Adaugare un nou index in array-ul cu infos pentru produse - frying_date&#10;Setare preluare data prajire cafea corect dupa data setata in formular&#10;Generare Declaratie de conf pentru fiecare comanda in parte dupa id +  setare in db in col conformity_declaration =&gt; 1&#10;Generare Declaratii de conf Bluk +  setare in db in col conformity_declaration =&gt; 1 pentru toate comenzile inregistrare&#10;Instalare pachet generare PDF pentru dec de conf  via - https://github.com/barryvdh/laravel-dompdf&#10;Adaugare btns in view-comenzi pentru generare bulk dec. de conf. si avize.&#10;Creare rute&#10;Creare views pentru declaratii(bulk si single)&#10;Creare Metode pentru Generare pdf(bulk si single)">
-      <change afterPath="$PROJECT_DIR$/app/Models/OrderUploadFile.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2018_11_03_135913_create_customers_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/custom.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/options/uploads.blade.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/composer.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/config/dompdf.php" afterDir="false" />
@@ -326,26 +322,11 @@
       <change afterPath="$PROJECT_DIR$/vendor/sabberworm/php-css-parser/tests/files/whitespace.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendor/sabberworm/php-css-parser/tests/phpunit.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/vendor/sabberworm/php-css-parser/tests/quickdump.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5f63334c-699b-4430-bb7e-aff7059d66c4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5f63334c-699b-4430-bb7e-aff7059d66c4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CustomersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OptionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OptionsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UploadCustomersFiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomersUploadsFiles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Customer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Customer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/CustomerFileUpload.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/CustomerUploadFile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2018_10_16_071459_create_upload_files_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_11_05_111720_create_orders_uploads_files_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2018_10_17_071813_create_customers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_11_05_111823_create_customers_uploads_files_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2018_10_18_132302_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_11_03_140625_create_orders_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/inc/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inc/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/Customers/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/Customers/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/Customers/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/Customers/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/custom.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/Customers/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/Customers/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/Customers/uploadedfiles.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/Customers/uploadedfiles.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/Order/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/Order/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/Order/notice.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/Order/notice.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php" afterDir="false" />
@@ -380,6 +361,31 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ecuator_app: schema" type="c314c289:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ecuator_app: schema" type="c314c289:MysqlImplModel$Schema" />
+        <item name="customers: table" type="98d5ac3d:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="ecuator_app@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ecuator_app: schema" type="c314c289:MysqlImplModel$Schema" />
+        <item name="orders: table" type="98d5ac3d:MysqlImplModel$Table" />
+      </path>
     </expand>
     <select />
   </component>
@@ -388,17 +394,8 @@
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="49" selection-start-line="49" selection-end-line="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5940">
-              <caret line="396" selection-start-line="396" selection-end-line="397" />
+            <state relative-caret-position="735">
+              <caret line="58" column="44" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -406,17 +403,158 @@
       <file leaf-file-name="OrdersController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrdersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="336" column="66" selection-start-line="336" selection-start-column="66" selection-end-line="336" selection-end-column="66" />
+            <state relative-caret-position="320">
+              <caret line="489" column="16" lean-forward="true" selection-start-line="489" selection-start-column="16" selection-end-line="489" selection-end-column="16" />
+              <folding>
+                <element signature="e#40#61#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="notices.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="28" column="111" lean-forward="true" selection-start-line="28" selection-start-column="111" selection-end-line="28" selection-end-column="111" />
+              <folding>
+                <element signature="e#3503#3551#0#HTML" expanded="true" />
+                <element signature="e#3809#3857#0#HTML" expanded="true" />
+                <element signature="e#4121#4169#0#HTML" expanded="true" />
+                <element signature="e#12035#12041#0#HTML" expanded="true" />
+                <element signature="e#12212#12218#0#HTML" expanded="true" />
+                <element signature="e#12389#12395#0#HTML" expanded="true" />
+                <element signature="e#12566#12572#0#HTML" expanded="true" />
+                <element signature="e#12743#12749#0#HTML" expanded="true" />
+                <element signature="e#12920#12926#0#HTML" expanded="true" />
+                <element signature="e#13097#13103#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="notice.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/notice.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="457">
+              <caret line="55" column="69" lean-forward="true" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
+              <folding>
+                <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h3#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#hr#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#2;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#2;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#3;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#4;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#5;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#6;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#2;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#3;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#4;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#th#4;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#th#5;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#th#6;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#0;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#0;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#th#0;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#2;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#3;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#5;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#5;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="e#11463#11469#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="e#11628#11634#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="e#11793#11799#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="e#11958#11964#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#td#4;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="e#12123#12129#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#td#5;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="e#12288#12294#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#td#6;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="e#12453#12459#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#2;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#3;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#4;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#5;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#6;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#1;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#table#1;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#table#1;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#2;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#table#2;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#1;n#table#2;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Kernel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/pages/Customers/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4275">
-              <caret line="285" column="26" selection-start-line="285" selection-start-column="26" selection-end-line="285" selection-end-column="26" />
+            <state relative-caret-position="383">
+              <caret line="34" column="56" lean-forward="true" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -437,6 +575,10 @@
       <find>s</find>
       <find>uploads</find>
       <find>&quot;</find>
+      <find>use Illuminate\Support\Facades\Storage;</find>
+      <find>storage</find>
+      <find>storage::</find>
+      <find>Valo</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -450,7 +592,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/web.php" />
         <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/.htaccess" />
         <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/.env" />
         <option value="$PROJECT_DIR$/database/migrations/2018_10_17_071813_create_customers_table.php" />
@@ -466,12 +607,9 @@
         <option value="$PROJECT_DIR$/database/migrations/2018_11_03_125248_create_orders_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_11_03_140029_create_orders_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_11_03_140625_create_orders_table.php" />
-        <option value="$PROJECT_DIR$/public/css/custom.css" />
         <option value="$PROJECT_DIR$/public/app.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/Customers/edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/Order/notice.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php" />
         <option value="$PROJECT_DIR$/app/Models/CustomerFileUpload.php" />
         <option value="$PROJECT_DIR$/app/Models/UploadsFiles.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UploadCustomersFiles.php" />
@@ -493,13 +631,17 @@
         <option value="$PROJECT_DIR$/database/migrations/2018_11_05_104425_create_customers_uploads_files_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_11_05_111823_create_customers_uploads_files_table.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/Customers/uploadedfiles.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/Customers/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/Order/index.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/vendor/autoload.php" />
         <option value="$USER_HOME$/backup.sql" />
         <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/index.php" />
         <option value="/private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/OrdersController.php" />
+        <option value="$PROJECT_DIR$/config/filesystems.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/Order/notice.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/Order/index.blade.php" />
+        <option value="$PROJECT_DIR$/public/css/custom.css" />
+        <option value="$PROJECT_DIR$/resources/views/pages/Customers/index.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" />
       </list>
     </option>
@@ -617,10 +759,9 @@
       <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1920" />
-    <option name="height" value="968" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -644,6 +785,12 @@
               <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Console" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Http" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -656,19 +803,28 @@
             <path>
               <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Models" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ecuator-app" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="Customers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ecuator-app" type="b2602c69:ProjectViewProjectNode" />
@@ -762,7 +918,10 @@
       <workItem from="1541434073260" duration="114000" />
       <workItem from="1541434595534" duration="4781000" />
       <workItem from="1541443575727" duration="3764000" />
-      <workItem from="1541450265843" duration="1000" />
+      <workItem from="1541450265843" duration="205000" />
+      <workItem from="1541490874849" duration="11335000" />
+      <workItem from="1541510957157" duration="10093000" />
+      <workItem from="1541582873740" duration="13434000" />
     </task>
     <task id="LOCAL-00001" summary="Major Work. Made Import Customers from XLSX without package. &#10;Some fix at customer.&#10;Delete Customer ID and replace with contractor_ean">
       <created>1539791174430</created>
@@ -827,14 +986,21 @@
       <option name="project" value="LOCAL" />
       <updated>1541234283226</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="some stuff design orders and customers pages -view mode in mod detaliat sau compact&#10;modificari db - creare tabela pentru fisierele uploadate pentru clienti si comenzi si gestiunea lor&#10;adaugare sectiune gestionare fisiere pe server(view, routes, methods)&#10;integrare api smart bill generare factura">
+      <created>1541450453747</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1541450453747</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="275925000" />
+    <option name="totallyTimeSpent" value="310991000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="968" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="7" />
@@ -843,11 +1009,11 @@
       <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49946752" weight="0.328125" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.32935324" />
       <window_info id="npm" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49840257" weight="0.3421355" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49840257" weight="0.34129354" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.32960597" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19062833" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1517572" />
       <window_info anchor="bottom" id="Docker" order="8" />
-      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.13471779" />
+      <window_info active="true" anchor="right" id="Database" order="4" visible="true" weight="0.14057508" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -878,38 +1044,11 @@
     <MESSAGE value="Create Numar de Aviz Bulk Pentru toate comenzile&#10;Buton Creare Nr de Aviz Bulk&#10;Salvare Nr de Aviz individual pentru fiecare Comanda in Tabela de Comenzi&#10;Salvare Ultimul nr de Aviz Generat in Tabela De optiuni&#10;Creare Aviz Corect&#10;Parsare in Aviz Data curenta si Nr de Aviz&#10;Parsare in View-urile pentru declaratie Nr de Aviz&#10;Afisare Nr de Aviz In pagina de Comenzi&#10;Restrictii la crearea Declaratiilor si A Avizelor&#10;Nu se Poate Creea declaratie daca nu a fost generat Aviz&#10;Nu se poate Genera Aviz daca nu a fost Generat Nr de serie pentru toate comenzile&#10;Salvare Pdf Pentru Aviz intr-un fisier doar pentru avize&#10;Buton Descarcare Avize&#10;Migratie Adaugare Coloana de Salvare Nume Aviz in Tabela de Optiuni" />
     <MESSAGE value="Creare metoda geneezre avize bulk&#10;Creare Rute&#10;Creare Metoda Editare Numar de Serie&#10;Creare views" />
     <MESSAGE value="Primul pas in integrarea api-ului de la Smartbill" />
-    <option name="LAST_COMMIT_MESSAGE" value="Primul pas in integrarea api-ului de la Smartbill" />
+    <MESSAGE value="some stuff design orders and customers pages -view mode in mod detaliat sau compact&#10;modificari db - creare tabela pentru fisierele uploadate pentru clienti si comenzi si gestiunea lor&#10;adaugare sectiune gestionare fisiere pe server(view, routes, methods)&#10;integrare api smart bill generare factura" />
+    <option name="LAST_COMMIT_MESSAGE" value="some stuff design orders and customers pages -view mode in mod detaliat sau compact&#10;modificari db - creare tabela pentru fisierele uploadate pentru clienti si comenzi si gestiunea lor&#10;adaugare sectiune gestionare fisiere pe server(view, routes, methods)&#10;integrare api smart bill generare factura" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_31_143129_add_pdf_local_path_to_orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="17" column="58" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_29_114447_add_serial_number_to_orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="17" column="69" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Order.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="67" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2018_11_03_124820_create_customers_table.php" />
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/customers">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2018_11_03_125248_create_orders_table.php" />
     <entry file="file://$PROJECT_DIR$/database/migrations/2018_11_03_135913_create_customers_table.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -936,13 +1075,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/Customers/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -954,13 +1086,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/orders">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -978,20 +1103,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="106" column="26" selection-start-line="106" selection-start-column="26" selection-end-line="106" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="74" column="24" lean-forward="true" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/notice.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="48" column="28" lean-forward="true" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -1087,13 +1198,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/Customers/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4275">
-          <caret line="285" column="26" selection-start-line="285" selection-start-column="26" selection-end-line="285" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/guzzlehttp/guzzle/composer.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-82" />
@@ -1118,25 +1222,202 @@
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/index.blade.php">
+    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/OrdersController.php" />
+    <entry file="file://$PROJECT_DIR$/config/app.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5940">
-          <caret line="396" selection-start-line="396" selection-end-line="397" />
+        <state relative-caret-position="508">
+          <caret line="197" column="57" lean-forward="true" selection-start-line="197" selection-start-column="57" selection-end-line="197" selection-end-column="57" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/filesystems.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="94" column="60" selection-start-line="94" selection-start-column="44" selection-end-line="94" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/orders">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/notices.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="28" column="111" lean-forward="true" selection-start-line="28" selection-start-column="111" selection-end-line="28" selection-end-column="111" />
+          <folding>
+            <element signature="e#3503#3551#0#HTML" expanded="true" />
+            <element signature="e#3809#3857#0#HTML" expanded="true" />
+            <element signature="e#4121#4169#0#HTML" expanded="true" />
+            <element signature="e#12035#12041#0#HTML" expanded="true" />
+            <element signature="e#12212#12218#0#HTML" expanded="true" />
+            <element signature="e#12389#12395#0#HTML" expanded="true" />
+            <element signature="e#12566#12572#0#HTML" expanded="true" />
+            <element signature="e#12743#12749#0#HTML" expanded="true" />
+            <element signature="e#12920#12926#0#HTML" expanded="true" />
+            <element signature="e#13097#13103#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://5f63334c-699b-4430-bb7e-aff7059d66c4/schema/ecuator_app/table/customers">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/Customers/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="34" column="56" lean-forward="true" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/Order/notice.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="55" column="69" lean-forward="true" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
+          <folding>
+            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#hr#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#2;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#2;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#3;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#4;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#5;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#6;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#2;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#3;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#4;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#th#4;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#th#5;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#th#6;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#0;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#th#0;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#2;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#3;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#5;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#5;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="e#11463#11469#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="e#11628#11634#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="e#11793#11799#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="e#11958#11964#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="e#12123#12129#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#td#5;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="e#12288#12294#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#td#6;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="e#12453#12459#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#td#0;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#2;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#3;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#4;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#5;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#6;n#td#1;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#1;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#1;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#table#1;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#2;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#2;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#1;n#table#2;n#td#2;n#tr#0;n#table#1;n#td#0;n#tr#1;n#table#2;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        <state relative-caret-position="735">
+          <caret line="58" column="44" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file:///private/var/folders/zf/gsdym03n65n_jtlkd1187nww0000gn/T/fz3temp-2/OrdersController.php" />
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrdersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="336" column="66" selection-start-line="336" selection-start-column="66" selection-end-line="336" selection-end-column="66" />
+        <state relative-caret-position="320">
+          <caret line="489" column="16" lean-forward="true" selection-start-line="489" selection-start-column="16" selection-end-line="489" selection-end-column="16" />
+          <folding>
+            <element signature="e#40#61#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -92,7 +92,7 @@
                                     <tbody>
                                     @foreach($orders as $order)
                                         <?php $productInfosArray = json_decode($order['product'], true);?>
-                                        <tr>
+                                        <tr class="addHover">
                                             <th scope="row">
                                                 {{$order->id}} <span class="badge badge-warning">Noua</span>
                                             </th>
@@ -199,9 +199,11 @@
                                             </td>
                                             <td class="text-center">
                                                 @if($order->smart_bill_invoice == 0)
-                                                    <a href="" class="btn btn-primary btn-lg" target="_blank"><i
+                                                    <a href="{{route('generate.smart.bill.invoice', ['id' => $order->id])}}"
+                                                       class="btn btn-primary btn-lg" target="_blank"><i
                                                                 class="fas fa-file-invoice-dollar"></i></a>
                                                 @else
+                                                    <i class="fas fa-check text-success"></i>&nbsp;
                                                     <button type="button" class="btn btn-secondary btn-lg"
                                                             style="cursor:not-allowed;" disabled><i
                                                                 class="fas fa-file-invoice-dollar"></i></button>
@@ -212,7 +214,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div id="ordersFullInfos" class="displayBlock">
+                            <div id="ordersFullInfos" class="displayNone">
                                 <table class="table">
                                     <thead class="bg-light text-dark">
                                     <tr>
@@ -234,7 +236,7 @@
                                     <tbody>
                                     @foreach($orders as $order)
                                         <?php $productInfosArray = json_decode($order['product'], true);?>
-                                        <tr>
+                                        <tr class="addHover">
                                             <th scope="row">
                                                 {{$order->id}} <span class="badge badge-warning">Noua</span>
                                             </th>
@@ -368,9 +370,11 @@
                                             </td>
                                             <td class="text-center">
                                                 @if($order->smart_bill_invoice == 0)
-                                                    <a href="" class="btn btn-primary btn-lg" target="_blank"><i
+                                                    <a href="{{route('generate.smart.bill.invoice', ['id' => $order->id])}}"
+                                                       class="btn btn-primary btn-lg" target="_blank"><i
                                                                 class="fas fa-file-invoice-dollar"></i></a>
                                                 @else
+                                                    <i class="fas fa-check text-success"></i>&nbsp;s
                                                     <button type="button" class="btn btn-secondary btn-lg"
                                                             style="cursor:not-allowed;" disabled><i
                                                                 class="fas fa-file-invoice-dollar"></i></button>
@@ -408,10 +412,10 @@
 
     <script>
         function showFullInfos() {
-            document.getElementById("ordersFullInfos").classList.add('displayBlock');
             document.getElementById("ordersFullInfos").classList.remove('displayNone');
-            document.getElementById("ordersSmallInfos").classList.remove('displayBlock');
+            document.getElementById("ordersFullInfos").classList.add('displayBlock');
             document.getElementById("ordersSmallInfos").classList.add('displayNone');
+            document.getElementById("ordersSmallInfos").classList.remove('displayBlock');
         }
 
         function showSmallInfos() {

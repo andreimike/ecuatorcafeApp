@@ -5,3 +5,13 @@
 .displayNone {
     display: none !important;
 }
+
+.addHover:hover {
+    background-color: #efefef !important;
+    border-radius: 8px !important;
+    box-shadow: 3px 2px 3px #333;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+}
