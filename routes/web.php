@@ -47,13 +47,17 @@ Route::get('comenzi/descarca-aviz/{id}', 'OrdersController@noticeDownload')->nam
 Route::get('comenzi/generare-numar-serie', 'OrdersController@serialNumber')->name('order.serial.numbers')->middleware('auth');
 Route::get('optiuni/editare-numar-de-serie/', 'OptionsController@editSerialNumber')->name('serial.number.edit')->middleware('auth');
 Route::post('optiuni/{id}', 'OptionsController@updateSerialNumber')->name('serial.number.update')->middleware('auth');
+Route::get('optiuni/same-day/api/informatii/', 'OptionsController@editApiToken')->name('api.token.edit')->middleware('auth');
+Route::get('optiuni/same-day/api/actualizare', 'OptionsController@updateApiToken')->name('api.token.update')->middleware('auth');
 
 //Options Routes
 Route::get('optiuni/fisiere-incarcate', 'OptionsController@getStoredFiles')->name('view.stored.files')->middleware('auth');
 Route::get('optiuni/descarcare-fisier-comanda/{id}', 'OptionsController@downloadOrderFile')->name('download.order.file')->middleware('auth');
 Route::delete('optiuni/sterge-fisier-comanda/{id}', 'OptionsController@destroyOrderFile')->name('delete.order.file')->middleware('auth');
+Route::delete('optiuni/sterge-toate-fisierele-comenzi', 'OptionsController@destroyAllOrdersFiles')->name('delete.all.orders.files')->middleware('auth');
+Route::delete('optiuni/sterge-toate-fisierele-clienti', 'OptionsController@destroyAllCustomersFiles')->name('delete.all.customers.files')->middleware('auth');
 
 
 //API Routes
-Route::get('comenzi/generare-factura/{id}', 'OrdersController@createInvoice')->name('generate.smart.bill.invoice');
-Route::get('/optiuni/api-token', 'OrdersController@getToken');
+Route::get('comenzi/generare-factura/{id}', 'OrdersController@createInvoice')->name('generate.smart.bill.invoice')->middleware('auth');
+Route::get('/optiuni/api-token', 'OrdersController@getToken')->middleware('auth');

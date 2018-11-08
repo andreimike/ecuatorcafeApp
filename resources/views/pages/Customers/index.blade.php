@@ -92,7 +92,7 @@
                                                 </td>
                                                 <td>
                                                     <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr style="border: 0;">
+                                                        <tr class="addHover" style="border: 0;">
                                                             <td style="border: none;" align="left"
                                                                 class="text-center mt-0 pt-0">
                                                                 <!--Edit-->

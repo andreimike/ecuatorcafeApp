@@ -70,11 +70,13 @@ class OrdersController extends Controller
         // Get the file
         $file = $request->file('file');
         $time = time();
-        $formatedTime = date('Y-m-d', $time);
+        $formattedTime = date('Y-m-d', $time);
+        $detailedFormattedTime = date('Y-m-d H:i:s', $time);
         // Hash for uploaded file
-        $fileHash = $file->getClientOriginalName() . "-" . $formatedTime;
+        $fileName = $formattedTime . "-" . str_random(8) . "-" . $file->getClientOriginalName();
         // Set name for order file
-        $fileName = $fileHash . '.' . $request->file('file')->getClientOriginalExtension();
+        // Function from above getClientOriginalName take already file extension
+        //$fileName = $fileHash . '.' . $request->file('file')->getClientOriginalExtension();
         // Save order file on server
         $path = Storage::putFileAs('orders', $file, $fileName);
         // Save in DB path and user for order file
@@ -83,7 +85,82 @@ class OrdersController extends Controller
             'id_utilizator' => Auth::user()->id
         ];
         OrderUploadFile::create($data);
-
+        //Get From Option Table last API Token
+        $smdDayApiTokenOption = Option::find(1);
+        $smdApiTokenExDate = $smdDayApiTokenOption->validity_shipping_api_token;
+        if ($smdApiTokenExDate == 0) {
+            // Make a POST Request to SameDay API to generate a new auth Token with validity for 30 days
+            // Setup the client info
+            $client = new \GuzzleHttp\Client([
+                'timeout' => 2.0,
+                'headers' =>
+                    [
+                        'Accept' => 'application/json',
+                        'Content-Type' => 'application/json',
+                        'X-Auth-Username' => 'topstarAPI',
+                        'X-Auth-Password' => 'l4djE/Ev9g=='
+                    ],
+                'auth' =>
+                    [
+                        'topstarAPI',
+                        'l4djE/Ev9g=='
+                    ]
+            ]);
+            try {
+                $response = $client->POST('https://sameday-api.demo.zitec.com/api/authenticate', [
+                    'query' => ['remember_me' => 'true']
+                ]);
+            } catch (\Exception $ex) {
+                \Log::error($ex);
+            }
+            //Get Request Response Code -> 200 Succes
+            $statusCode = $response->getStatusCode();
+            // Convert API Response to String and get body content
+            $resData = (string)$response->getBody();
+            $resData = json_decode($resData);
+            $apiToken = $resData->token;
+            $apiValidityDate = $resData->expire_at;
+            $smdDayApiTokenOption->shipping_api_token = $apiToken;
+            $smdDayApiTokenOption->validity_shipping_api_token = $apiValidityDate;
+            $smdDayApiTokenOption->updated_at = $detailedFormattedTime;
+            $smdDayApiTokenOption->save();
+        } elseif ($smdApiTokenExDate <= $detailedFormattedTime) {
+            // Make a POST Request to SameDay API to generate a new auth Token with validity for 30 days
+            // Setup the client info
+            $client = new \GuzzleHttp\Client([
+                'timeout' => 2.0,
+                'headers' =>
+                    [
+                        'Accept' => 'application/json',
+                        'Content-Type' => 'application/json',
+                        'X-Auth-Username' => 'topstarAPI',
+                        'X-Auth-Password' => 'l4djE/Ev9g=='
+                    ],
+                'auth' =>
+                    [
+                        'topstarAPI',
+                        'l4djE/Ev9g=='
+                    ]
+            ]);
+            try {
+                $response = $client->POST('https://sameday-api.demo.zitec.com/api/authenticate', [
+                    'query' => ['remember_me' => 'true']
+                ]);
+            } catch (\Exception $ex) {
+                \Log::error($ex);
+            }
+            //Get Request Response Code -> 200 Succes
+            $statusCode = $response->getStatusCode();
+            // Convert API Response to String and get body content
+            $resData = (string)$response->getBody();
+            $resData = json_decode($resData);
+            $apiToken = $resData->token;
+            $apiValidityDate = $resData->expire_at;
+            $smdDayApiTokenOption->shipping_api_token = $apiToken;
+            $smdDayApiTokenOption->validity_shipping_api_token = $apiValidityDate;
+            $smdDayApiTokenOption->updated_at = $detailedFormattedTime;
+            $smdDayApiTokenOption->save();
+        }
         $ordersArray = Excel::toArray(new CustomersImport, $file);
         // Order Array Index
         $i = 0;
@@ -220,7 +297,7 @@ class OrdersController extends Controller
                 }
             }
         }
-        return redirect()->route('order.view')->with('success', 'Comenzile au fost importate cu succes!');
+        return redirect()->route('order.view')->with('success', 'Comenzile au fost importate cu succes!  || A fost generat cu succes un nou Token pentru Curier');
     }
 
     /**
@@ -525,7 +602,9 @@ class OrdersController extends Controller
         $statusCode = $response->getStatusCode();
         $data = (string)$response->getBody();
         $data = json_decode($data);
-        dd($data);
+//        $data = json_encode($data);
+        var_dump($data->token);
+        var_dump($data->expire_at);
         dd($data);
     }
 }

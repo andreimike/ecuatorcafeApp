@@ -69,9 +69,9 @@ class CustomersUploadsFiles extends Controller
         ]);
         $file = $request->file('fisierclienti');
         $time = time();
-        $formatedTime = date('Y-m-d', $time);
-        $fileHash = $file->getClientOriginalName() . "-" . $formatedTime;
-        $fileName = $fileHash . '.' . $request->file('fisierclienti')->getClientOriginalExtension();
+        $formattedTime = date('Y-m-d', $time);
+        $fileName = $formattedTime . "-" . str_random(8) . "-" . $file->getClientOriginalName();
+        //        $fileName = $fileHash . '.' . $request->file('fisierclienti')->getClientOriginalExtension();
         $path = Storage::putFileAs('files', $file, $fileName);
         $data = [
             'customers_uploads_path' => $path,

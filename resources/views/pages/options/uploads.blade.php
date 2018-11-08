@@ -33,7 +33,7 @@
                                         data-target="#ordersFiles" aria-expanded="false"
                                         aria-controls="ordersFiles">
                                     Fisiere Comenzi <i class="fas fa-list-ol"></i>
-                                </button>
+                                </button>s
                             </div>
                         </div>
                     </div>
@@ -43,6 +43,25 @@
         <div class="row justify-content-center mt-3 mb-2">
             <div class="col-md-10">
                 <div class="collapse" id="customersFiles">
+                    @if(count($customersFiles) >= 1)
+                        <div class="card justify-content-center mt-3">
+                            <div class="card-body">
+                                <h5 class="text-center">Sterge toate fisierele pentru Clienti</h5>
+                                <!--Delete-->
+                                <form class="form-delete"
+                                      action="{{route('delete.all.customers.files')}}"
+                                      method="POST">
+                                    {{csrf_field()}}
+                                    {{method_field('DELETE')}}
+                                    <button type="submit" class="btn btn-danger btn-block mt-1"
+                                            onclick="return confirm('Toate fisierele incarcate si salvate pe server pentru clienti vor fi sterse. Esti sigur?')"
+                                            title="Stergere Toate fisierele pentru clienti">
+                                        <i
+                                                class="far fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                     <div class="card mt-3">
                         <div class="card-header text-center">
                             <h5>Fisiere Pentru Clienti Incarcate</h5>
@@ -88,7 +107,8 @@
                                 </div>
                             @else
                                 <div class="alert alert-warning" role="alert">
-                                    <p class="text-center p-2 mt-3"><i class="fas fa-exclamation-triangle"></i> <span
+                                    <p class="text-center p-2 mt-3"><i class="fas fa-exclamation-triangle"></i>
+                                        <span
                                                 class="text-dark">Nu exista fisiere incarcate pe server</span></p>
                                 </div>
                             @endif
@@ -96,6 +116,25 @@
                     </div>
                 </div>
                 <div class="collapse" id="ordersFiles">
+                    @if(count($ordersFiles) >= 1)
+                        <div class="card justify-content-center mt-3">
+                            <div class="card-body">
+                                <h5 class="text-center">Sterge toate fisierele pentru Comenzi</h5>
+                                <!--Delete-->
+                                <form class="form-delete"
+                                      action="{{route('delete.all.orders.files')}}"
+                                      method="POST">
+                                    {{csrf_field()}}
+                                    {{method_field('DELETE')}}
+                                    <button type="submit" class="btn btn-danger btn-block mt-1"
+                                            onclick="return confirm('Toate fisierele incarcate si salvate pe server pentru comenzi vor fi sterse. Esti sigur?')"
+                                            title="Stergere Toate fisierele pentru comenzi">
+                                        <i
+                                                class="far fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                     <div class="card mt-3">
                         <div class="card-header text-center">
                             <h5>Fisiere Pentru Comenzi Incarcate</h5>

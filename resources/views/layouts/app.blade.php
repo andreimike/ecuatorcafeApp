@@ -29,7 +29,11 @@
     <!-- Meta Tag Manager -->
     <meta name="theme-color" content="#C7A17A"/>
     <!-- / Meta Tag Manager -->
-
+    <style>
+        .nightMode > div {
+            background-color: #343a40 !important;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
