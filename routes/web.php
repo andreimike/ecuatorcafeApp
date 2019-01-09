@@ -43,12 +43,13 @@ Route::get('comenzi/declaratie-conformitate/{id}', 'OrdersController@generateDec
 Route::get('comenzi/generare-declaratii-bulk/', 'OrdersController@generateDeclarations')->name('order.declarations')->middleware('auth');
 Route::get('comenzi/generare-aviz/{id}', 'OrdersController@generateNotice')->name('order.single.notice')->middleware('auth');
 Route::get('comenzi/generare-avize-bulk/', 'OrdersController@generateNotices')->name('order.all.notices')->middleware('auth');
-Route::get('comenzi/descarca-aviz/{id}', 'OrdersController@noticeDownload')->name('order.single.notice.download')->middleware('auth');
+//Route::get('comenzi/descarca-aviz/{id}', 'OrdersController@noticeDownload')->name('order.single.notice.download')->middleware('auth');
 Route::get('comenzi/generare-numar-serie', 'OrdersController@serialNumber')->name('order.serial.numbers')->middleware('auth');
 Route::get('optiuni/editare-numar-de-serie/', 'OptionsController@editSerialNumber')->name('serial.number.edit')->middleware('auth');
 Route::post('optiuni/{id}', 'OptionsController@updateSerialNumber')->name('serial.number.update')->middleware('auth');
 Route::get('optiuni/same-day/api/informatii/', 'OptionsController@editApiToken')->name('api.token.edit')->middleware('auth');
 Route::get('optiuni/same-day/api/actualizare', 'OptionsController@updateApiToken')->name('api.token.update')->middleware('auth');
+Route::get('comenzi/generare-pdf-etichete', 'OrdersController@generateStickers')->name('order.create.stickers.pdf')->middleware('auth');
 
 //Options Routes
 Route::get('optiuni/fisiere-incarcate', 'OptionsController@getStoredFiles')->name('view.stored.files')->middleware('auth');
@@ -60,4 +61,10 @@ Route::delete('optiuni/sterge-toate-fisierele-clienti', 'OptionsController@destr
 
 //API Routes
 Route::get('comenzi/generare-factura/{id}', 'OrdersController@createInvoice')->name('generate.smart.bill.invoice')->middleware('auth');
-Route::get('/optiuni/api-token', 'OrdersController@getToken')->middleware('auth');
+Route::get('comenzi/generare-awb/{id}', 'OrdersController@smdApiCreateAwb')->name('generate.smd.awb')->middleware('auth');
+Route::get('/optiuni/dev/waveit/api-token', 'OrdersController@getToken')->middleware('auth');
+Route::get('/optiuni/dev/waveit/smd-api-pickup-point/', 'OrdersController@smdApiGetPickupPoint')->middleware('auth');
+Route::get('/optiuni/dev/waveit/smd-api-active-services/', 'OrdersController@smdApiGetActiveServices')->middleware('auth');
+Route::get('/optiuni/dev/waveit/smd-api-get-county', 'OrdersController@smdApiGetCountyList')->middleware('auth');
+Route::get('/optiuni/dev/waveit/smd-api-get-city', 'OrdersController@smdApiGetCityList')->middleware('auth');
+Route::get('/optiuni/dev/waveit/smd-api-create-pickup-point', 'OrdersController@smdApiCreatePickupPoint')->middleware('auth');

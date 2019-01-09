@@ -8,7 +8,7 @@
     <table border="0" cellpadding="0" cellspacing="0" valign="top" align="center"
            style="vertical-align: top; margin: 0 auto;">
         <tr style="border: none">
-            <td align="center" style="padding: 5px; vertical-align: top; width: 100%; max-width: 595px !important;">
+            <td align="center" style="padding: 0px; vertical-align: top; width: 100%; max-width: 595px !important;">
                 <table border="0" align="center"
                        style="vertical-align: top; width: 100%; border-bottom: 2px solid #000000;">
                     <tr>
@@ -21,7 +21,7 @@
                             <h3 style="text-align: right;">AVIZ DE INSOTIRE A MARFII</h3>
                             <hr style="border: 1px solid #000;"/>
                             <p style="text-align: right; padding: 0px !important; margin: 0px !important;">Seria
-                                ATSNP nr. {{$order->serial_number}}
+                                RATSNP nr. {{$order->serial_number}}
                             </p>
                             <p style="text-align: right; padding: 0px !important; margin: 0px !important;">Data
                                 (zi/luna/an):
@@ -50,12 +50,11 @@
                         <td align="right" style="vertical-align: top;">
                             <p style="text-align: left; padding: 0; margin: 0;">Client: AUCHAN Romania SA</p>
                             <p style="text-align: left; padding: 0; margin: 0;">Reg. com.: J40/2731/2005</p>
-                            <p style="text-align: left; padding: 0; margin: 0;">CIF: RO17233051</p>
                             <p style="text-align: left; padding: 0; margin: 0;">
-                                    CUI: {{$order->customer->cui}}
+                                CIF: {{$order->customer->cui}}
                             </p>
                             <p style="text-align: left; padding: 0; margin: 0;">
-                                    Adresa: {{$order->customer->adresa}}
+                                Adresa: {{$order->customer->adresa}}, {{$order->customer->localitate}}
                             </p>
                             <p style="text-align: left; padding: 0; margin: 0;">
 
@@ -71,28 +70,31 @@
                         <td align="center">
                             <table border="1" cellspacing="0" cellpadding="1"
                                    style="vertical-align: top;">
-                                <thead style="vertical-align: middle;">
+                                <thead style="vertical-align: middle; background-color: #C7A17A;">
                                 <tr>
                                     <th>
-                                        <p style="text-align: center;"><b>Nr. crt</b></p>
+                                        <p style="text-align: center; padding: 0; margin: 0;"><b>Nr. crt</b></p>
                                     </th>
                                     <th>
-                                        <p style="text-align: center;"><b>Denumirea produselor sau a serviciilor</b></p>
+                                        <p style="text-align: center; padding: 0; margin: 0;"><b>Denumirea produselor
+                                                sau a serviciilor</b></p>
                                     </th>
                                     <th>
-                                        <p style="text-align: center;"><b>U.M.</b></p>
+                                        <p style="text-align: center; padding: 0; margin: 0;"><b>U.M.</b></p>
                                     </th>
                                     <th>
-                                        <p style="text-align: center;"><b>Cant.</b></p>
+                                        <p style="text-align: center; padding: 0; margin: 0;"><b>Cant.</b></p>
                                     </th>
                                     <th>
-                                        <p style="text-align: center;"><b>Pret unitar (fara TVA) -Lei-</b></p>
+                                        <p style="text-align: center; padding: 0; margin: 0;"><b>Pret unitar (fara TVA)
+                                                -Lei-</b></p>
                                     </th>
                                     <th>
-                                        <p style="text-align: center;"><b>Valoarea -Lei-</b></p>
+                                        <p style="text-align: center; padding: 0; margin: 0;"><b>Valoarea -Lei-</b></p>
                                     </th>
                                     <th>
-                                        <p style="text-align: center;"><b>Valoarea TVA -Lei-</b></p>
+                                        <p style="text-align: center; padding: 0; margin: 0;"><b>Valoarea TVA -Lei-</b>
+                                        </p>
                                     </th>
                                 </tr>
                                 </thead>
@@ -122,9 +124,9 @@
                                 <!-- Order Index Deckaration -->
                                 <?php $index = (int)0; ?>
                                 <!-- Price Sum Declaration -->
-                                <?php $sum = (float)0.10; ?>
+                                <?php $sum = (float)0.00 - 0.02; ?>
                                 <!-- Vat Total Sum Declartion -->
-                                <?php $sVat = (float)0.01; ?>
+                                <?php $sVat = (float)0.00 - 0.01; ?>
                                 @foreach($productInfosArray as $orderInfos)
                                     <tr style="border-top: none; border-bottom: none; padding-top: 2px !important; padding-bottom: 2px !important;">
                                         <th scope="row"
@@ -150,28 +152,28 @@
                                         </td>
                                         <td style="border-top: none; border-bottom: none;">
                                             <p style="text-align: right; text-transform: uppercase;">
-                                                <?php $productPrice = (float)round($orderInfos['product_price'], 2); ?>
-                                                <?php $prodPriceWithoutVat = (float)round($productPrice / 1.09, 2); ?>
-                                                <?php $truncateProdPriceWithoutVat = round($prodPriceWithoutVat, 2); ?>
+                                                <?php $productPrice = number_format((float)$orderInfos['product_price'], 2, '.', ''); ?>
+                                                <?php $prodPriceWithoutVat = number_format((float)round($productPrice / 1.09, 2), 2, '.', ''); ?>
+                                                <?php $truncateProdPriceWithoutVat = number_format((float)$prodPriceWithoutVat, 2, '.', ''); ?>
                                                 {{$truncateProdPriceWithoutVat}}
                                             </p>
                                         </td>
                                         <td style="border-top: none; border-bottom: none;">
                                             <p style="text-align: right; text-transform: uppercase;">
-                                                <?php $productQty = (float)round($orderInfos['product_qty'], 2); ?>
-                                                <?php $productTotalPrice = (float)round($productQty * $truncateProdPriceWithoutVat, 2); ?>
+                                                <?php $productQty = (int)$orderInfos['product_qty']; ?>
+                                                <?php $productTotalPrice = number_format((float)($productQty * $truncateProdPriceWithoutVat), 2, '.', ''); ?>
                                                 <?php $orderArraySize = count($productInfosArray); ?>
                                                 <?php $productEan = $orderInfos['product_ean']; ?>
-                                                <?php $sum = (float)round($sum + $productTotalPrice, 2); ?>
-                                                <?php $s = round($sum, 2); ?>
+                                                <?php $sum = number_format((float)($sum + $productTotalPrice), 2, '.', ''); ?>
+                                                <?php $s = number_format((float)$sum, 2, '.', ''); ?>
                                                 {{$productTotalPrice}}
                                             </p>
                                         </td>
                                         <td style="border-top: none; border-bottom: none;">
                                             <p style="text-align: right; text-transform: uppercase;">
-                                                <?php $vatTotal = (float)$productTotalPrice * 0.09; ?>
-                                                <?php $vatTotal = (float)round($vatTotal, 2); ?>
-                                                <?php $sVat = (float)round($sVat + $vatTotal, 2); ?>
+                                                <?php $vatTotal = number_format((float)$productTotalPrice * 0.09, 2, '.', ''); ?>
+                                                <?php $vatTotal = number_format((float)$vatTotal, 2, '.', ''); ?>
+                                                <?php $sVat = number_format((float)$sVat + $vatTotal, 2, '.', ''); ?>
                                                 {{$vatTotal}}
                                             </p>
                                         </td>
@@ -211,9 +213,11 @@
                                 <tr>
                                     <td align="left"
                                         style="width: 100%; border-top: none; border-right: 1px solid #111; border-bottom: none; border-left: 1px solid #111;">
-                                        <p style="text-align: left; margin-bottom: 0px; padding-bottom: 0px; padding-left: 2px;">
+                                        <p class="text-danger"
+                                           style="text-align: left; margin-bottom: 0px; padding-bottom: 0px; padding-left: 2px; color: red;">
                                             Cod Furnizor 04195</p>
-                                        <p style="text-align: left; padding-top: 0px; margin-top: 0px; padding-left: 2px;">
+                                        <p class="text-danger"
+                                           style="text-align: left; padding-top: 0px; margin-top: 0px; padding-left: 2px; color: red;">
                                             Numar comanda {{$order->order_number}}</p>
                                     </td>
                                 </tr>
@@ -228,7 +232,8 @@
                                         <small>Semnatura<br>si stampila<br>furnizorului</small>
                                     </td>
                                     <td align="center" style="border-top: none;">
-                                        <p style="text-align: left; margin: 1px; padding: 1px;">Intocmit de: -</p>
+                                        <p style="text-align: left; margin: 1px; padding: 1px;">Intocmit de: Curier Same
+                                            Day</p>
                                         <p style="text-align: left; margin: 1px; padding: 1px;">CNP: -</p>
                                         <p style="text-align: left; margin: 1px; padding: 1px;">Numele delegatului:
                                             -</p>
@@ -244,13 +249,13 @@
                                                style="vertical-align: top; width: 100%; border-top: none; border-right: none; border-bottom: none; border-left: none;">
                                             <tr>
                                                 <td align="left" style="text-align: left; width: 33.3%;">
-                                                    Total
+                                                    <p style="padding: 0; margin: 0;">Total</p>
                                                 </td>
                                                 <td align="center" style="text-align: right; width: 33.3%">
-                                                    {{$s}}
+                                                    <p style="padding: 0; margin: 0;">{{$s}}</p>
                                                 </td>
                                                 <td align="right" style="text-align: right; width: 33.3%;">
-                                                    {{$sVat}}
+                                                    <p style="padding: 0; margin: 0;">{{$sVat}}</p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -258,11 +263,11 @@
                                                style="vertical-align: top; width: 100%; border-right: none; border-bottom: none; border-left: none;">
                                             <tr>
                                                 <td align="left" style="text-align: left; width: 50%;">
-                                                    Total plata
+                                                    <p style="padding: 0; margin: 0;">Total plata</p>
                                                 </td>
                                                 <td align="center" style="text-align: right; width: 50%;">
-                                                    <?php $orderTotalSum = round($s + $sVat, 2); ?>
-                                                    {{$orderTotalSum}}
+                                                    <?php $orderTotalSum = number_format((float)($s + $sVat), 2, '.', ''); ?>
+                                                    <p style="padding: 0; margin: 0;">{{$orderTotalSum}}</p>
                                                 </td>
                                             </tr>
                                         </table>

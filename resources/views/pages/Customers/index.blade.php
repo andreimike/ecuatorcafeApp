@@ -97,7 +97,7 @@
                                                                 class="text-center mt-0 pt-0">
                                                                 <!--Edit-->
                                                                 <a href="{{route('customer.edit', [$customer->contractor_ean])}}"
-                                                                   class="btn btn-info btn-lg mt-1"
+                                                                   class="btn btn-info btn-lg mt-1 text-white"
                                                                    title="Editare Client -  {{$customer->nume}}"><i
                                                                             class="far fa-edit"></i></a>
                                                             </td>
@@ -246,7 +246,7 @@
                                                                 class="text-center mt-0 pt-0">
                                                                 <!--Edit-->
                                                                 <a href="{{route('customer.edit', [$customer->contractor_ean])}}"
-                                                                   class="btn btn-info btn-lg mt-1"
+                                                                   class="btn btn-info text-white btn-lg mt-1"
                                                                    title="Editare Client -  {{$customer->nume}}"><i
                                                                             class="far fa-edit"></i></a>
                                                             </td>

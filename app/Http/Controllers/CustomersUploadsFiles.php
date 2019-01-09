@@ -100,7 +100,7 @@ class CustomersUploadsFiles extends Controller
                 }
             }
         }
-        return redirect()->route('customer.view')->with('success', 'Clientul a fost adaugat cu succes!');
+        return redirect()->route('customer.view')->with('success', 'Clientii au fost importati, dar exista campuri necompletate care se pot actualiza ulterior.');
     }
 
     /**

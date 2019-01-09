@@ -24,6 +24,18 @@
         <div class="row justify-content-center mt-2">
             <div class="col-md-6">
                 <div class="card">
+                    <div class="card-body text-center">
+                        <a href="{{route('order.create')}}" class="btn btn-success text-white">Adauga o comanda <i
+                                    class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center mt-2">
+            <div class="col-md-6">
+                <div class="card">
                     <div class="card-header">
                         <h5>Comenzi</h5>
                     </div>
@@ -74,18 +86,6 @@
                                 </li>
                             @endforeach
                         </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row justify-content-center mt-2">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <a href="{{route('order.create')}}" class="btn btn-success text-white">Adauga o comanda <i
-                                    class="fas fa-plus"></i></a>
                     </div>
                 </div>
             </div>

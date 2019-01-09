@@ -1,8 +1,10 @@
-
 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <i class="fab fa-app-store fa-lg"></i> {{ config('app.name', 'Laravel') }}
+            <img class="img-fluid"
+                 src="{{ URL::to('/') }}/images/Logo-EcuatorCafeEdited.png"
+                 style="width: 72px; height: auto; -ms-interpolation-mode: bicubic; display: block; margin: 0 auto;"/>
+
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -58,8 +60,8 @@
                     </div>
                 </li>
                 {{--<li class="nav-item">--}}
-                    {{--<button type="button" class="btn btn-warning" onclick="dayMode()"><i class="fas fa-sun text-white"></i></button>--}}
-                    {{--<button type="button" class="btn btn-dark" onclick="nightMode()"><i class="far fa-moon"></i></button>--}}
+                {{--<button type="button" class="btn btn-warning" onclick="dayMode()"><i class="fas fa-sun text-white"></i></button>--}}
+                {{--<button type="button" class="btn btn-dark" onclick="nightMode()"><i class="far fa-moon"></i></button>--}}
                 {{--</li>--}}
             </ul>
 
@@ -99,13 +101,13 @@
 </nav>
 
 {{--<script>--}}
-    {{--function dayMode() {--}}
-        {{--document.getElementById("appBody").classList.remove('nightMode');--}}
-        {{--document.getElementById("appBody").classList.add('dayMode');--}}
-    {{--}--}}
+{{--function dayMode() {--}}
+{{--document.getElementById("appBody").classList.remove('nightMode');--}}
+{{--document.getElementById("appBody").classList.add('dayMode');--}}
+{{--}--}}
 
-    {{--function nightMode() {--}}
-        {{--document.getElementById("appBody").classList.remove('dayMode');--}}
-        {{--document.getElementById("appBody").classList.add('nightMode');--}}
-    {{--}--}}
+{{--function nightMode() {--}}
+{{--document.getElementById("appBody").classList.remove('dayMode');--}}
+{{--document.getElementById("appBody").classList.add('nightMode');--}}
+{{--}--}}
 {{--</script>--}}

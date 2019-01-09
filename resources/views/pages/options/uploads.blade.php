@@ -33,7 +33,7 @@
                                         data-target="#ordersFiles" aria-expanded="false"
                                         aria-controls="ordersFiles">
                                     Fisiere Comenzi <i class="fas fa-list-ol"></i>
-                                </button>s
+                                </button>
                             </div>
                         </div>
                     </div>

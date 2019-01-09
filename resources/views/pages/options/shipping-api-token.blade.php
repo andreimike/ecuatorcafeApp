@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-body">
                         @if($smdApiTokenExDate <= $detailedFormattedTime)
-                            <h4 class="text-warning text-success"><i class="far fa-times-circle"></i> Tokenul NU mai
+                            <h4 class="text-danger text-center"><i class="far fa-times-circle"></i> Tokenul Nu mai
                                 este valid
                             </h4>
                             <p class="text-center text-dark" style="text-decoration: line-through;"><i
@@ -31,7 +31,8 @@
                             <h4 class="text-center text-success"><i class="fas fa-check"></i> Tokenul este inca valid
                             </h4>
                             <p class="text-center text-dark"><i class="far fa-clock"></i> {{$smdApiTokenExDate}}</p>
-                            <p class="text-center text-dark">Data ultima actualizare: {{$smdDayApiTokenOption->updated_at}}</p>
+                            <p class="text-center text-dark">Data ultima
+                                actualizare: {{$smdDayApiTokenOption->updated_at}}</p>
                         @endif
                         <br>
                         <form action="{{route('api.token.update')}}"
