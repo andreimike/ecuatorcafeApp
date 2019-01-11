@@ -15,5 +15,5 @@ class Option extends Model
 
     public $timestamps = false;
 
-    protected $fillable = array('serial_number');
+    protected $fillable = array('serial_number', 'shipping_api_token', 'validity_shipping_api_token', 'updated_at');
 }

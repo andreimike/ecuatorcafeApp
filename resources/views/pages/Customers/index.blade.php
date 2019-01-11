@@ -22,7 +22,7 @@
                         @if(count($customers) > 0)
                             <div class="table-responsive">
                                 <div id="customerSamllInfos" class="displayBlock">
-                                    <table class="table">
+                                    <table class="table table-sm">
                                         <thead class="bg-light text-dark">
                                         <tr>
                                             <th>Contractor EAN</th>
@@ -30,7 +30,7 @@
                                             <th>Adresa</th>
                                             <th>Localitate</th>
                                             <th>Judet</th>
-                                            <th>Tara</th>
+                                            <th>Cod Postal</th>
                                             <th>ILN</th>
                                             <th>CUI</th>
                                             <th>Reg. Comert</th>
@@ -61,10 +61,10 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($customer->tara == null)
+                                                    @if($customer->cod_postal == null)
                                                         -
                                                     @else
-                                                        {{$customer->tara}}
+                                                        {{$customer->cod_postal}}
                                                     @endif
                                                 </td>
                                                 <td>
@@ -125,16 +125,16 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div id="customerFullInfos" class="displayNone">
-                                    <table class="table">
+                                <span id="customerFullInfos" class="displayNone">
+                                    <table class="table table-sm">
                                         <thead class="bg-light text-dark">
                                         <tr>
                                             <th>Contractor EAN</th>
                                             <th>Nume</th>
                                             <th>Adresa</th>
                                             <th>Localitate</th>
+                                            <th>Cod Postal</th>
                                             <th>Judet</th>
-                                            <th>Tara</th>
                                             <th>ILN</th>
                                             <th>CUI</th>
                                             <th>Reg. Comert</th>
@@ -143,7 +143,7 @@
                                             <th>Pers.Contact</th>
                                             <th>Email</th>
                                             <th>Tel.</th>
-                                            <th>Data adaugare companie</th>
+                                            <th>Observatii</th>
                                             <th class="text-center">Actiuni</th>
                                         </tr>
                                         </thead>
@@ -164,17 +164,17 @@
                                                         {{$customer->localitate}}
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    @if($customer->cod_postal == null)
+                                                        -
+                                                    @else
+                                                        {{$customer->cod_postal}}
+                                                    @endif
+                                                </td>
                                                 <td>@if($customer->judet == null)
                                                         -
                                                     @else
                                                         {{$customer->judet}}
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if($customer->tara == null)
-                                                        -
-                                                    @else
-                                                        {{$customer->tara}}
                                                     @endif
                                                 </td>
                                                 <td>
@@ -237,7 +237,14 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{$customer->created_at}}
+                                                    @if($customer->observatii == null)
+                                                        -
+                                                    @else
+                                                        <span class="d-inline-block text-truncate"
+                                                              style="max-width: 200px;">
+                                                        {{$customer->observatii}}
+                                                        </span>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <table border="0" cellpadding="0" cellspacing="0">
@@ -273,20 +280,20 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                </div>
                             </div>
-                        @else
-                            <div class="alert alert-warning" role="alert">
-                                <p class="text-center p-2 mt-3"><i class="fas fa-exclamation-triangle"></i> <span
-                                            class="text-dark">Momentan nu exista clineti in baza de date!</span> <a
-                                            href="{{route('customer.create')}}">Va rugam sa adaugati clienti.</a> <i
-                                            class="fas fa-exclamation-triangle"></i></p>
-                            </div>
-                        @endif
                     </div>
+                    @else
+                        <div class="alert alert-warning" role="alert">
+                            <p class="text-center p-2 mt-3"><i class="fas fa-exclamation-triangle"></i> <span
+                                        class="text-dark">Momentan nu exista clineti in baza de date!</span> <a
+                                        href="{{route('customer.create')}}">Va rugam sa adaugati clienti.</a> <i
+                                        class="fas fa-exclamation-triangle"></i></p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 <script>

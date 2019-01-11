@@ -791,100 +791,103 @@ class OrdersController extends Controller
         dd($data);
     }
 
-    public
-    function sameDayApi($id)
-    {
-        $order = Order::find($id);
-        $productInfosArray = json_decode($order['product'], true);
-        $ecuatorCui = "RO31883947";
-        $customerCompanyName = 'AUCHAN ROMANIA SA';
-        $orderId = $order->id;
-        // Get Order Number
-        $orderNumber = $order->order_number;
-        // Get Customer For Each Order by Order Number
-        $orderCustomer = Order::with('customer')->where('order_number', '=', $orderNumber)->get();
-        $smartBillInvoiceMentions = 'Numar comanda ' . $order->order_number;
-        $reqData = [
-            'companyVatCode' => $ecuatorCui,
-            'client' => [
-                'name' => $customerCompanyName,
-                'vatCode' => $orderCustomer[0]->customer->cui,
-                'address' => $orderCustomer[0]->customer->adresa,
-                'isTaxPayer' => false,
-                'city' => $orderCustomer[0]->customer->localitate,
-                'county' => $orderCustomer[0]->customer->judet,
-                'country' => $orderCustomer[0]->customer->tara,
-                'saveToDb' => false,
-            ],
-            'isDraft' => true,
-            'issueDate' => date('Y-m-d'),
-            'seriesName' => 'TSNP',
-            'currency' => 'RON',
-            'language' => 'RO',
-            'precision' => 1,
-            'dueDate' => date('Y-m-d', time() + 14 * 3600),
-            'useStock' => false,
-            'usePaymentTax' => false,
-            'useEstimateDetails' => false,
-            'observations' => $smartBillInvoiceMentions,
-            'mentions' => $smartBillInvoiceMentions,
-            'products' => []
-        ];
-
-        $i = 0;
-        foreach ($productInfosArray as $orderInfo) {
-
-            $reqData['products'][$i] =
-                ['name' => $orderInfo['product_name'],
-                    'isDiscount' => false,
-                    'measuringUnitName' => 'buc',
-                    'currency' => 'RON',
-                    'quantity' => $orderInfo['product_qty'],
-                    'price' => $orderInfo['product_price'],
-                    'isTaxIncluded' => true,
-                    'taxName' => 'Redusa',
-                    'taxPercentage' => 9,
-                    'saveToDb' => false,
-                    'isService' => false,
-                ];
-            $i++;
-        }
-        $client = new \GuzzleHttp\Client([
-            'timeout' => 2.0,
-            'headers' =>
-                [
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json'
-                ],
-            'auth' =>
-                [
-                    'office@ecuatorcafe.ro',
-                    '6ecf8b23f08a05eb91bcf5f69d248d2c'
-                ]
-        ]);
-        try {
-            $response = $client->POST('https://ws.smartbill.ro:8183/SBORO/api/invoice', [
-                \GuzzleHttp\RequestOptions::JSON => $reqData
-            ]);
-        } catch (\Exception $ex) {
-            \Log::error($ex);
-        }
-        //Get Request Response Code -> 200 Succes
-        $statusCode = $response->getStatusCode();
-        if ($statusCode == 200) {
-            // Set in DB Col SmartBill_Invoice From Null to 1 - after it was created
-            $order->smart_bill_invoice = 1;
-            // Save in DB
-            $order->save();
-            return redirect()->route('order.view')->with('success', 'Comanda a fost creata cu succes la Same Day');
-        } else {
-            return redirect()->route('order.view')->with('error', 'A aparut o eroare!');
-        }
-//        $data = (string)$response->getBody();
-//        $data = json_decode($data);
-////        dd($data);
-
-    }
+    /**
+     * //    public
+     * //    function devGetSDAPIToken($id)
+     * //    {
+     * //        $order = Order::find($id);
+     * //        $productInfosArray = json_decode($order['product'], true);
+     * //        $ecuatorCui = "RO31883947";
+     * //        $customerCompanyName = 'AUCHAN ROMANIA SA';
+     * //        $orderId = $order->id;
+     * //        // Get Order Number
+     * //        $orderNumber = $order->order_number;
+     * //        // Get Customer For Each Order by Order Number
+     * //        $orderCustomer = Order::with('customer')->where('order_number', '=', $orderNumber)->get();
+     * //        $smartBillInvoiceMentions = 'Numar comanda ' . $order->order_number;
+     * //        $reqData = [
+     * //            'companyVatCode' => $ecuatorCui,
+     * //            'client' => [
+     * //                'name' => $customerCompanyName,
+     * //                'vatCode' => $orderCustomer[0]->customer->cui,
+     * //                'address' => $orderCustomer[0]->customer->adresa,
+     * //                'isTaxPayer' => false,
+     * //                'city' => $orderCustomer[0]->customer->localitate,
+     * //                'county' => $orderCustomer[0]->customer->judet,
+     * //                'country' => $orderCustomer[0]->customer->tara,
+     * //                'saveToDb' => false,
+     * //            ],
+     * //            'isDraft' => true,
+     * //            'issueDate' => date('Y-m-d'),
+     * //            'seriesName' => 'TSNP',
+     * //            'currency' => 'RON',
+     * //            'language' => 'RO',
+     * //            'precision' => 1,
+     * //            'dueDate' => date('Y-m-d', time() + 14 * 3600),
+     * //            'useStock' => false,
+     * //            'usePaymentTax' => false,
+     * //            'useEstimateDetails' => false,
+     * //            'observations' => $smartBillInvoiceMentions,
+     * //            'mentions' => $smartBillInvoiceMentions,
+     * //            'products' => []
+     * //        ];
+     * //
+     * //        $i = 0;
+     * //        foreach ($productInfosArray as $orderInfo) {
+     * //
+     * //            $reqData['products'][$i] =
+     * //                ['name' => $orderInfo['product_name'],
+     * //                    'isDiscount' => false,
+     * //                    'measuringUnitName' => 'buc',
+     * //                    'currency' => 'RON',
+     * //                    'quantity' => $orderInfo['product_qty'],
+     * //                    'price' => $orderInfo['product_price'],
+     * //                    'isTaxIncluded' => true,
+     * //                    'taxName' => 'Redusa',
+     * //                    'taxPercentage' => 9,
+     * //                    'saveToDb' => false,
+     * //                    'isService' => false,
+     * //                ];
+     * //            $i++;
+     * //        }
+     * //        $client = new \GuzzleHttp\Client([
+     * //            'timeout' => 2.0,
+     * //            'headers' =>
+     * //                [
+     * //                    'Accept' => 'application/json',
+     * //                    'Content-Type' => 'application/json'
+     * //                ],
+     * //            'auth' =>
+     * //                [
+     * //                    'office@ecuatorcafe.ro',
+     * //                    '6ecf8b23f08a05eb91bcf5f69d248d2c'
+     * //                ]
+     * //        ]);
+     * //        try {
+     * //            $response = $client->POST('https://ws.smartbill.ro:8183/SBORO/api/invoice', [
+     * //                \GuzzleHttp\RequestOptions::JSON => $reqData
+     * //            ]);
+     * //        } catch (\Exception $ex) {
+     * //            \Log::error($ex);
+     * //        }
+     * //        //Get Request Response Code -> 200 Succes
+     * //        $statusCode = $response->getStatusCode();
+     * //        if ($statusCode == 200) {
+     * //            // Set in DB Col SmartBill_Invoice From Null to 1 - after it was created
+     * //            $order->smart_bill_invoice = 1;
+     * //            // Save in DB
+     * //            $order->save();
+     * //            return redirect()->route('order.view')->with('success', 'Comanda a fost creata cu succes la Same Day');
+     * //        } else {
+     * //            return redirect()->route('order.view')->with('error', 'A aparut o eroare!');
+     * //        }
+     * ////        $data = (string)$response->getBody();
+     * ////        $data = json_decode($data);
+     * //////        dd($data);
+     * //
+     * //    }
+     *
+     **/
 
     public
     function smdApiGetPickupPoint()
@@ -950,6 +953,7 @@ class OrdersController extends Controller
     {
         $getSmdOoption = Option::find(1);
         $smdApiToken = $getSmdOoption->shipping_api_token;
+
         $client = new \GuzzleHttp\Client([
             'timeout' => 2.0,
             'headers' =>
@@ -975,8 +979,9 @@ class OrdersController extends Controller
     }
 
     public
-    function smdApiGetCityList()
+    function smdApiGetCityList($clientCounty, $clientCity)
     {
+
         $getSmdOoption = Option::find(1);
         $smdApiToken = $getSmdOoption->shipping_api_token;
         $client = new \GuzzleHttp\Client([
@@ -991,20 +996,19 @@ class OrdersController extends Controller
         try {
             $response = $client->GET('https://sameday-api.demo.zitec.com/api/geolocation/city',
                 ['query' =>
-                    ['name' => 'Pitesti'],
-                    ['county' => 4]
+                    ['name' => $clientCity],
+                    ['county' => $clientCounty]
                 ]);
         } catch (\Exception $ex) {
             \Log::error($ex);
+            dd($ex);
         }
         //Get Request Response Code -> 200 Succes
         $statusCode = $response->getStatusCode();
-        $data = (string)$response->getBody();
-        $data = json_decode($data);
-        // $data = json_encode($data);
-//        var_dump($data->token);
-//        var_dump($data->expire_at);
-        dd($data);
+        $cityAndCountyDetails = (string)$response->getBody();
+
+        return $cityAndCountyDetails;
+
     }
 
     public
@@ -1068,26 +1072,9 @@ class OrdersController extends Controller
         dd($data);
     }
 
-    public
-    function smdApiCreateAwb($id)
+    private function generate_headers_for_same_day_API()
     {
         $getSmdOoption = Option::find(1);
-        $order = Order::find($id);
-        $productInfosArray = json_decode($order['product'], true);
-        $orderId = $order->id;
-        // Get Order Number
-        $orderNumber = $order->order_number;
-        // Get Customer For Each Order by Order Number
-        $orderCustomer = Order::with('customer')->where('order_number', '=', $orderNumber)->get();
-        // Initial Order Product QTY
-        $orderProductTotalQty = 0;
-        foreach ($productInfosArray as $orderProduct) {
-            $orderProductTotalQty = (integer)$orderProductTotalQty + $orderProduct['product_qty'];
-        }
-        // Sum of order Products QTY
-        $finalOrdersQty = $orderProductTotalQty;
-        // Get One Parcel Weight
-        $parcelTotalWeight = (float)($finalOrdersQty / 10) * 2.3; // One Parcel of 10 BUC  = 2,3 kg
         $smdApiToken = $getSmdOoption->shipping_api_token;
         $client = new \GuzzleHttp\Client([
             'timeout' => 2.0,
@@ -1098,29 +1085,74 @@ class OrdersController extends Controller
                     'X-AUTH-TOKEN' => $smdApiToken
                 ]
         ]);
-        $clientCity = $orderCustomer[0]->customer->localitate;
-        $clientCounty = $orderCustomer[0]->customer->judet;
-        // Interrogate SMD API TO GET EXACT CITY NAME AND ID
+
+        return $client;
+    }
+
+    public function downloadShippingAWBPdf($shippingAwb)
+    {
+
+        $data = [
+            'format' => "A4",
+            'awbNumber' => $shippingAwb
+        ];
+
+        $pdfToDownload = "";
+
         try {
-            $getCityResponse = $client->GET('https://sameday-api.demo.zitec.com/api/geolocation/city',
-                ['query' =>
-                    ['name' => $clientCity],
-                    ['county' => $clientCounty]
-                ]);
+            $response = $this->generate_headers_for_same_day_API()->GET('https://sameday-api.demo.zitec.com/api/awb/download/' . $shippingAwb . '/A4?_format=json/',
+                ['form_params' => [$data]
+                ],
+                ['stream' => true]
+            );
+//            $response = $client->POST('https://sameday-api.demo.zitec.com/api/awb', [
+//                'form_params' => [$reqData]
+//            ]);
+
         } catch (\Exception $ex) {
             \Log::error($ex);
             dd($ex);
         }
-        $cityReqData = (string)$getCityResponse->getBody();
-        $cityReqData = json_decode($cityReqData);
-        $smdClientCity = $cityReqData->data[0]->village;
-        $smdClientCounty = $cityReqData->data[0]->county->name;
-        $smdClientCityId = $cityReqData->data[0]->id;
-        $smdClientCountyId = $cityReqData->data[0]->county->id;
+
+
+        $data = (string)$response->getBody();
+        $data = json_decode($data);
+        $response->header('Content-Type', 'application/octet-stream'); // change this to the download content type.
+        return $response;
+
+    }
+
+
+    public
+    function smdApiCreateAwb($id)
+    {
+        $order = Order::find($id);
+        $productInfosArray = json_decode($order['product'], true);
+        $orderId = $order->id;
+        // Get Order Number
+        $orderNumber = $order->order_number;
+        // Get Customer For Each Order by Order Number
+        $orderCustomer = Order::with('customer')->where('order_number', '=', $orderNumber)->get();
+
+        $clientCity = $orderCustomer[0]->customer->localitate;
+        $clientCounty = $orderCustomer[0]->customer->judet;
+
+        // Interrogate SMD API TO GET EXACT CITY NAME AND ID
+
+        $cityAndCountyDetails = $this->smdApiGetCityList($clientCity, $clientCounty);
+
+
+        $cityAndCountyDetails = json_decode($cityAndCountyDetails);
+
+
+        $smdClientCity = $cityAndCountyDetails->data[0]->village;
+        $smdClientCounty = $cityAndCountyDetails->data[0]->county->name;
+        $smdClientCityId = $cityAndCountyDetails->data[0]->id;
+        $smdClientCountyId = $cityAndCountyDetails->data[0]->county->id;
 
         // Pickup info
-        $goodPickupPointPitesti = 3452;
-        $ecuatorContactPersonId = 3709;
+        $pickupPointPitestiID = 3452;
+        $ecuatorContactPersonID = 3709;
         // Active service 1 - Name: 24H - Next day
         $ecuatorSmdActiveService1Id = 7;
         // Active service 2 - Name: Retur Standard - Next day
@@ -1135,53 +1167,238 @@ class OrdersController extends Controller
         $parcelLength = 220.00;
         // Parcel Weight
         $parceWeight = 2.3;
-        // Create new PickupPoint Request Data
+
+        // Initial Order Product QTY
+        $orderProductTotalQty = 0.00;
+        foreach ($productInfosArray as $orderProduct) {
+
+            // Increment $orderProductTotalQty Variable with every product QTY
+            $orderProductTotalQty = (float)$orderProductTotalQty + $orderProduct['product_qty'];
+
+        }
+
+        // Sum of order Products QTY
+        $finalOrdersQty = $orderProductTotalQty;
+        // Package Total Weight
+        $packageWeight = (float)($finalOrdersQty / 10) * 2.3; // One Box of 10 BUC  = 2,3 kg
+
+        $boxNumber = floor($finalOrdersQty / 10); // One Box of 10 BUC
+
+        // Build Object for create a new AWB
         $reqData = [
-            'requestBody' => [
-                'pickupPoint' => $goodPickupPointPitesti, //PickupPoint for Dev - 3452
-                'contactPerson' => $ecuatorContactPersonId, //ContactPerson ID - 3709
-                'packageType' => 0, //Package Type: 0 - package, 1 - envelope and 2 - large package
-                'packageWeight' => $parcelTotalWeight,
-                'service' => $ecuatorSmdActiveService1Id, // 7
-                'awbPayment' => 1, // AWB payment (Who pays) 1 - client, 2 - recipient, 3 - third Party
-                'cashOnDelivery' => 0, // Cash on delivery (can be 0)
-                'insuredValue' => 0.0, // Insured value for awb (all packages)
-                'thirdPartyPickup' => 0, // Pickup from a third party, not one of the client's pickup points. 1 - third party pickup, 0 - otherwise
-                'awbRecipient' =>
-                    [
-                        'name' => $orderCustomer[0]->customer->pers_contact,
-                        'phoneNumber' => $orderCustomer[0]->customer->telefon,
-                        'email' => $orderCustomer[0]->customer->email,
-                        'personType' => 1,
-                        'companyName' => $orderCustomer[0]->customer->nume,
-                        'county' => $smdClientCountyId,
-                        'city' => $smdClientCityId,
-                        'cityString' => $smdClientCity,
-                        'countyString' => $smdClientCounty,
-                        'address' => $orderCustomer[0]->customer->adresa,
-                    ],
-                'parcels' => []
-            ]
+            "_format" => "json",
+            'pickupPoint' => $pickupPointPitestiID, //PickupPoint for Dev - 3452
+            'contactPerson' => $ecuatorContactPersonID, //ContactPerson ID - 3709
+            'packageType' => 0, //Package Type: 0 - package, 1 - envelope and 2 - large package
+            'packageWeight' => $packageWeight,
+            'service' => $ecuatorSmdActiveService1Id, // 7
+            'awbPayment' => 1, // AWB payment (Who pays) 1 - client, 2 - recipient, 3 - third Party
+            'cashOnDelivery' => 0, // Cash on delivery (can be 0)
+            'insuredValue' => 0.00, // Insured value for awb (all packages)
+            'thirdPartyPickup' => 0, // Pickup from a third party, not one of the client's pickup points. 1 - third party pickup, 0 - otherwise
+            'awbRecipient' =>
+                [
+                    'name' => $orderCustomer[0]->customer->pers_contact,
+                    'phoneNumber' => $orderCustomer[0]->customer->telefon,
+                    'email' => $orderCustomer[0]->customer->email,
+                    'personType' => 1,
+                    'companyName' => $orderCustomer[0]->customer->nume,
+                    'county' => $smdClientCountyId,
+                    'city' => $smdClientCityId,
+                    'cityString' => $smdClientCity,
+                    'countyString' => $smdClientCounty,
+                    'address' => $orderCustomer[0]->customer->adresa,
+                ],
+            'clientObservation' => $orderCustomer[0]->customer->observatii,
+            'parcels' => []
         ];
 
-        // Set the information for each parcel
-        $i = 0;
-        foreach ($productInfosArray as $orderInfo) {
-            $reqData['requestBody']['parcels'][$i] =
+        $parcelObj = (object)[];
+
+        if ($boxNumber == 1) {
+
+            $parcelNumber = 1;
+            $parcelWeight = 2.3;
+
+            $reqData['parcels'][0] =
                 [
-                    'weight' => $parceWeight,
+                    'weight' => $parcelWeight,
                     'width' => $parcelWidth,
                     'length' => $parcelLength,
                     'height' => $parcelHeight
                 ];
-            $i++;
+
+        } elseif ($boxNumber == 2) {
+
+            $parcelNumber = 2;
+            $parcelWeight = ($boxNumber * 2.3) / 2;
+
+            $reqData['parcels'][0] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+            $reqData['parcels'][1] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+
+        } elseif ($boxNumber == 3) {
+
+            $parcelNumber = 1;
+            $parcelWeight = $boxNumber * 2.3;
+
+            $reqData['parcels'][0] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+
+        } elseif ($boxNumber == 4) {
+
+            $parcelNumber = 1;
+            $parcelWeight = ($boxNumber * 2.3) / 2;
+            $reqData['parcels'][0] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+
+        } elseif ($boxNumber == 5) {
+
+            $parcelNumber = 1;
+            $parcelWeight = $boxNumber * 2.3;
+
+            $reqData['parcels'][0] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+
+        } elseif ($boxNumber == 6) {
+
+            $parcelNumber = 2;
+            $parcelWeight = ($boxNumber * 2.3) / 2;
+
+            $reqData['parcels'][0] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+            $reqData['parcels'][1] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+
+        } elseif ($boxNumber == 7) {
+
+            $parcelNumber = 2;
+            $parcelWeight1 = 4 * 2.3;
+            $parcelWeight2 = 3 * 2.3;
+
+            $reqData['parcels'][0] =
+                [
+                    'weight' => $parcelWeight1,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+            $reqData['parcels'][1] =
+                [
+                    'weight' => $parcelWeight2,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+
+        } elseif ($boxNumber == 8) {
+
+            $parcelNumber = 2;
+            $parcelWeight = ($boxNumber * 2.3) / 2;
+
+            $reqData['parcels'][0] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+            $reqData['parcels'][1] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+
+        } elseif ($boxNumber == 9) {
+
+            $parcelNumber = 2;
+            $parcelWeight1 = 5 * 2.3;
+            $parcelWeight2 = 4 * 2.3;
+
+            $reqData['parcels'][0] =
+                [
+                    'weight' => $parcelWeight1,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+            $reqData['parcels'][1] =
+                [
+                    'weight' => $parcelWeight2,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+
+        } elseif ($boxNumber == 10) {
+
+            $parcelNumber = 2;
+            $parcelWeight = ($boxNumber * 2.3) / 2;
+
+            $reqData['parcels'][0] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+            $reqData['parcels'][1] =
+                [
+                    'weight' => $parcelWeight,
+                    'width' => $parcelWidth,
+                    'length' => $parcelLength,
+                    'height' => $parcelHeight
+                ];
+
         }
+
+
         try {
-            $reqData = json_encode($reqData);
-//            dd($reqData);
-            $response = $client->POST('https://sameday-api.demo.zitec.com/api/awb', [
-                'form_params' => [$reqData]
+            $response = $this->generate_headers_for_same_day_API()->POST('https://sameday-api.demo.zitec.com/api/awb', [
+                \GuzzleHttp\RequestOptions::JSON => $reqData
             ]);
+//            $response = $client->POST('https://sameday-api.demo.zitec.com/api/awb', [
+//                'form_params' => [$reqData]
+//            ]);
+
         } catch (\Exception $ex) {
             \Log::error($ex);
             dd($ex);
@@ -1191,9 +1408,9 @@ class OrdersController extends Controller
         var_dump($statusCode);
         $data = (string)$response->getBody();
         $data = json_decode($data);
-        // $data = json_encode($data);
-//        var_dump($data->token);
-//        var_dump($data->expire_at);
-        dd($data);
+        $shippingAwb = $data->awbNumber;
+
+        return $this->downloadShippingAWBPdf($shippingAwb);
+
     }
 }

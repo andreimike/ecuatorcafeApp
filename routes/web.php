@@ -57,6 +57,7 @@ Route::get('optiuni/descarcare-fisier-comanda/{id}', 'OptionsController@download
 Route::delete('optiuni/sterge-fisier-comanda/{id}', 'OptionsController@destroyOrderFile')->name('delete.order.file')->middleware('auth');
 Route::delete('optiuni/sterge-toate-fisierele-comenzi', 'OptionsController@destroyAllOrdersFiles')->name('delete.all.orders.files')->middleware('auth');
 Route::delete('optiuni/sterge-toate-fisierele-clienti', 'OptionsController@destroyAllCustomersFiles')->name('delete.all.customers.files')->middleware('auth');
+Route::get('optiuni/cautare-detalii-locatie', 'OptionsController@searchCustomerLocation')->name('search.customer.location.data')->middleware('auth');
 
 
 //API Routes

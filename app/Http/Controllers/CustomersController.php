@@ -58,6 +58,7 @@ class CustomersController extends Controller
             'contractor_ean' => 'required',
             'adresa' => 'required',
             'localitate' => 'required',
+            'codPostal' => 'required',
             'judet' => 'required',
             'cui' => 'required'
         ]);
@@ -68,6 +69,7 @@ class CustomersController extends Controller
             'nume' => $request->nume,
             'adresa' => $request->adresa,
             'localitate' => $request->localitate,
+            'cod_postal' => $request->codPostal,
             'judet' => $request->judet,
             'tara' => $request->tara,
             'iln' => $request->iln,
@@ -77,7 +79,8 @@ class CustomersController extends Controller
             'iban' => $request->iban,
             'pers_contact' => $request->pers_contact,
             'telefon' => $request->telefon,
-            'email' => $request->email
+            'email' => $request->email,
+            'observatii' => $request->observatii,
         ];
 
         Customer::create($data);
@@ -131,6 +134,7 @@ class CustomersController extends Controller
         $customer->contractor_ean = $request->input('contractor_ean');
         $customer->adresa = $request->input('adresa');
         $customer->localitate = $request->input('localitate');
+        $customer->cod_postal = $request->input('codPostal');
         $customer->judet = $request->input('judet');
         $customer->tara = $request->input('tara');
         $customer->iln = $request->input('iln');
@@ -141,6 +145,7 @@ class CustomersController extends Controller
         $customer->email = $request->input('email');
         $customer->pers_contact = $request->input('pers_contact');
         $customer->telefon = $request->input('telefon');
+        $customer->observatii = $request->input('observatii');
         $customer->save();
 
         return redirect()->route('customer.view')->with('success', 'Clientul a fost actualizat!');

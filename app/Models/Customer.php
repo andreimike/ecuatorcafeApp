@@ -15,7 +15,7 @@ class Customer extends Model
     //Timestamps
     public $timestamps = true;
 
-    protected $fillable = array('contractor_ean', 'nume', 'adresa', 'localitate', 'judet', 'tara', 'iln', 'cui', 'reg_com', 'banca', 'iban', 'pers_contact', 'email', 'telefon');
+    protected $fillable = array('contractor_ean', 'nume', 'adresa', 'cod_postal', 'localitate', 'judet', 'tara', 'iln', 'cui', 'reg_com', 'banca', 'iban', 'pers_contact', 'email', 'telefon', 'observatii');
 
     public function order()
     {

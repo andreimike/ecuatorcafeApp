@@ -119,7 +119,7 @@ class OptionsController extends Controller
         $time = time();
         $detailedFormattedTime = date('Y-m-d H:i:s', $time);
         $smdApiTokenExDate = $smdDayApiTokenOption->validity_shipping_api_token;
-        return view('pages.options.shipping-api-token', compact('detailedFormattedTime','smdApiTokenExDate', 'smdDayApiTokenOption'));
+        return view('pages.options.shipping-api-token', compact('detailedFormattedTime', 'smdApiTokenExDate', 'smdDayApiTokenOption'));
     }
 
     public function updateSerialNumber(Request $request, $id)
@@ -240,6 +240,60 @@ class OptionsController extends Controller
             $orderFile->delete();
         }
         Return redirect()->route('view.stored.files')->with('success', 'Toate fisierele pentru Clienti au fost sterse!');
+
+    }
+
+    public function searchCustomerLocation(Request $request)
+    {
+
+        $input = $request->all();
+        $jsonEncode = json_encode($input);
+        $jsonDecoded = json_decode($jsonEncode, true);
+        $customerCity = $jsonDecoded['city'];
+        $customerCounty = $jsonDecoded['county'];
+
+        $getSmdOoption = Option::find(1);
+        $smdApiToken = $getSmdOoption->shipping_api_token;
+        $client = new \GuzzleHttp\Client([
+            'timeout' => 2.0,
+            'headers' =>
+                [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'X-AUTH-TOKEN' => $smdApiToken
+                ]
+        ]);
+
+        if ($customerCity == "Bucuresti") {
+
+            // Switch to County For Search In Same Day DataBase
+            $customerCity = $customerCounty;
+
+        }
+
+
+        try {
+            $response = $client->GET('https://sameday-api.demo.zitec.com/api/geolocation/city',
+                ['query' =>
+                    ['name' => $customerCity]
+                ]);
+        } catch (\Exception $ex) {
+            \Log::error($ex);
+            dd($ex);
+        }
+        //Get Request Response Code -> 200 Succes
+        $statusCode = $response->getStatusCode();
+        $cityAndCountyDetails = (string)$response->getBody();
+        $locationData = json_decode($cityAndCountyDetails);
+        $successMessage = 'Am cautat boss';
+
+
+        return response()->json(
+            [
+                'success' => $successMessage,
+                'locationData' => $locationData
+            ]);
+
 
     }
 }

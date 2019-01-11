@@ -48,7 +48,7 @@
                                 <div class="col-md-3 mt-2 mb-2 text-center">
                                     @if($orders[0]->notice == 0)
                                         <button type="button"
-                                                class="btn btn-outline-secondary text-white btn-block text-center"
+                                                class="btn btn-outline-secondary btn-block text-center"
                                                 onclick="conformityGeneratorAlert()">
                                             <i class="fas fa-ban text-danger"></i>
                                             Genereaza
@@ -169,7 +169,7 @@
                                                     @if($order->notice == 0 && $order->serial_number == 0)
                                                         <i class="fas fa-ban text-danger"></i>
                                                         <button type="button"
-                                                                class="btn btn-outline-dark text-white btn-lg"
+                                                                class="btn btn-outline-dark btn-lg"
                                                                 onclick="conformityAlertMessage()"><i
                                                                     class="far fa-file-alt"></i></button>
                                                     @elseif($order->notice == 0 && $order->conformity_declaration == 0 && $order->serial_number != 0)
@@ -200,7 +200,8 @@
                                                 </td>
                                                 <td class="text-center">
                                                     @if($order->dpd_shipping == 0)
-                                                        <a href="" class="btn btn-danger btn-lg"><i
+                                                        <a href="{{route('generate.smd.awb', ['id' => $order->id])}}"
+                                                           class="btn btn-danger btn-lg"><i
                                                                     class="fas fa-shipping-fast"></i></a>
                                                     @else
                                                         <button type="button" class="btn btn-secondary btn-lg"
